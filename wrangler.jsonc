@@ -1,6 +1,7 @@
 {
   "name": "b2bware-site",
   "compatibility_date": "2026-10-01",
+  "preview_urls": true,
   "assets": {
     "directory": "./dist",
     "html_handling": "drop-trailing-slash",

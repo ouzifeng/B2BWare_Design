@@ -1,8 +1,10 @@
 name: Deploy to Cloudflare
 
+# main updates the test site. Any other branch gets its own preview link,
+# e.g. branch "filip-homepage" -> https://filip-homepage-b2bware-site.syncspider.workers.dev
 on:
   push:
-    branches: [main]
+    branches: ['**']
   workflow_dispatch:
 
 jobs:
@@ -19,8 +21,12 @@ jobs:
       - run: npm run build
         env:
           PUBLIC_NOINDEX: 'true'
+      - name: Preview name from the branch
+        if: github.ref_name != 'main'
+        run: echo "ALIAS=$(echo '${{ github.ref_name }}' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | cut -c1-40 | sed 's/-*$//')" >> $GITHUB_ENV
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.149.0"
+          command: ${{ github.ref_name == 'main' && 'deploy' || format('versions upload --preview-alias {0}', env.ALIAS) }}
