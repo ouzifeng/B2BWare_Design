@@ -123,6 +123,15 @@ You need: Node.js 22.12 or newer, and write access to this GitHub repo.
 
 Pushing to `main` updates the test site in about a minute: https://b2bware-site.syncspider.workers.dev. You can watch it under the repo's **Actions** tab. If a deploy fails, the old version stays up.
 
+**Want to try something without changing the test site?** Work on your own branch. Every branch gets its own preview link automatically:
+
+1. `git checkout -b filip-homepage` (any name)
+2. Make changes, then `git add -A`, `git commit -m "..."`, `git push -u origin filip-homepage`
+3. About a minute later it's live at `https://filip-homepage-b2bware-site.syncspider.workers.dev`
+4. Happy with it? `git checkout main`, `git pull`, `git merge filip-homepage`, `git push`. The test site updates.
+
+No pull requests or approvals are needed. Small copy fixes can go straight to `main`.
+
 Always `git pull` before you start and before you push. Other people (and David's AI agent) work on this repo too.
 
 ## 11. Hosting and SEO (already set up, don't change without David)
