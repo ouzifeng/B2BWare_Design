@@ -53,6 +53,6 @@ Source: https://b2bware.com/page-sitemap.xml (121 pages). Every old English URL 
 
 ## Hosting (9 Oct 2026)
 - Host: Cloudflare Workers (static assets), account SyncSpider. Test site: https://b2bware-site.syncspider.workers.dev (noindex).
-- Flow: local -> GitHub (SyncSpider-GmbH/B2BWare_Design, main) -> GitHub Actions -> Cloudflare. Needs repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
+- Flow: local -> GitHub (ouzifeng/B2BWare_Design (moved from SyncSpider-GmbH, no free seats), main) -> GitHub Actions -> Cloudflare. Needs repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
 - Redirects: scripts/redirects.mjs writes dist/_redirects from the Astro.redirect pages on every build, so they are real 301s.
 - Before switch-over: /x/ to /x currently answers 307 (Cloudflare default). Add a 301 rule for trailing slashes, build production without PUBLIC_NOINDEX, then point b2bware.com at the Worker.
