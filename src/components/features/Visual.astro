@@ -1,0 +1,167 @@
+---
+// Feature-specific illustrative mock. One component, several layouts, driven by feature.visual.kind.
+interface Props { v: Record<string, any> }
+const { v } = Astro.props;
+const tick = '✓';
+---
+<figure class="ui-card ft-mock" data-kind={v.kind}>
+  <figcaption class="ft-mock_label">Illustrative example</figcaption>
+
+  {v.kind === 'table' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    {v.sub && <p class="ft-mock_sub">{v.sub}</p>}
+    <div class="ft-scroll"><table class="ft-table">
+      <thead><tr>{v.cols.map((c: string) => <th>{c}</th>)}</tr></thead>
+      <tbody>{v.rows.map((r: string[], i: number) => <tr class:list={{ 'is-hi': v.hi === i }}>{r.map((c, j) => <td class:list={{ 'ft-mono': j > 0 }}>{c}</td>)}</tr>)}</tbody>
+    </table></div>
+    {v.foot && <p class="seg-sent ft-foot"><span>{v.foot}</span></p>}
+  </>)}
+
+  {v.kind === 'search' && (<>
+    <div class="ft-search"><span class="ft-search_icon" aria-hidden="true">⌕</span><span class="ft-mono">{v.query}</span></div>
+    <ul role="list" class="ft-chips">{v.chips.map((c: string) => <li class="ft-chip is-on">{c}</li>)}</ul>
+    <ul role="list" class="ft-results">{v.rows.map((r: string[]) => (
+      <li><div><strong>{r[0]}</strong><span class="ft-mono">{r[1]}</span></div><span class:list={['seg-stock', r[2] === 'In stock' ? 'is-ok' : 'is-low']}><span class="seg-stock_dot"></span>{r[2]}</span></li>
+    ))}</ul>
+  </>)}
+
+  {v.kind === 'flow' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <ol role="list" class="ft-flow">{v.nodes.map((n: any) => (
+      <li class:list={['ft-flow_node', 'is-' + n.st]}><span class="ft-flow_dot" aria-hidden="true"></span><div><strong>{n.t}</strong><span>{n.s}</span></div></li>
+    ))}</ol>
+  </>)}
+
+  {v.kind === 'panels' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <div class="ft-panels" style={`--n:${v.panels.length}`}>{v.panels.map((p: any) => (
+      <div class="ft-panel"><p class="ft-panel_h">{p.h}</p>
+        <ul role="list">{p.items.map((it: any) => <li class:list={{ 'is-no': !it[1] }}><span aria-hidden="true">{it[1] ? tick : '×'}</span>{it[0]}<span class="sr-only">{it[1] ? ' allowed' : ' not allowed'}</span></li>)}</ul>
+      </div>
+    ))}</div>
+  </>)}
+
+  {v.kind === 'matrix' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <div class="ft-scroll"><table class="ft-table is-matrix">
+      <thead><tr><th></th>{v.cols.map((c: string) => <th>{c}</th>)}</tr></thead>
+      <tbody>{v.rows.map((r: any[]) => <tr><td>{r[0]}</td>{r.slice(1).map((x) => <td class:list={['ft-yn', { 'is-on': x }]}>{x ? tick : '–'}<span class="sr-only">{x ? 'yes' : 'no'}</span></td>)}</tr>)}</tbody>
+    </table></div>
+  </>)}
+
+  {v.kind === 'rules' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <ul role="list" class="ft-rules">{v.rows.map((r: string[]) => (
+      <li><span class="ft-kw">{r[0]}</span> {r[1]} <span class="ft-kw is-then">{r[2]}</span> <strong>{r[3]}</strong></li>
+    ))}</ul>
+  </>)}
+
+  {v.kind === 'login' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <div class="ft-form">{v.fields.map((f: string) => <div class="ft-field"><span>{f}</span><i>{f === 'Password' ? '••••••••••' : 'j.dale@hargreaves.example'}</i></div>)}</div>
+    <span class="ft-btn">Sign in</span>
+    <p class="ft-mock_sub">{v.note}</p>
+  </>)}
+
+  {v.kind === 'chips' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    {v.groups.map((g: any) => (<div class="ft-group"><p class="ft-panel_h">{g.h}</p><ul role="list" class="ft-chips">{g.chips.map((c: string) => <li class="ft-chip">{c}</li>)}</ul></div>))}
+  </>)}
+
+  {v.kind === 'brand' && (<>
+    <div class="ft-browser"><span class="ft-browser_dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="ft-mono">{v.url}</span></div>
+    <div class="ft-brand">
+      <span class="ft-brand_logo" style={`background:${v.swatches[0]}`} aria-hidden="true"></span><strong>{v.name}</strong>
+    </div>
+    <ul role="list" class="ft-swatches">{v.swatches.map((s: string) => <li><i style={`background:${s}`}></i><span class="ft-mono">{s}</span></li>)}</ul>
+  </>)}
+
+  {v.kind === 'form' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <dl class="seg-ledger">{v.rows.map((r: string[]) => <div class="seg-ledger_row"><dt>{r[0]}</dt><dd>{r[1]}</dd></div>)}</dl>
+    <p class="seg-sent ft-foot"><span>{v.note}</span></p>
+  </>)}
+
+  {v.kind === 'extract' && (
+    <div class="ft-extract">
+      <div class="ft-extract_src"><p class="ft-panel_h">{v.head}</p>{v.src.map((l: string) => <p class="ft-mono">{l}</p>)}</div>
+      <span class="ft-extract_arrow" aria-hidden="true">→</span>
+      <div class="ft-extract_out"><p class="ft-panel_h">Order lines</p>{v.fields.map((f: string[]) => <p><span class="ft-mono">{f[0]}</span><strong>{f[1]}</strong></p>)}</div>
+    </div>
+  )}
+
+  {v.kind === 'checks' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <ul role="list" class="ft-checks">{v.rows.map((r: string[]) => (
+      <li class:list={['is-' + r[1]]}><span class="ft-checks_mark" aria-hidden="true">{r[1] === 'ok' ? tick : '!'}</span><div><strong>{r[0]}</strong><span>{r[2]}</span></div></li>
+    ))}</ul>
+    <p class="ft-warn">{v.foot}</p>
+  </>)}
+
+  {v.kind === 'hub' && (<>
+    <div class="ft-hub">
+      <ul role="list" class="ft-hub_col">{v.left.map((l: string) => <li>{l}</li>)}</ul>
+      <div class="ft-hub_core"><strong>{v.center}</strong></div>
+      <ul role="list" class="ft-hub_col">{v.right.map((l: string) => <li>{l}</li>)}</ul>
+    </div>
+    <p class="ft-mock_sub">{v.note}</p>
+  </>)}
+
+  {v.kind === 'compare' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <div class="ft-cmp">{[v.before, v.after].map((c: any, i: number) => (
+      <div class:list={['ft-cmp_col', { 'is-after': i === 1 }]}><p class="ft-panel_h">{c.h}</p>
+        <dl>{c.rows.map((r: string[]) => <div><dt>{r[0]}</dt><dd class="ft-mono">{r[1]}</dd></div>)}</dl></div>
+    ))}</div>
+  </>)}
+
+  {v.kind === 'tree' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <div class="ft-tree"><span class="ft-tree_root">{v.root}</span>
+      <ul role="list">{v.nodes.map((n: string[]) => <li><strong>{n[0]}</strong><span class="ft-mono">{n[1]}</span></li>)}</ul></div>
+    <p class="ft-mock_sub">{v.note}</p>
+  </>)}
+
+  {v.kind === 'code' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <pre class="ft-code"><code>{v.lines.join('\n')}</code></pre>
+  </>)}
+
+  {v.kind === 'log' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <ol role="list" class="ft-log">{v.rows.map((r: string[]) => <li><span class="ft-mono">{r[0]}</span><strong>{r[1]}</strong><span>{r[2]}</span></li>)}</ol>
+  </>)}
+
+  {v.kind === 'phone' && (
+    <div class="ft-phone">
+      <p class="ft-phone_top">{v.title}</p>
+      <p class="ft-phone_status">{v.status}</p>
+      <ul role="list">{v.rows.map((r: string[]) => <li><span>{r[0]}</span><span class="ft-mono">{r[1]}</span></li>)}</ul>
+      <span class="ft-btn">{v.foot}</span>
+    </div>
+  )}
+
+  {v.kind === 'kv' && (<>
+    <div class="ft-kv_head"><p class="ft-mock_title">{v.title}</p><span class="ft-chip is-on">{v.badge}</span></div>
+    <dl class="seg-ledger">{v.rows.map((r: string[]) => <div class="seg-ledger_row"><dt>{r[0]}</dt><dd>{r[1]}</dd></div>)}</dl>
+  </>)}
+
+  {v.kind === 'schedule' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <ol role="list" class="ft-sched">{v.rows.map((r: string[]) => <li><span class="ft-mono">{r[0]}</span><div><strong>{r[1]}</strong><span>{r[2]}</span></div></li>)}</ol>
+  </>)}
+
+  {v.kind === 'quote' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <p class="ft-mock_sub">{v.sub}</p>
+    <dl class="seg-ledger">{v.rows.map((r: string[]) => <div class="seg-ledger_row"><dt>{r[0]} <span class="ft-dim">{r[1]}</span></dt><dd>{r[2]}</dd></div>)}
+      <div class="seg-ledger_row ft-total"><dt>{v.total[0]}</dt><dd>{v.total[1]}</dd></div></dl>
+    <p class="ft-sig"><span>{v.sign}</span></p>
+  </>)}
+
+  {v.kind === 'sign' && (<>
+    <p class="ft-mock_title">{v.title}</p>
+    <ul role="list" class="ft-signlines">{v.lines.map((l: string) => <li>{l}</li>)}</ul>
+    <div class="ft-signbox"><span class="ft-signature" aria-hidden="true">{v.signer}</span><span class="ft-dim">{v.stamp}</span></div>
+  </>)}
+</figure>

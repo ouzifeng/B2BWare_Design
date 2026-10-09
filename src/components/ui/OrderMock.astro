@@ -1,0 +1,39 @@
+---
+interface Row {
+  item: string;
+  qty: string;
+  codes: string;
+  ok: string;
+}
+interface Props {
+  label: string;
+  customer: string;
+  meta: string;
+  badge: string;
+  rows: Row[];
+  footLeft: string;
+  footRight: string;
+  caption: string;
+}
+const { label, customer, meta, badge, rows, footLeft, footRight, caption } = Astro.props;
+---
+<div class="ord-card">
+  <div class="ord-card_top">
+    <div>
+      <div class="ord-card_label">{label}</div>
+      <div class="ord-card_cust">{customer}</div>
+      <div class="ord-card_meta">{meta}</div>
+    </div>
+    <div class="ord-badge">{badge}</div>
+  </div>
+  {rows.map((r) => (
+    <div>
+      <div class="ord-item">{r.item}</div>
+      <div class="ord-qty">{r.qty}</div>
+      <div class="ord-codes">{r.codes}</div>
+      <div class="ord-ok">{r.ok}</div>
+    </div>
+  ))}
+  <div class="ord-foot"><div>{footLeft}</div><div>{footRight}</div></div>
+  <p class="ord-caption">{caption}</p>
+</div>

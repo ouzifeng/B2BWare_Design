@@ -1,0 +1,18 @@
+---
+import Section from '../ui/Section.astro';
+import { bySlug } from '../../data/industries';
+interface Props { slug: string }
+const ind = bySlug(Astro.props.slug);
+---
+<Section id="ind-scenarios" tone="white" title={ind.scenariosTitle}>
+  <ol role="list" class="ind-scn">
+    {ind.scenarios.map((s, i) => (
+      <li class="ind-scn_item">
+        <span class="ind-scn_n seg-mono" aria-hidden="true">0{i + 1}</span>
+        <p class="ind-scn_who">{s.who}</p>
+        <h3 class="ind-scn_title">{s.title}</h3>
+        <p class="ind-scn_text">{s.text}</p>
+      </li>
+    ))}
+  </ol>
+</Section>

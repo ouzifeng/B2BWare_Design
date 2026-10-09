@@ -1,0 +1,25 @@
+---
+import Section from '../ui/Section.astro';
+const pains = [
+  { title: 'Orders arrive in every format and get retyped', fix: 'Emailed, PDF and spreadsheet orders are read, their part codes matched to yours, checked against your ERP, and posted as finished sales orders. Phone and WhatsApp orders are captured too. Your team approves before anything posts.', link: { text: 'How emailed orders work', href: '/solutions/emailed-orders' } },
+  { title: 'Every dealer has a different price', fix: 'Each dealer sees their own prices, range and terms in the portal, taken live from your ERP. A standard shop cannot carry that. A portal built on your ERP can.', link: { text: 'How the dealer portal works', href: '/solutions/trade-portal' } },
+  { title: 'The portal drifts out of sync, and a new ERP means a rebuild', fix: 'Prices, stock and orders sync live with your ERP. When your ERP updates or changes, we fix the link, and that is in the monthly fee. No rebuild bill.', link: { text: 'How the ERP link works', href: '/solutions/erp-integration' } },
+  { title: 'Agents and reps order without live prices', fix: 'Agents order for dealers with live ERP prices, in the same portal. A sales app for field agents is available as an add-on, with a flat fee, not a fee per agent.', link: { text: 'Agent ordering in the portal', href: '/solutions/trade-portal' } },
+];
+---
+<Section id="mf-pains" tone="light" title="What manufacturers tell us" intro="The same four problems, and what we do about each.">
+  <div class="mf-fix">
+    <div class="mf-fix_head" aria-hidden="true"><span>The problem</span><span>What we do</span></div>
+    <ol role="list" class="mf-fix_list">
+      {pains.map((p) => (
+        <li class="mf-fix_row">
+          <h3 class="mf-fix_problem">{p.title}</h3>
+          <div class="mf-fix_answer">
+            <p>{p.fix}</p>
+            <a class="seg-link" href={p.link.href}>{p.link.text}<span aria-hidden="true"> &rarr;</span></a>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>

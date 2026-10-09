@@ -1,0 +1,43 @@
+---
+import Section from './ui/Section.astro';
+import SectionHeader from './ui/SectionHeader.astro';
+import PriceCard from './ui/PriceCard.astro';
+import CheckList from './ui/CheckList.astro';
+
+interface Props {
+  data: {
+    title: string;
+    intro: string;
+    cards: { tag: string; title: string; text: string; cta?: { text: string; href: string } }[];
+    includedTitle: string;
+    included: string[];
+    includedMore: string[];
+    addonsLead: string;
+    addons: string[];
+    addonsNote: string;
+  };
+}
+const { data } = Astro.props;
+---
+<Section id="v2-pricing" tone="light" title={data.title} intro={data.intro}>
+  <div class="card-grid">
+    {data.cards.map((c) => <PriceCard {...c} />)}
+  </div>
+  <SectionHeader title={data.includedTitle} level={3} />
+  <div id="v2-included">
+    <CheckList items={data.included} />
+    <details class="incl-more">
+      <summary>See the full list</summary>
+      <ul class="incl-more_list">
+        {data.includedMore.map((i) => <li>{i}</li>)}
+      </ul>
+    </details>
+  </div>
+  <div class="addons">
+    <p class="addons_lead">{data.addonsLead}</p>
+    <ul class="addons_list">
+      {data.addons.map((a) => <li>{a}</li>)}
+    </ul>
+    <p class="addons_note">{data.addonsNote}</p>
+  </div>
+</Section>

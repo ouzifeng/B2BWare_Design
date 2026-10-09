@@ -1,0 +1,47 @@
+---
+import SegHero from './SegHero.astro';
+const bands = [
+  { dealer: 'Northgate Cycles', band: 'Dealer band A', price: '£41.20', stock: 'In stock', tone: 'ok' },
+  { dealer: 'Pennine Outdoor', band: 'Dealer band B', price: '£44.80', stock: 'In stock', tone: 'ok' },
+  { dealer: 'Tamar Sports', band: 'Stockist', price: '£47.50', stock: 'Low stock', tone: 'low' },
+];
+---
+<SegHero
+  tone="light"
+  headline="Your dealers order at their own prices."
+  highlight="Straight into your ERP."
+  checks={['Dealers reorder in their own portal', 'Sales agents order on the visit with live prices', 'Emailed and phoned orders are captured too']}
+  lead="Nobody retypes anything, and you keep your ERP."
+  primaryCta={{ text: 'Book a free consultation', href: '#order-check' }}
+  secondaryCta={{ text: 'See what we fix', href: '#mf-pains' }}
+  priceLine="£5,000 to set up. £300 a month."
+  priceNote="Live in weeks, not months."
+>
+  <div class="ui-card mf-price">
+    <div class="ui-card_top">
+      <div>
+        <div class="ord-card_label">Dealer portal &middot; Synced with your ERP</div>
+        <div class="ord-card_cust">Trail frame set</div>
+        <div class="ord-card_meta">Code <span class="seg-mono">TF-210</span> &middot; List <span class="seg-mono seg-was">£58.00</span></div>
+      </div>
+    </div>
+    <div class="mf-price_head" aria-hidden="true"><span>Account</span><span>Stock</span><span>Their price</span></div>
+    <ul role="list" class="mf-price_rows">
+      {bands.map((b) => (
+        <li class="mf-price_row">
+          <div class="mf-price_who">
+            <span class="mf-price_name">{b.dealer}</span>
+            <span class="mf-price_band">{b.band}</span>
+          </div>
+          <span class:list={['seg-stock', `is-${b.tone}`]}><span class="seg-stock_dot" aria-hidden="true"></span>{b.stock}</span>
+          <span class="mf-price_now">{b.price}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="seg-sent">
+      <svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>
+      <span>Order sent to your ERP as sales order <span class="seg-mono">SO-30871</span></span>
+    </div>
+    <p class="ord-caption">Illustrative example.</p>
+  </div>
+</SegHero>

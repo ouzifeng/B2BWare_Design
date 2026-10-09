@@ -1,0 +1,64 @@
+---
+interface Props {
+  endpoint?: string;
+}
+const { endpoint = '#' } = Astro.props;
+const erps = ['Sage 200', 'Sage 50', 'Business Central', 'NetSuite', 'SAP Business One', 'IFS', 'Other'];
+const needs = ['Emailed orders', 'Webshop and ERP out of sync', 'Customers ordering online', 'Consumer web shop and ERP', 'Not sure'];
+const sells = ['Standard products with codes', 'Mostly made to order or configured'];
+---
+<form class="oc-form" id="oc-form" action={endpoint} method="post" data-todo="destination not decided (HubSpot or Pipedrive)">
+  <div class="oc-field">
+    <label for="oc-name">Your name</label>
+    <input type="text" id="oc-name" name="name" class="oc-input" required autocomplete="name" />
+  </div>
+  <div class="oc-field">
+    <label for="oc-email">Work email</label>
+    <input type="email" id="oc-email" name="email" class="oc-input" required autocomplete="email" />
+  </div>
+  <div class="oc-field">
+    <label for="oc-company">Company</label>
+    <input type="text" id="oc-company" name="company" class="oc-input" required autocomplete="organization" />
+  </div>
+  <div class="oc-field">
+    <label for="oc-erp">Your ERP</label>
+    <select id="oc-erp" name="erp" class="oc-input" required>
+      <option value="" disabled selected>Select your ERP</option>
+      {erps.map((o) => <option value={o}>{o}</option>)}
+    </select>
+  </div>
+  <fieldset class="oc-field oc-fieldset">
+    <legend>What do you need help with? <span class="oc-opt">(optional)</span></legend>
+    {needs.map((o, i) => (
+      <label class="oc-radio" for={`oc-need-${i}`}>
+        <input type="checkbox" id={`oc-need-${i}`} name="needs" value={o} />
+        {o}
+      </label>
+    ))}
+  </fieldset>
+  <fieldset class="oc-field oc-fieldset">
+    <legend>What do you sell? <span class="oc-opt">(optional)</span></legend>
+    {sells.map((o, i) => (
+      <label class="oc-radio" for={`oc-sell-${i}`}>
+        <input type="radio" id={`oc-sell-${i}`} name="sell" value={o} />
+        {o}
+      </label>
+    ))}
+  </fieldset>
+  <div class="oc-field">
+    <label for="oc-issues">What goes wrong today <span class="oc-opt">(optional)</span></label>
+    <textarea id="oc-issues" name="issues" class="oc-input" rows="4"></textarea>
+  </div>
+  <button type="submit" class="button is-large">Book my free consultation</button>
+  <p class="oc-msg" id="oc-msg" role="status" aria-live="polite" hidden>Thanks. This is a preview; the form is not connected yet.</p>
+</form>
+<script is:inline>
+  (function () {
+    var f = document.getElementById('oc-form');
+    if (!f) return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('oc-msg').hidden = false;
+    });
+  })();
+</script>

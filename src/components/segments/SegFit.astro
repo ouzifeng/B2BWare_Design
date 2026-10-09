@@ -1,0 +1,18 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { id: string; tone?: 'white' | 'light'; title: string; yesTitle: string; yes: string[]; noTitle: string; no: string[] }
+const { id, tone = 'white', title, yesTitle, yes, noTitle, no } = Astro.props;
+---
+<Section id={id} tone={tone} title={title}>
+  <div class="seg-fit">
+    <div class="seg-fit_col is-yes">
+      <h3 class="seg-fit_title">{yesTitle}</h3>
+      <ul role="list" class="seg-ticks">{yes.map((i) => <li>{i}</li>)}</ul>
+    </div>
+    <div class="seg-fit_col is-no">
+      <h3 class="seg-fit_title">{noTitle}</h3>
+      <ul role="list" class="seg-ticks is-no">{no.map((i) => <li>{i}</li>)}</ul>
+    </div>
+  </div>
+  <slot />
+</Section>

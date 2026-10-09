@@ -1,0 +1,21 @@
+---
+import Section from '../ui/Section.astro';
+import { reasons, reasonsIntro } from '../../data/b2c';
+---
+<Section id="b2c-brief" tone="white" class="b2c-reasons">
+  <div class="b2c-brief">
+    <div class="b2c-brief_head">
+      <h2 class="heading-h2">Stop using your current consumer shop. Switch to us, because:</h2>
+      <p class="text-lead">{reasonsIntro.intro}</p>
+      <a href="/solutions/b2c" class="button is-large">See how it works</a>
+    </div>
+    <ul class="b2c-brief_list" role="list">
+      {reasons.map((r) => (
+        <li>
+          <h3>{r.title}</h3>
+          <p>{r.brief}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

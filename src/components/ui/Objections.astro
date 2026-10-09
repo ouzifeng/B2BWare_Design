@@ -1,0 +1,18 @@
+---
+import Section from './Section.astro';
+import { objections, type ObjectionPage } from '../../data/objections';
+interface Props { page: ObjectionPage; id?: string; tone?: 'white' | 'light' }
+const { page, id = 'objections', tone = 'white' } = Astro.props;
+const data = objections[page];
+---
+<Section id={id} tone={tone} title={data.title}>
+  <dl class="obj">
+    {data.items.map((o) => (
+      <div class="obj_row">
+        <dt class="obj_q">&ldquo;{o.q}&rdquo;</dt>
+        <dd class="obj_a"><strong>{o.lead}</strong> {o.text}</dd>
+      </div>
+    ))}
+  </dl>
+  <p class="obj_foot">Not sure which of these is you? <a class="obj_link" href="#order-check">Book a free consultation<span aria-hidden="true"> &rarr;</span></a></p>
+</Section>

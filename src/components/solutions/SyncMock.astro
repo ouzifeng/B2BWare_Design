@@ -1,0 +1,25 @@
+---
+const rows = [
+  { label: 'Customer prices', web: '2,340', erp: '2,340', state: 'In sync' },
+  { label: 'Stock', web: '1,812 items', erp: '1,812 items', state: 'In sync' },
+  { label: 'Web orders today', web: '38', erp: '38', state: 'Posted' },
+];
+---
+<div class="ui-card sm">
+  <div class="sm_grid sm_cols" aria-hidden="true">
+    <div class="sm_col">Webshop</div>
+    <div class="sm_col">Your ERP (master)</div>
+  </div>
+  {rows.map((r) => (
+    <div class="sm_grid sm_row">
+      <div class="sm_cell"><span class="sm_label">{r.label}</span><span class="sm_web">{r.web}</span></div>
+      <div class="sm_cell is-erp"><span class="sm_label"><span class="sm_pill">{r.state}</span></span><span class="sm_web">{r.erp}</span></div>
+    </div>
+  ))}
+  <div class="sm_warn">
+    <span class="sm_dot" aria-hidden="true"></span>
+    <span>1 item code not in ERP &middot; held for your team</span>
+  </div>
+  <div class="ui-card_foot">Watched every day by us</div>
+  <p class="ord-caption">Illustrative example.</p>
+</div>

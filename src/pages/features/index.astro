@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import SegHero from '../../components/segments/SegHero.astro';
+import Section from '../../components/ui/Section.astro';
+import FeatureCard from '../../components/features/FeatureCard.astro';
+import OrderCheck from '../../components/OrderCheck.astro';
+import { orderCheck } from '../../data/b2b';
+import { features, groups, groupOrder } from '../../data/features';
+
+const byGroup = groupOrder.map((k) => ({ key: k, g: groups[k], items: features.filter((f) => f.group === k) }));
+---
+<Base title="Features: trade ordering connected to your ERP | B2Bware" description="Every B2Bware feature for trade ordering, grouped by job: trade portal, emailed orders, ERP integration and field sales. £5,000 to set up, £300 a month.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/features.css" />
+  </Fragment>
+
+  <SegHero
+    tone="light"
+    headline="Every feature, by the job it does."
+    highlight="Four jobs. One price. Any ERP."
+    checks={['Most features are in the one price', 'A few are add-ons, each a flat monthly fee', 'Built for manufacturers, distributors and wholesalers']}
+    lead="Trade customers order the way they already do, and every order lands in your ERP as a finished sales order. Pick the job that is costing you most."
+    primaryCta={{ text: 'Book a free consultation', href: '#order-check' }}
+    secondaryCta={{ text: 'Browse the features', href: '#ft-portal' }}
+    priceLine="£5,000 to set up. £300 a month."
+    priceNote="Free consultation first."
+  >
+    <div class="ui-card ft-index">
+      <p class="ft-mock_title">Jump to a job</p>
+      <ul role="list" class="ft-index_list">
+        {byGroup.map((b) => (
+          <li><a href={`#ft-${b.key}`}><span><strong>{b.g.title}</strong><em>{b.g.problem}</em></span><span class="ft-mono">{b.items.length}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </SegHero>
+
+  {byGroup.map((b, i) => (
+    <Section id={`ft-${b.key}`} tone={i % 2 === 0 ? 'white' : 'light'} title={b.g.title} intro={b.g.intro}>
+      <div class="ft-grid">
+        {b.items.map((f) => <FeatureCard f={f} />)}
+      </div>
+      <p class="ft-all"><a class="seg-link" href={b.g.href}>How we fix it: {b.g.problemLabel} &rarr;</a></p>
+    </Section>
+  ))}
+
+  <Section id="ft-fit" tone="white" title="Not sure which you need?">
+    <div class="ft-fit is-simple">
+      <p class="text-lead">Tell us how orders reach you today. We come back with a plan and a fixed price, and you keep the plan either way.</p>
+      <ul role="list" class="ft-fit_segs">
+        <li><a href="/manufacturers"><strong>Manufacturers</strong><span>Dealers and agents ordering your range.</span></a></li>
+        <li><a href="/distributors"><strong>Distributors</strong><span>Large catalogues and customer part codes.</span></a></li>
+        <li><a href="/wholesalers"><strong>Wholesalers</strong><span>Many accounts and repeat orders.</span></a></li>
+      </ul>
+    </div>
+  </Section>
+
+  <OrderCheck data={orderCheck} />
+</Base>

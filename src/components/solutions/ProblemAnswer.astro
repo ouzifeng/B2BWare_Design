@@ -1,0 +1,18 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { data: { title: string; problemHead: string; answerHead: string; rows: { problem: string; answer: string }[] } }
+const { data } = Astro.props;
+---
+<Section title={data.title}>
+  <div class="pa">
+    <div class="pa_head" aria-hidden="true"><span>{data.problemHead}</span><span>{data.answerHead}</span></div>
+    <ol class="pa_list" role="list">
+      {data.rows.map((r, i) => (
+        <li class="pa_row">
+          <div class="pa_problem"><span class="pa_num" aria-hidden="true">{i + 1}</span><p>{r.problem}</p></div>
+          <div class="pa_answer"><p>{r.answer}</p></div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>

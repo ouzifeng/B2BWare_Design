@@ -1,0 +1,22 @@
+---
+import Section from '../ui/Section.astro';
+import { bySlug } from '../../data/industries';
+interface Props { slug: string }
+const ind = bySlug(Astro.props.slug);
+---
+<Section id="ind-pains" tone="light" title={ind.painsTitle} intro="The problem as it sounds on the phone, and what we do about it.">
+  <div class="ind-fix">
+    <div class="ind-fix_head" aria-hidden="true"><span>The problem</span><span>What we do</span></div>
+    <ol role="list" class="ind-fix_list">
+      {ind.pains.map((p) => (
+        <li class="ind-fix_row">
+          <h3 class="ind-fix_problem">{p.problem}</h3>
+          <div class="ind-fix_answer">
+            <p>{p.fix}</p>
+            <a class="seg-link" href={p.link.href}>{p.link.text}<span aria-hidden="true"> &rarr;</span></a>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>

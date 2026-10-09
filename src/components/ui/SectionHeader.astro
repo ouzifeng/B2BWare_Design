@@ -1,0 +1,15 @@
+---
+interface Props {
+  title?: string;
+  intro?: string;
+  dark?: boolean;
+  level?: 2 | 3;
+}
+const { title, intro, dark = false, level = 2 } = Astro.props;
+const Tag = level === 3 ? 'h3' : 'h2';
+const hcls = (level === 3 ? 'heading-h3' : 'heading-h2') + (dark ? ' is-white' : '');
+---
+<div class="section_header is-tight">
+  {title && <Tag class={hcls}>{title}</Tag>}
+  {intro && <p class:list={['text-lead', dark && 'is-white']}>{intro}</p>}
+</div>

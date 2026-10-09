@@ -1,0 +1,17 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { data: { title: string; intro?: string; cards: { title: string; lead?: string; items?: string[]; close: string }[] } }
+const { data } = Astro.props;
+---
+<Section title={data.title} intro={data.intro}>
+  <div class="compare">
+    {data.cards.map((c) => (
+      <div class="compare_card">
+        <h3 class="heading-h3">{c.title}</h3>
+        {c.lead && <p class="compare_lead">{c.lead}</p>}
+        {c.items && <ul role="list" class="compare_list">{c.items.map((i) => <li class="compare_item">{i}</li>)}</ul>}
+        <p class="compare_close">{c.close}</p>
+      </div>
+    ))}
+  </div>
+</Section>

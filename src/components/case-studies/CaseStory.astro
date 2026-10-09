@@ -1,0 +1,53 @@
+---
+import type { CaseStudy } from './caseStudies';
+import CaseFigure from './CaseFigure.astro';
+interface Props { data: CaseStudy }
+const { data } = Astro.props;
+---
+<section class="section cs-story">
+  <div class="container">
+    <div class="cs-chapter" id="cs-problem">
+      <div class="cs-chapter_head">
+        <h2 class="cs-chapter_title">{data.problem.title}</h2>
+      </div>
+      <div class="cs-chapter_body">
+        <p class="cs-chapter_intro">{data.problem.intro}</p>
+        <ul class="seg-ticks is-no cs-points">
+          {data.problem.points.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="cs-chapter" id="cs-built">
+      <div class="cs-chapter_head">
+        <h2 class="cs-chapter_title">{data.built.title}</h2>
+      </div>
+      <div class="cs-chapter_body is-split">
+        <div class="cs-chapter_text">
+          <p class="cs-chapter_intro">{data.built.intro}</p>
+          <ul class="seg-ticks cs-points">
+            {data.built.points.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+        <CaseFigure figure={data.built.figure} />
+      </div>
+    </div>
+
+    <div class="cs-chapter" id="cs-daily">
+      <div class="cs-chapter_head">
+        <h2 class="cs-chapter_title">{data.daily.title}</h2>
+      </div>
+      <div class="cs-chapter_body">
+        <p class="cs-chapter_intro">{data.daily.intro}</p>
+        <ol class="cs-steps">
+          {data.daily.steps.map((s) => (
+            <li class="cs-steps_item">
+              <h3 class="cs-steps_title">{s.title}</h3>
+              <p class="cs-steps_text">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

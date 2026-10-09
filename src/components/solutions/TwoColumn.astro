@@ -1,0 +1,23 @@
+---
+import Section from '../ui/Section.astro';
+interface Col { title: string; tone: 'yes' | 'no' | 'neutral'; text?: string; items?: string[] }
+interface Props { data: { title: string; intro?: string; columns: Col[]; footer?: string; variant?: 'contrast' | 'checklist' } }
+const { data } = Astro.props;
+const v = data.variant;
+---
+<Section title={data.title} intro={data.intro}>
+  <div class:list={['two-col', { 'is-contrast': v === 'contrast', 'is-checklist': v === 'checklist' }]}>
+    {data.columns.map((c, i) => (
+      <div class:list={['two-col_card', `is-${c.tone}`, { 'is-emph': v === 'contrast' && i === 1 }]}>
+        <h3 class="heading-h3">{c.title}</h3>
+        {c.text && <p class="card_text">{c.text}</p>}
+        {c.items && (
+          <ul role="list" class="two-col_list">
+            {c.items.map((it) => <li class="two-col_item">{it}</li>)}
+          </ul>
+        )}
+      </div>
+    ))}
+  </div>
+  {data.footer && <p class="two-col_footer">{data.footer}</p>}
+</Section>

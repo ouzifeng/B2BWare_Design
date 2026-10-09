@@ -1,0 +1,35 @@
+---
+const lead = { name: 'Doppler', meta: 'Umbrella and parasol manufacturer, Austria', text: 'Sales agents order with live ERP pricing.', image: '/images/menu/menu-cs-doppler.webp' };
+const more = [
+  { name: 'Harrows Darts', meta: 'Manufacturer, UK', text: 'Trade customers order through a portal connected to the ERP.', image: '/images/customers/harrows-darts.webp' },
+  { name: 'Kienesberger', meta: 'Manufacturer, Austria', text: "Each customer's own prices from the ERP, across about 70,000 price entries.", image: '/images/menu/menu-cs-kienesberger.webp' },
+];
+---
+<section id="mf-proof" class="section is-dark seg-proof">
+  <div class="container">
+    <div class="seg-proof_top">
+      <h2 class="heading-h2 is-white">Manufacturers already running it</h2>
+      <p class="seg-proof_ask">Ask us to put you in touch. <a href="#order-check">Book a free consultation<span aria-hidden="true"> &rarr;</span></a></p>
+    </div>
+    <article class="seg-proof_lead">
+      <img src={lead.image} alt="A Doppler parasol on a terrace" width="570" height="404" loading="lazy" class="seg-proof_img" />
+      <div class="seg-proof_body">
+        <h3 class="seg-proof_name">{lead.name}</h3>
+        <p class="seg-proof_meta">{lead.meta}</p>
+        <p class="seg-proof_claim is-large">{lead.text}</p>
+      </div>
+    </article>
+    <div class="seg-proof_more">
+      {more.map((c) => (
+        <article class="seg-proof_item">
+          <img src={c.image} alt="" width="570" height="404" loading="lazy" class="seg-proof_thumb" />
+          <div class="seg-proof_body">
+            <h3 class="seg-proof_name is-small">{c.name}</h3>
+            <p class="seg-proof_meta">{c.meta}</p>
+            <p class="seg-proof_claim">{c.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

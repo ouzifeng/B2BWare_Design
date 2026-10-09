@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import DistHero from '../components/segments/DistHero.astro';
+import DistTimeline from '../components/segments/DistTimeline.astro';
+import DistCatalogue from '../components/segments/DistCatalogue.astro';
+import DistFixes from '../components/segments/DistFixes.astro';
+import DistProof from '../components/segments/DistProof.astro';
+import Objections from '../components/ui/Objections.astro';
+import SegFit from '../components/segments/SegFit.astro';
+import DistVolume from '../components/segments/DistVolume.astro';
+import Pricing from '../components/Pricing.astro';
+import Faq from '../components/Faq.astro';
+import OrderCheck from '../components/OrderCheck.astro';
+import { pricing, orderCheck } from '../data/b2b';
+
+const faq = {
+  title: 'What distributors ask us first',
+  items: [
+    { q: 'Will it work with our ERP?', a: 'Yes, any ERP. B2Bware is made by SyncSpider, the integration platform we have run for 10 years. If your ERP is not covered we build the link as part of set-up. ERP updates are fixed in the monthly fee.' },
+    { q: 'Can every customer see their own prices across a huge catalogue?', a: 'Yes. Each account sees its own prices, range and terms, live from your ERP. Kienesberger runs this across a multi-brand catalogue, about 70,000 price entries.' },
+    { q: 'Our customers phone and WhatsApp their orders. Does that work?', a: 'Yes. Phone and WhatsApp orders are captured into the ERP, so they are not keyed by hand. Emailed PDFs and spreadsheets are read automatically too.' },
+    { q: 'Can our big customers order from their own buying system?', a: 'Yes. Punchout lets a large account order from inside its own procurement system, at its own prices, and the order lands in your ERP. EDI is available as an add-on.' },
+    { q: 'What happens when we pass 1,000 orders a month?', a: 'The first 1,000 are included in the £300. After that it is about 15p an order. There are no per-user fees.' },
+  ],
+};
+const form = {
+  title: orderCheck.title,
+  intro: 'Tell us what your sales desk keys by hand: emailed orders, the same reorders by phone, or a shop that does not match your ERP. We will come back with a plan and a fixed price. You keep the plan either way.',
+};
+const pricingData = { ...pricing, intro: 'One price, whichever way your orders arrive.' };
+---
+<Base title="Order automation for distributors and wholesalers | B2Bware" description="Distributors and wholesalers: emailed, phoned and portal orders straight into your ERP at each customer's own price. £5,000 to set up, £300 a month.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/seg-distributors.css" />
+    <link rel="stylesheet" href="/css/objections.css" />
+  </Fragment>
+  <DistHero />
+  <DistTimeline />
+  <DistCatalogue />
+  <DistFixes />
+  <DistProof />
+  <SegFit
+    id="ds-fit"
+    title="Is this for a business like yours?"
+    yesTitle="Right for you if"
+    yes={['You sell to account customers on their own prices', 'Thousands of SKUs, often from several brands', 'Customers reorder by email, phone or through a rep', 'Your inside sales team keys orders into the ERP']}
+    noTitle="Not for you if"
+    no={['Trade-counter merchants, where most sales are over the counter', 'Spot or commodity pricing with no price list behind it', 'Orders that are configured or priced one by one']}
+  />
+  <Pricing data={pricingData} />
+  <DistVolume />
+  <Objections page="distributors" tone="white" />
+  <Faq data={faq} />
+  <OrderCheck data={form} />
+</Base>

@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import SegHero from '../../components/segments/SegHero.astro';
+import Section from '../../components/ui/Section.astro';
+import OrderCheck from '../../components/OrderCheck.astro';
+import { orderCheck } from '../../data/b2b';
+import { comparePages, compareHero, CHECKED } from '../../data/compare';
+
+const pages = Object.values(comparePages);
+
+const choose = [
+  { title: 'Start with your prices', text: 'If every trade customer has their own price, check where that price lives. A platform that holds its own price lists will drift from your ERP.' },
+  { title: 'Then the ERP link', text: 'Ask who builds it, who fixes it after an update, and what happens if the supplier of the connector goes away.' },
+  { title: 'Then how orders really arrive', text: 'Some customers will always email a PDF or spreadsheet. Check whether those orders can reach the ERP without being retyped.' },
+];
+
+const asks = [
+  { q: 'Does each customer see their own prices, taken from the ERP?', a: 'Ask to see two customers with different prices side by side, and ask where the price is held.' },
+  { q: 'Is the sync live, or an overnight file?', a: 'Ask how long a price or stock change in the ERP takes to reach the portal.' },
+  { q: 'Who fixes the link after an update?', a: 'ERP and platform updates change the connection. Ask who repairs it, how fast, and whether it costs extra.' },
+  { q: 'Is the price fixed before you start?', a: 'Ask for a written price for set-up and for running it, not an estimate after a discovery phase.' },
+  { q: 'Can emailed orders go into the ERP?', a: 'Ask what happens to a customer who sends a PDF or spreadsheet instead of using the portal.' },
+];
+---
+<Base title="Compare B2B ordering platforms | B2Bware" description="How to choose a B2B ordering platform, with fair comparisons of B2Bware against Shopify B2B, OroCommerce, Sana Commerce and Virto Commerce.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/compare.css" />
+    <link rel="stylesheet" href="/css/compare-index.css" />
+  </Fragment>
+  <SegHero
+    tone="light"
+    headline="Compare B2B ordering platforms"
+    highlight="Fair side-by-sides for trade sellers on an ERP."
+    checks={['Each platform’s facts link to its own sources', 'Where each one fits better is in here too', `Checked ${CHECKED}`]}
+    lead="Picking a platform for trade customers is mostly a question of prices, the ERP link and who does the work. These pages answer it one platform at a time."
+    primaryCta={compareHero.primaryCta}
+    secondaryCta={{ text: 'See the comparisons', href: '#cmpx-list' }}
+    priceLine={compareHero.priceLine}
+    priceNote={compareHero.priceNote}
+  >
+    <div class="ui-card cmpx-jump">
+      <p class="cmp-verdict_title">The four comparisons</p>
+      <ul role="list" class="cmpx-jump_list">
+        {pages.map((p) => <li><a href={`/compare/${p.slug}`}>{p.name} vs B2Bware<span aria-hidden="true"> →</span></a></li>)}
+      </ul>
+    </div>
+  </SegHero>
+
+  <Section id="cmpx-choose" title="How to choose a B2B ordering platform" intro="Three questions, in this order, narrow the field faster than a feature list.">
+    <ol role="list" class="cmpx-steps">
+      {choose.map((c, i) => (
+        <li class="cmpx-step">
+          <span class="cmpx-step_n" aria-hidden="true">{i + 1}</span>
+          <h3 class="seg-fit_title">{c.title}</h3>
+          <p>{c.text}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section id="cmpx-list" tone="light" title="Compare B2Bware with" intro="Each page asks the same questions of both sides and says where the other platform is the better fit.">
+    <ul role="list" class="cmpx-grid">
+      {pages.map((p) => (
+        <li class="cmpx-card">
+          <h3 class="seg-fit_title">{p.name} vs B2Bware</h3>
+          <p class="cmpx-card_who">Where {p.name} fits better</p>
+          <p class="cmpx-card_text">{p.verdict.theirs}</p>
+          <a class="seg-link" href={`/compare/${p.slug}`}>Read the comparison <span aria-hidden="true">→</span></a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="cmpx-ask" title="What to ask any vendor" intro="Five questions that separate a portal that works from one that needs constant correcting. Ask them of us too.">
+    <ol role="list" class="cmpx-asks">
+      {asks.map((a) => (
+        <li class="cmpx-ask">
+          <h3 class="cmpx-ask_q">{a.q}</h3>
+          <p class="cmpx-ask_a">{a.a}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <OrderCheck data={orderCheck} />
+</Base>

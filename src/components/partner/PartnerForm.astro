@@ -1,0 +1,70 @@
+---
+// Same pattern and endpoint as forms/OrderCheckForm.astro. No backend of its own.
+interface Props {
+  endpoint?: string;
+}
+const { endpoint = '#' } = Astro.props;
+const roles = [
+  { value: 'impl', label: 'Implementation partner (agency or integrator)' },
+  { value: 'erp', label: 'ERP partner (reseller or VAR)' },
+  { value: 'ref', label: 'Referral partner (consultant)' },
+  { value: 'unsure', label: 'Not sure yet' },
+];
+---
+<form class="oc-form" id="pp-form" action={endpoint} method="post" data-todo="destination not decided (HubSpot or Pipedrive)">
+  <div class="pp-form_pair">
+    <div class="oc-field">
+      <label for="pp-name">Your name</label>
+      <input type="text" id="pp-name" name="name" class="oc-input" required autocomplete="name" />
+    </div>
+    <div class="oc-field">
+      <label for="pp-email">Work email</label>
+      <input type="email" id="pp-email" name="email" class="oc-input" required autocomplete="email" />
+    </div>
+  </div>
+  <div class="pp-form_pair">
+    <div class="oc-field">
+      <label for="pp-company">Company</label>
+      <input type="text" id="pp-company" name="company" class="oc-input" required autocomplete="organization" />
+    </div>
+    <div class="oc-field">
+      <label for="pp-site">Website <span class="oc-opt">(optional)</span></label>
+      <input type="url" id="pp-site" name="website" class="oc-input" autocomplete="url" placeholder="https://" />
+    </div>
+  </div>
+  <fieldset class="oc-field oc-fieldset">
+    <legend>How would you like to partner?</legend>
+    {roles.map((r) => (
+      <label class="oc-radio" for={`pp-role-${r.value}`}>
+        <input type="radio" id={`pp-role-${r.value}`} name="role" value={r.value} required />
+        {r.label}
+      </label>
+    ))}
+  </fieldset>
+  <div class="pp-form_pair">
+    <div class="oc-field">
+      <label for="pp-erps">ERPs your clients run</label>
+      <input type="text" id="pp-erps" name="erps" class="oc-input" required />
+    </div>
+    <div class="oc-field">
+      <label for="pp-country">Country</label>
+      <input type="text" id="pp-country" name="country" class="oc-input" required autocomplete="country-name" />
+    </div>
+  </div>
+  <div class="oc-field">
+    <label for="pp-clients">Tell us about your clients <span class="oc-opt">(optional)</span></label>
+    <textarea id="pp-clients" name="clients" class="oc-input" rows="4" placeholder="Who they are, and how their orders come in today"></textarea>
+  </div>
+  <button type="submit" class="button is-large">Apply to join</button>
+  <p class="oc-msg" id="pp-msg" role="status" aria-live="polite" hidden>Thanks. This is a preview; the form is not connected yet.</p>
+</form>
+<script is:inline>
+  (function () {
+    var f = document.getElementById('pp-form');
+    if (!f) return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('pp-msg').hidden = false;
+    });
+  })();
+</script>

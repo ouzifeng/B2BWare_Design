@@ -1,0 +1,715 @@
+// Feature library: /features and /features/<slug>. One template, data-driven (src/pages/features/[slug].astro).
+// Source: the live b2bware.com feature pages, filtered. Brief: research/pages/features-brief.md.
+// No statistics, logos, quotes or savings claims. Price only from ./b2b (GBP 5,000 set-up, GBP 300 a month).
+// Every mock is illustrative; Visual.astro labels each one.
+
+export type GroupKey = 'portal' | 'emailed' | 'erp' | 'field';
+export type SegKey = 'manufacturers' | 'distributors' | 'wholesalers';
+
+export const groups: Record<GroupKey, { title: string; short: string; intro: string; problem: string; href: string; problemLabel: string }> = {
+  portal: {
+    title: 'Trade portal',
+    short: 'Trade portal',
+    intro: 'What your trade customers see and do when they order for themselves.',
+    problem: 'Customers ring and email the same orders every week.',
+    href: '/solutions/trade-portal',
+    problemLabel: 'Trade portal',
+  },
+  emailed: {
+    title: 'Emailed orders',
+    short: 'Emailed orders',
+    intro: 'How orders that arrive as PDFs, spreadsheets and emails become finished sales orders.',
+    problem: 'Someone retypes every emailed order.',
+    href: '/solutions/emailed-orders',
+    problemLabel: 'Emailed orders',
+  },
+  erp: {
+    title: 'ERP integration',
+    short: 'ERP integration',
+    intro: 'How prices, stock, products and orders move between your ERP and everywhere customers order.',
+    problem: 'The shop and the ERP disagree, and nobody knows which is right.',
+    href: '/solutions/erp-integration',
+    problemLabel: 'ERP integration',
+  },
+  field: {
+    title: 'Field sales',
+    short: 'Field sales',
+    intro: 'For reps who take orders and quotes at the customer, on site or on the road.',
+    problem: 'Reps write orders on paper and key them in later.',
+    href: '/solutions/trade-portal',
+    problemLabel: 'Trade portal',
+  },
+};
+
+export const segments: Record<SegKey, { name: string; href: string; text: string }> = {
+  manufacturers: { name: 'Manufacturers', href: '/manufacturers', text: 'Dealers and agents ordering your range at their own prices.' },
+  distributors: { name: 'Distributors', href: '/distributors', text: 'Large catalogues, customer part codes and volume pricing.' },
+  wholesalers: { name: 'Wholesalers', href: '/wholesalers', text: 'Many accounts, repeat orders and orders by phone and email.' },
+};
+
+export type Visual = { kind: string; [k: string]: any };
+
+export type Feature = {
+  slug: string;
+  name: string;
+  group: GroupKey;
+  /** Short line used on cards and as the hero highlight (buyer words). */
+  line: string;
+  /** One sentence: what it is. */
+  lead: string;
+  /** The problem it fixes. */
+  problem: string;
+  points: [string, string, string];
+  steps: [{ t: string; x: string }, { t: string; x: string }, { t: string; x: string }];
+  segs: SegKey[];
+  related: [string, string, string];
+  /** Part of an add-on (flat monthly fee), not the base price. */
+  addon?: string;
+  visual: Visual;
+  meta: string;
+};
+
+const ALL: SegKey[] = ['manufacturers', 'distributors', 'wholesalers'];
+
+export const features: Feature[] = [
+  // ---------------------------------------------------------------- Trade portal
+  {
+    slug: 'self-service-portal',
+    name: 'Self-service portal',
+    group: 'portal',
+    line: 'Customers order for themselves, at any hour, at their own prices.',
+    lead: 'A login-only trade portal where each account sees its own range, prices and stock, and every order lands in your ERP.',
+    problem: 'Customers ring, email or send a PDF because ordering online is not worth the effort. Your team prices and keys in every order.',
+    points: ['Each account sees its own range and prices', 'Stock shown live from your ERP', 'Orders land in the ERP as finished sales orders'],
+    steps: [
+      { t: 'Customer logs in', x: 'Their account decides what they see: range, prices, terms.' },
+      { t: 'They build the order', x: 'A familiar basket, with their own codes and pack sizes.' },
+      { t: 'It posts to your ERP', x: 'A finished sales order arrives. Nobody retypes it.' },
+    ],
+    segs: ALL,
+    related: ['contract-based-catalogs', 'order-history-quick-reorder', 'tiered-pricing'],
+    visual: {
+      kind: 'table', title: 'Your account', sub: 'Hargreaves Building Supplies · Acct 10442',
+      cols: ['Item', 'Pack', 'Your price', 'Stock'],
+      rows: [['Hex bolt M8 x 30, A2', 'Box of 100', '£14.60', 'In stock'], ['Nyloc nut M8, A2', 'Box of 200', '£9.80', 'In stock'], ['Anchor resin 380ml', 'Tube', '£6.35', 'Low']],
+      foot: 'Basket total £112.80 · Order sent to ERP',
+    },
+    meta: 'A self-service trade portal on your ERP. Each account sees its own range, prices and stock, and orders land in the ERP.',
+  },
+  {
+    slug: 'contract-based-catalogs',
+    name: 'Contract catalogues',
+    group: 'portal',
+    line: 'Each customer sees only the range and prices they have agreed.',
+    lead: 'Product ranges and contract prices follow the account, taken from your ERP.',
+    problem: 'Customers are shown products they cannot buy, or a price that is not theirs. They ring to check, and your team sorts out the disputes.',
+    points: ['Range limited to what the account can buy', 'Contract prices applied automatically', 'Kept in step with your ERP'],
+    steps: [
+      { t: 'We read the contract data', x: 'Ranges and agreed prices come from your ERP.' },
+      { t: 'The account is matched', x: 'Each login is tied to its customer account.' },
+      { t: 'They see their own catalogue', x: 'Only agreed items, at agreed prices, ready to order.' },
+    ],
+    segs: ALL,
+    related: ['tiered-pricing', 'self-service-portal', 'permission-management'],
+    visual: {
+      kind: 'panels', title: 'Same catalogue, two accounts',
+      panels: [
+        { h: 'Hargreaves Building Supplies', items: [['Fixings range', true], ['Resins and sealants', true], ['Contract price list C-22', true], ['Power tools', false]] },
+        { h: 'Northgate Plant Hire', items: [['Fixings range', true], ['Resins and sealants', false], ['Contract price list C-31', true], ['Power tools', true]] },
+      ],
+    },
+    meta: 'Contract catalogues for trade accounts: each customer sees only the range and prices agreed in your ERP. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'tiered-pricing',
+    name: 'Tiered pricing',
+    group: 'portal',
+    line: 'Quantity breaks and customer prices applied as the basket builds.',
+    lead: 'Price bands by quantity, customer group or contract, read from your ERP and shown in the portal.',
+    problem: 'A flat web price does not match how you sell. Reps override prices by hand, discounts slip through and customers lose trust in the number.',
+    points: ['Quantity breaks shown as the basket grows', 'Prices by customer, group or contract', 'No spreadsheet to keep up to date'],
+    steps: [
+      { t: 'We read your price rules', x: 'Bands, breaks and contract prices stay in your ERP.' },
+      { t: 'The portal applies them', x: 'The price changes as the quantity changes.' },
+      { t: 'The order carries the price', x: 'The same figure arrives in the ERP.' },
+    ],
+    segs: ALL,
+    related: ['contract-based-catalogs', 'single-source-of-truth', 'self-service-portal'],
+    visual: {
+      kind: 'table', title: 'Anchor resin 380ml', sub: 'Price for Acct 10442',
+      cols: ['Quantity', 'Each', 'Applies'],
+      rows: [['1 to 9', '£7.10', ''], ['10 to 49', '£6.35', 'Your basket: 12'], ['50 or more', '£5.90', '']], hi: 1,
+      foot: 'Contract band set in the ERP',
+    },
+    meta: 'Tiered and quantity-break pricing for trade accounts, read from your ERP and applied in the portal as the basket builds.',
+  },
+  {
+    slug: 'order-history-quick-reorder',
+    name: 'Order history and quick reorder',
+    group: 'portal',
+    line: 'Last month\'s order, back in the basket in one click.',
+    lead: 'Customers see past orders and reorder them, with today\'s price and stock checked.',
+    problem: 'Most trade orders repeat. Customers phone them in because finding the same twelve lines again is slower than ringing you.',
+    points: ['Past orders listed per account', 'One click to rebuild the basket', 'Price and stock checked again before checkout'],
+    steps: [
+      { t: 'Open past orders', x: 'Every order the account has placed, in one list.' },
+      { t: 'Reorder', x: 'The lines go back into the basket. Change quantities if needed.' },
+      { t: 'Check and send', x: 'Current price and stock are shown before the order posts.' },
+    ],
+    segs: ['distributors', 'wholesalers'],
+    related: ['self-service-portal', 'advanced-search-filtering', 'self-learning-order-matching'],
+    visual: {
+      kind: 'table', title: 'Order history', sub: 'Acct 10442',
+      cols: ['Order', 'Date', 'Lines', ''],
+      rows: [['SO-104420', '3 Sep', '4', 'Reorder'], ['SO-103981', '27 Aug', '7', 'Reorder'], ['SO-103512', '12 Aug', '4', 'Reorder']], hi: 0,
+      foot: 'Basket rebuilt · prices rechecked',
+    },
+    meta: 'Order history and one-click reorder in your trade portal, with price and stock checked again before the order posts.',
+  },
+  {
+    slug: 'advanced-search-filtering',
+    name: 'Search and filters',
+    group: 'portal',
+    line: 'Buyers find the right product by code, name or attribute.',
+    lead: 'Search and filters over your own product data, including customers\' own part codes.',
+    problem: 'In a large catalogue, buyers cannot find the item, so they ask your team. Wrong picks turn into returns.',
+    points: ['Search by code, name or attribute', 'Filters built from your product attributes', 'Results carry the account\'s own price'],
+    steps: [
+      { t: 'We load your product data', x: 'Codes, names and attributes come from your ERP or PIM.' },
+      { t: 'Buyers search and filter', x: 'Results narrow as each filter is applied.' },
+      { t: 'They add to the basket', x: 'The account\'s price and stock are already on the line.' },
+    ],
+    segs: ['distributors', 'wholesalers'],
+    related: ['order-history-quick-reorder', 'unified-product-data-management', 'self-service-portal'],
+    visual: {
+      kind: 'search', query: 'M8 bolt', chips: ['Stainless A2', 'Length 30', 'In stock'],
+      rows: [['Hex bolt M8 x 30, A2', '933-0830-A2', 'In stock'], ['Hex bolt M8 x 30, A4', '933-0830-A4', 'In stock'], ['Set screw M8 x 30, A2', '913-0830-A2', 'Low']],
+    },
+    meta: 'Product search and filters for your trade portal, built on your own product data and part codes. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'custom-workflows-approvals',
+    name: 'Custom workflows and approvals',
+    group: 'portal',
+    line: 'Orders that need a second pair of eyes go to the right person.',
+    lead: 'Rules decide which orders need approval and who approves them, set up for your business.',
+    problem: 'Approval requests get lost in email. Odd orders wait for someone to notice them, and nobody can see where they stand.',
+    points: ['Approvers set per rule', 'Exceptions flagged before they post', 'Status visible to your team'],
+    steps: [
+      { t: 'You tell us the rules', x: 'Who approves what, and when. We set them up.' },
+      { t: 'Orders are checked against them', x: 'Matching orders are held and sent to the approver.' },
+      { t: 'Approved orders post', x: 'Held orders post to the ERP once approved.' },
+    ],
+    segs: ALL,
+    addon: 'Approval workflows beyond the first review are an add-on, a flat monthly fee.',
+    related: ['intelligent-process-automation', 'automated-order-validation', 'audit-trail-order-reporting'],
+    visual: {
+      kind: 'flow', title: 'Order SO-104433',
+      nodes: [{ t: 'Order placed', s: 'Hargreaves Building Supplies', st: 'ok' }, { t: 'Rule matched', s: 'Order over the buyer\'s limit', st: 'warn' }, { t: 'Waiting for approval', s: 'Sent to the account manager', st: 'now' }, { t: 'Posts to ERP', s: 'After approval', st: 'idle' }],
+    },
+    meta: 'Order approvals and workflows for trade ordering: rules decide what is held, who approves it and when it posts.',
+  },
+  {
+    slug: 'intelligent-process-automation',
+    name: 'Process automation',
+    group: 'portal',
+    line: 'Routine steps run on their own, set up around your rules.',
+    lead: 'Rules that route, hold and notify, so routine order steps happen without anyone chasing them.',
+    problem: 'Orders move by hand: someone forwards, someone checks, someone remembers. Steps get missed and every person does it differently.',
+    points: ['Rules set up for your business', 'Steps run in the background', 'Your team handles only the exceptions'],
+    steps: [
+      { t: 'Describe the process', x: 'Tell us how an order should move today.' },
+      { t: 'We set up the rules', x: 'Routing, holds and notices, built to match.' },
+      { t: 'It runs by itself', x: 'Each order follows the rules. Exceptions come to your team.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    related: ['custom-workflows-approvals', 'automated-order-validation', 'audit-trail-order-reporting'],
+    visual: {
+      kind: 'rules', title: 'Rules for new orders',
+      rows: [['If', 'order is from a new account', 'then', 'hold for account manager'], ['If', 'account is on stop', 'then', 'hold and notify credit control'], ['If', 'all checks pass', 'then', 'post to ERP']],
+    },
+    meta: 'Process automation for trade orders: routing, holds and notices that run to your rules and leave your team the exceptions.',
+  },
+  {
+    slug: 'role-based-access-control',
+    name: 'Roles and access',
+    group: 'portal',
+    line: 'Each user sees and does only what their role allows.',
+    lead: 'Roles for buyers, reps and admins that decide what each person can view, edit or approve.',
+    problem: 'Without roles, a buyer can see prices they should not and a rep can change things they should not.',
+    points: ['Roles for buyers, reps and admins', 'Set per person or per group', 'Changed from the admin screen'],
+    steps: [
+      { t: 'Pick the roles', x: 'Start from the usual ones: buyer, rep, admin.' },
+      { t: 'Set what each can do', x: 'View, edit, approve, order for others.' },
+      { t: 'Change them any time', x: 'Update access from the admin screen as people move.' },
+    ],
+    segs: ALL,
+    related: ['permission-management', 'secure-user-authentication', 'multi-client-support'],
+    visual: {
+      kind: 'matrix', title: 'What each role can do',
+      cols: ['Buyer', 'Rep', 'Admin'],
+      rows: [['See own prices', 1, 1, 1], ['Order for a customer', 0, 1, 1], ['Approve an order', 0, 0, 1], ['Change a role', 0, 0, 1]],
+    },
+    meta: 'Role-based access for trade portals: buyers, reps and admins each see and do only what their role allows. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'permission-management',
+    name: 'Permission management',
+    group: 'portal',
+    line: 'Limit who sees which customers, regions and catalogues.',
+    lead: 'Access that follows your sales structure: by region, customer group or account.',
+    problem: 'Reps, distributors and sub-accounts should not see each other\'s customers or catalogues. Managing that by hand does not scale.',
+    points: ['Access by region, group or account', 'Reps can order on behalf of their customers', 'Checked before an order posts to the ERP'],
+    steps: [
+      { t: 'Map your structure', x: 'Regions, groups and who looks after whom.' },
+      { t: 'Assign access', x: 'Each user gets the customers and catalogues they need.' },
+      { t: 'Actions are checked', x: 'An order from outside someone\'s access does not go through.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    related: ['role-based-access-control', 'multi-client-support', 'contract-based-catalogs'],
+    visual: {
+      kind: 'panels', title: 'Access by user',
+      panels: [
+        { h: 'Rep: North region', items: [['Northgate Plant Hire', true], ['Hargreaves Building Supplies', true], ['Calder Valley Fixings (South)', false]] },
+        { h: 'Rep: South region', items: [['Northgate Plant Hire', false], ['Hargreaves Building Supplies', false], ['Calder Valley Fixings (South)', true]] },
+      ],
+    },
+    meta: 'Permission management for trade portals: access by region, customer group or account, checked before orders post.',
+  },
+  {
+    slug: 'secure-user-authentication',
+    name: 'User sign-in',
+    group: 'portal',
+    line: 'Only the right people get in, tied to the right account.',
+    lead: 'Each user signs in with their own login, tied to a customer account.',
+    problem: 'A trade portal holds your prices. Shared passwords and unknown users put those prices and your orders at risk.',
+    points: ['Own login for every user', 'Login tied to a customer account', 'Sessions end when left unattended'],
+    steps: [
+      { t: 'You invite the user', x: 'We set up accounts with you and send the invites.' },
+      { t: 'They sign in', x: 'Their login opens only their own account.' },
+      { t: 'Access ends cleanly', x: 'Remove a user and their access stops.' },
+    ],
+    segs: ALL,
+    related: ['role-based-access-control', 'permission-management', 'self-service-portal'],
+    visual: { kind: 'login', title: 'Sign in to the trade portal', fields: ['Email', 'Password'], note: 'Account: Hargreaves Building Supplies' },
+    meta: 'User sign-in for trade portals: a login per person, tied to a customer account. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'multiple-payment-methods',
+    name: 'Payment methods',
+    group: 'portal',
+    line: 'Pay on account, by card or by bank transfer, by customer.',
+    lead: 'Payment options set per customer or region, with the result passed to your ERP.',
+    problem: 'Trade customers pay in different ways. One option forces manual invoicing and chasing, and slows cash in.',
+    points: ['Account terms, purchase orders and card options', 'Set per customer or region', 'Passed to your ERP, not rekeyed'],
+    steps: [
+      { t: 'Choose the methods', x: 'Which options each customer type may use.' },
+      { t: 'Customer picks at checkout', x: 'Account customers see terms; others see card or transfer.' },
+      { t: 'The ERP gets the result', x: 'The payment detail travels with the order.' },
+    ],
+    segs: ['distributors', 'wholesalers'],
+    addon: 'Payment methods are an add-on, a flat monthly fee.',
+    related: ['self-service-portal', 'cpq-configure-price-quote', 'erp-pim-integration'],
+    visual: {
+      kind: 'chips', title: 'Checkout options',
+      groups: [{ h: 'Acct 10442 (30 day terms)', chips: ['Pay on account', 'Purchase order number'] }, { h: 'New account', chips: ['Card', 'Bank transfer'] }],
+    },
+    meta: 'Payment methods for trade ordering: account terms, purchase orders, card and transfer, set per customer and passed to your ERP.',
+  },
+  {
+    slug: 'white-label',
+    name: 'White label',
+    group: 'portal',
+    line: 'The portal looks like yours, on your own domain.',
+    lead: 'Your logo, colours and web address on the whole portal, login page and notices.',
+    problem: 'A generic portal makes your business look like a reseller. Customers trust a portal that looks like you.',
+    points: ['Your brand across the portal', 'Your own web address', 'Branded login page and notices'],
+    steps: [
+      { t: 'Send us your brand', x: 'Logo, colours and fonts.' },
+      { t: 'We apply it everywhere', x: 'Portal, login page and emails to customers.' },
+      { t: 'It goes live as yours', x: 'On your own domain.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    related: ['customizable-design', 'multi-client-support', 'multilingual-capability'],
+    visual: { kind: 'brand', title: 'Your brand', url: 'orders.yourcompany.co.uk', name: 'Your Company', swatches: ['#181E35', '#08A270', '#F4F7FA'] },
+    meta: 'White-label trade portal: your logo, colours and domain on the portal, login page and customer notices. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'multilingual-capability',
+    name: 'Multiple languages',
+    group: 'portal',
+    line: 'Customers order in their own language, from one portal.',
+    lead: 'One portal in several languages, with local currency and units shown to each customer.',
+    problem: 'Buyers abroad do not order with confidence in a language that is not theirs. Separate portals per language double the upkeep.',
+    points: ['Interface in each customer\'s language', 'Currency and units per account', 'One product catalogue behind them'],
+    steps: [
+      { t: 'Pick the languages', x: 'We set up the ones your customers need.' },
+      { t: 'Customers choose at login', x: 'Navigation, messages and basket follow.' },
+      { t: 'Orders reach the ERP as normal', x: 'Same codes, whatever the language on screen.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    related: ['white-label', 'multi-client-support', 'single-source-of-truth'],
+    visual: {
+      kind: 'chips', title: 'One product, three screens',
+      groups: [{ h: 'English', chips: ['Add to basket', 'Pack of 100', '£14.60'] }, { h: 'Deutsch', chips: ['In den Warenkorb', '100er Packung', '€17.20'] }, { h: 'Français', chips: ['Ajouter au panier', 'Lot de 100', '€17.20'] }],
+    },
+    meta: 'A multilingual trade portal: customers order in their own language, with local currency and units, from one catalogue.',
+  },
+  {
+    slug: 'multi-client-support',
+    name: 'Several brands or companies',
+    group: 'portal',
+    line: 'Run several brands or companies from one setup, kept apart.',
+    lead: 'Separate catalogues, prices, branding and users for each brand, company or market, managed together.',
+    problem: 'Each extra brand or company usually means another portal, another team and another bill, and a risk of customers seeing the wrong data.',
+    points: ['Own catalogue and prices for each', 'Own branding and language for each', 'Users see only their own'],
+    steps: [
+      { t: 'Define each brand or company', x: 'Catalogue, price lists, look and language.' },
+      { t: 'Keep them apart', x: 'Users and orders stay within their own.' },
+      { t: 'Manage them together', x: 'One team looks after all of them.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    related: ['white-label', 'permission-management', 'multilingual-capability'],
+    visual: {
+      kind: 'panels', title: 'One setup, three portals',
+      panels: [
+        { h: 'Brand A', items: [['Own catalogue', true], ['Own price lists', true], ['Own branding', true]] },
+        { h: 'Brand B', items: [['Own catalogue', true], ['Own price lists', true], ['Own branding', true]] },
+        { h: 'Company C', items: [['Own catalogue', true], ['Own price lists', true], ['Own branding', true]] },
+      ],
+    },
+    meta: 'Run several brands, companies or markets from one setup, each with its own catalogue, prices, branding and users.',
+  },
+  {
+    slug: 'customizable-design',
+    name: 'Built around how you sell',
+    group: 'portal',
+    line: 'Extra fields, layouts and rules to fit your process.',
+    lead: 'The portal is shaped to your workflow, not the other way round: your fields, your layout, your menu order.',
+    problem: 'Off-the-shelf portals make your team work around missing fields and awkward menus.',
+    points: ['Extra fields for your product data', 'Layout and menus to suit your users', 'Done for you, no coding on your side'],
+    steps: [
+      { t: 'Map how you sell', x: 'Workflows, fields and the tools you use.' },
+      { t: 'We build it in', x: 'Layout, data flows and connections to match.' },
+      { t: 'Test and go live', x: 'Tested on your own orders first.' },
+    ],
+    segs: ALL,
+    related: ['white-label', 'custom-workflows-approvals', 'rest-api'],
+    visual: {
+      kind: 'form', title: 'Product page: extra fields',
+      rows: [['Material', 'Stainless A2'], ['Thread', 'M8, coarse'], ['Certificate', 'Required on dispatch'], ['Pack size', 'Box of 100']], note: 'Fields added for this range',
+    },
+    meta: 'A trade portal built around how you sell: extra fields, layouts and rules to fit your process, done for you. We build it, link it to your ERP and run it.',
+  },
+
+  // ---------------------------------------------------------------- Emailed orders
+  {
+    slug: 'ai-document-recognition',
+    name: 'Reading emailed orders',
+    group: 'emailed',
+    line: 'PDF, spreadsheet and email orders read for you.',
+    lead: 'Orders sent as PDFs, spreadsheets or in the body of an email are read into order lines, ready for checking.',
+    problem: 'Someone on your team retypes every emailed order, line by line, and typos turn into wrong prices and wrong parts.',
+    points: ['PDF, Excel and email orders', 'Codes, quantities and account read out', 'Checked against your ERP before posting'],
+    steps: [
+      { t: 'The order arrives', x: 'Forwarded to your order inbox, in whatever format the customer uses.' },
+      { t: 'We read the lines', x: 'Codes, quantities, prices and the customer account.' },
+      { t: 'Your team approves', x: 'Then it posts to your ERP as a sales order.' },
+    ],
+    segs: ALL,
+    related: ['self-learning-order-matching', 'automated-order-validation', 'audit-trail-order-reporting'],
+    visual: {
+      kind: 'extract', head: 'Email from purchasing@hargreaves.example',
+      src: ['Hi, please send:', '4 x boxes HB-M8-30SS', '2 x boxes NYL-M8', '12 x CA-380-PE', 'Thanks, Dave'],
+      fields: [['Account', 'Hargreaves Building Supplies', 'ok'], ['HB-M8-30SS', '4 boxes of 100', 'ok'], ['NYL-M8', '2 boxes of 200', 'ok'], ['CA-380-PE', '12 tubes', 'ok']],
+    },
+    meta: 'Read PDF, Excel and emailed trade orders into order lines, check them against your ERP and post them after your team approves.',
+  },
+  {
+    slug: 'self-learning-order-matching',
+    name: 'Matching customer part codes',
+    group: 'emailed',
+    line: 'Their codes matched to yours, and it remembers the corrections.',
+    lead: 'Customers\' own part codes, packs and units are matched to your products, and each correction is kept.',
+    problem: 'Every customer names your products differently. Someone has to decode their codes on every order.',
+    points: ['Customer codes matched to your codes', 'Packs and units converted', 'Every correction kept for next time'],
+    steps: [
+      { t: 'We match what we can', x: 'Their code is compared to your product data.' },
+      { t: 'Your team fixes the rest', x: 'A correction once is enough.' },
+      { t: 'It remembers', x: 'The same code is matched automatically next time.' },
+    ],
+    segs: ['distributors', 'wholesalers'],
+    related: ['ai-document-recognition', 'automated-order-validation', 'unified-product-data-management'],
+    visual: {
+      kind: 'table', title: 'Code matches for Acct 10442', sub: 'Their code, your code',
+      cols: ['Their code', 'Your code', 'Status'],
+      rows: [['HB-M8-30SS', '933-0830-A2', 'Matched'], ['NYL-M8', '985-08-A2', 'Matched'], ['RESIN-PE', '?', 'Asked once']], hi: 2,
+      foot: 'Corrections are kept for next time',
+    },
+    meta: 'Match customers\' own part codes, packs and units to your products, and keep every correction for the next order.',
+  },
+  {
+    slug: 'automated-order-validation',
+    name: 'Order checks before posting',
+    group: 'emailed',
+    line: 'Every order checked against your ERP before it posts.',
+    lead: 'Prices, stock, credit and codes are checked on each order, and problems are flagged for your team.',
+    problem: 'Bad orders reach the ERP and are fixed after the fact: wrong prices, unknown codes, accounts on stop.',
+    points: ['Codes, quantities and prices checked', 'Stock and account status checked', 'Problems flagged, not posted'],
+    steps: [
+      { t: 'Check against the ERP', x: 'Codes, prices, stock and credit.' },
+      { t: 'Flag what fails', x: 'Anything off is held and shown to your team.' },
+      { t: 'Post what passes', x: 'Clean orders go in as finished sales orders.' },
+    ],
+    segs: ALL,
+    related: ['ai-document-recognition', 'self-learning-order-matching', 'custom-workflows-approvals'],
+    visual: {
+      kind: 'checks', title: 'Checks on SO-104420',
+      rows: [['Part codes known', 'ok', '4 of 4'], ['Contract price', 'ok', 'Applied'], ['Stock', 'warn', 'Anchor resin: 8 in stock, 12 ordered'], ['Account status', 'ok', 'Not on stop']],
+      foot: 'Held for your team to review',
+    },
+    meta: 'Orders checked against your ERP for codes, prices, stock and credit before they post, with problems flagged for your team.',
+  },
+
+  // ---------------------------------------------------------------- ERP integration
+  {
+    slug: 'erp-pim-integration',
+    name: 'ERP and PIM link',
+    group: 'erp',
+    line: 'Prices, stock and orders move between your systems on their own.',
+    lead: 'A live link between your ERP or PIM and the places customers order, for any ERP.',
+    problem: 'Orders are rekeyed, stock is wrong online and prices drift. Nobody knows which system to believe.',
+    points: ['Prices, stock and products from the ERP', 'Orders back into the ERP', 'Built new, or taken over and fixed'],
+    steps: [
+      { t: 'We connect your ERP', x: 'Built on SyncSpider, our integration platform with 400+ integrations.' },
+      { t: 'Data flows both ways', x: 'Product, price and stock out. Orders in.' },
+      { t: 'We run it', x: 'We fix the link after ERP or shop updates, in the monthly fee.' },
+    ],
+    segs: ALL,
+    related: ['single-source-of-truth', 'unified-product-data-management', 'rest-api'],
+    visual: {
+      kind: 'hub', center: 'Your ERP', left: ['Prices', 'Stock', 'Products'], right: ['Trade portal', 'Webshop', 'Order inbox'], note: 'Out: prices, stock, products. In: finished orders.',
+    },
+    meta: 'A live link between your ERP or PIM and where customers order, for any ERP. Built new, or taken over and fixed.',
+  },
+  {
+    slug: 'single-source-of-truth',
+    name: 'One source of truth',
+    group: 'erp',
+    line: 'One set of prices, products and stock, everywhere customers order.',
+    lead: 'Your ERP stays the master. Every channel reads from it, so figures cannot disagree.',
+    problem: 'The webshop says one price, the ERP another, and the rep a third. Fixing it means updating three places.',
+    points: ['Your ERP stays the master', 'Every channel reads the same data', 'Changes show everywhere'],
+    steps: [
+      { t: 'Change it once', x: 'Update the price or product in your ERP or PIM.' },
+      { t: 'It syncs out', x: 'Portal, shop and sales app pick up the change.' },
+      { t: 'Everyone sees the same', x: 'Customers, reps and your team look at one number.' },
+    ],
+    segs: ALL,
+    related: ['erp-pim-integration', 'unified-product-data-management', 'tiered-pricing'],
+    visual: {
+      kind: 'compare', title: 'Anchor resin 380ml, price today',
+      before: { h: 'Before', rows: [['ERP', '£6.35'], ['Webshop', '£6.80'], ['Rep price list', '£6.10']] },
+      after: { h: 'With one source', rows: [['ERP', '£6.35'], ['Portal', '£6.35'], ['Sales app', '£6.35']] },
+    },
+    meta: 'One source of truth for prices, products and stock: your ERP stays the master and every channel reads from it.',
+  },
+  {
+    slug: 'unified-product-data-management',
+    name: 'Product data in one place',
+    group: 'erp',
+    line: 'Update a product once and it is right everywhere.',
+    lead: 'Product data, variants, bundles and kits kept in your ERP or PIM and shared with every channel.',
+    problem: 'Out-of-date product data leads to wrong orders, wrong quotes and corrections sent back and forth.',
+    points: ['Variants, bundles and kits', 'Shared with every connected channel', 'Handles large catalogues'],
+    steps: [
+      { t: 'Edit at the source', x: 'In your ERP or PIM, as you do now.' },
+      { t: 'It syncs on', x: 'To the portal and other sales channels.' },
+      { t: 'Customers order the right thing', x: 'Right codes, right variants, right packs.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    related: ['single-source-of-truth', 'advanced-search-filtering', 'erp-pim-integration'],
+    visual: {
+      kind: 'tree', title: 'Hex bolt M8 x 30', root: 'Product family',
+      nodes: [['A2 stainless', 'Box of 100'], ['A4 stainless', 'Box of 100'], ['Zinc plated', 'Box of 200']], note: 'Variants share one record',
+    },
+    meta: 'Keep product data, variants, bundles and kits in your ERP or PIM and share it with every channel. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'rest-api',
+    name: 'REST API',
+    group: 'erp',
+    line: 'Connect your own tools without waiting on a rebuild.',
+    lead: 'A REST API for products, prices and orders, so your other systems can talk to the portal.',
+    problem: 'Rigid systems cannot reach your other tools, and custom links break when anything changes.',
+    points: ['REST API for products, prices and orders', 'Extra fields for your own data', 'Works with the systems you already have'],
+    steps: [
+      { t: 'Tell us what to connect', x: 'A CRM, a stock tool, a reporting sheet.' },
+      { t: 'We build the link', x: 'Using the API, with custom endpoints where needed.' },
+      { t: 'We keep it working', x: 'It sits inside the managed service.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    related: ['erp-pim-integration', 'customizable-design', 'single-source-of-truth'],
+    visual: {
+      kind: 'code', title: 'Example request',
+      lines: ['GET /orders?account=10442', '', '{', '  "order": "SO-104420",', '  "status": "posted",', '  "lines": 4', '}'],
+    },
+    meta: 'A REST API for products, prices and orders, so your other systems can connect to your trade portal. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'audit-trail-order-reporting',
+    name: 'Audit trail and reporting',
+    group: 'erp',
+    line: 'Every change to every order, with who and when.',
+    lead: 'A time-stamped record of order edits, approvals and status changes, with reports you can export.',
+    problem: 'When a customer disputes an order, nobody can show what changed, who approved it or when.',
+    points: ['Edits, approvals and status changes logged', 'Reports by customer, product or date', 'Export to CSV, PDF or Excel'],
+    steps: [
+      { t: 'Every action is logged', x: 'With the user and the time.' },
+      { t: 'Search the record', x: 'By order, customer or date.' },
+      { t: 'Export it', x: 'For a dispute, a review or a report.' },
+    ],
+    segs: ALL,
+    related: ['custom-workflows-approvals', 'automated-order-validation', 'ai-document-recognition'],
+    visual: {
+      kind: 'log', title: 'SO-104433',
+      rows: [['09:12', 'Order placed', 'Hargreaves, J. Dale'], ['09:12', 'Held: over limit', 'Rule 3'], ['10:40', 'Approved', 'A. Patel'], ['10:41', 'Posted to ERP', 'System']],
+    },
+    meta: 'An audit trail for trade orders: every edit, approval and status change logged, with exportable reports. We build it, link it to your ERP and run it.',
+  },
+
+  // ---------------------------------------------------------------- Field sales
+  {
+    slug: 'onsite-order-entry',
+    name: 'Order entry on site',
+    group: 'field',
+    line: 'Reps take orders at the customer, at the customer\'s price.',
+    lead: 'Reps place orders from a phone, tablet or laptop with live prices and stock, and the order goes to the ERP.',
+    problem: 'Orders written on paper get delayed, lost or priced wrongly. Stock sells before the order is in.',
+    points: ['Phone, tablet or laptop', 'Live price and stock', 'Straight to the ERP'],
+    steps: [
+      { t: 'Pick the customer', x: 'Their prices and range load.' },
+      { t: 'Build the order', x: 'Live stock and permitted discounts shown.' },
+      { t: 'Confirm', x: 'It posts to the ERP and the customer sees it confirmed.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    addon: 'The sales app for field reps is an add-on, a flat monthly fee, not priced per rep.',
+    related: ['offline-product-catalog-access', 'digital-customer-file-live-data', 'visit-planning-reporting'],
+    visual: {
+      kind: 'phone', title: 'New order', status: 'Hargreaves Building Supplies',
+      rows: [['Hex bolt M8 x 30', '4 x £14.60'], ['Nyloc nut M8', '2 x £9.80'], ['Anchor resin 380ml', '12 x £6.35']], foot: 'Confirm order',
+    },
+    meta: 'Order entry on site for field reps: live prices and stock on a phone or tablet, with the order sent straight to your ERP.',
+  },
+  {
+    slug: 'offline-product-catalog-access',
+    name: 'Offline catalogue',
+    group: 'field',
+    line: 'No signal, no problem. The catalogue is on the device.',
+    lead: 'Reps keep the catalogue on their device and orders queue until the signal returns.',
+    problem: 'A rep in a basement or a warehouse cannot show products or take an order, and the sale waits.',
+    points: ['Catalogue stored on the device', 'Orders queue while offline', 'Sent to the ERP on reconnection'],
+    steps: [
+      { t: 'Catalogue downloads', x: 'Products, prices and images, kept on the device.' },
+      { t: 'Work without signal', x: 'Search, show and take the order.' },
+      { t: 'Syncs when back online', x: 'Queued orders send to the ERP, none doubled.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    addon: 'The sales app for field reps is an add-on, a flat monthly fee, not priced per rep.',
+    related: ['onsite-order-entry', 'visit-planning-reporting', 'digital-customer-file-live-data'],
+    visual: {
+      kind: 'phone', title: 'Offline', status: 'No signal · catalogue on device',
+      rows: [['Order for Northgate Plant Hire', 'Queued'], ['Order for Calder Valley Fixings', 'Queued']], foot: '2 orders will send when you reconnect',
+    },
+    meta: 'An offline product catalogue for field reps: work without signal and send queued orders to your ERP on reconnection.',
+  },
+  {
+    slug: 'digital-customer-file-live-data',
+    name: 'Customer file with live data',
+    group: 'field',
+    line: 'Everything about the account, live from your ERP.',
+    lead: 'Contacts, addresses, order history, terms and credit position in one view, read from your ERP.',
+    problem: 'Reps quote from old price lists and finance chases invoices blind. Ask three people about a customer, get three answers.',
+    points: ['Contacts, addresses and terms', 'Order history and prices', 'Account status and credit from the ERP'],
+    steps: [
+      { t: 'Open the account', x: 'One page per customer.' },
+      { t: 'See live ERP data', x: 'Not an import from last week.' },
+      { t: 'Act on it', x: 'Quote, order or call with the facts in front of you.' },
+    ],
+    segs: ['manufacturers', 'wholesalers'],
+    addon: 'The sales app for field reps is an add-on, a flat monthly fee, not priced per rep.',
+    related: ['visit-planning-reporting', 'onsite-order-entry', 'single-source-of-truth'],
+    visual: {
+      kind: 'kv', title: 'Hargreaves Building Supplies', badge: 'Acct 10442',
+      rows: [['Terms', '30 days'], ['Credit limit', '£15,000'], ['Balance', '£4,820'], ['Last order', 'SO-104420, 3 Sep'], ['Status', 'Not on stop']],
+    },
+    meta: 'A digital customer file read live from your ERP: contacts, terms, order history and credit position in one view.',
+  },
+  {
+    slug: 'visit-planning-reporting',
+    name: 'Visit planning and reports',
+    group: 'field',
+    line: 'Plan the day\'s visits and log them as you go.',
+    lead: 'Reps see planned visits with account history, log what happened, and managers see the reports.',
+    problem: 'Reps visit whoever is nearest, follow-ups slip and managers hear about it a week later.',
+    points: ['Planned visits with account history', 'Orders and notes logged on the visit', 'Reports for managers'],
+    steps: [
+      { t: 'Plan the visits', x: 'Customers, dates and what is open.' },
+      { t: 'Prepare and visit', x: 'History and open quotes on hand. Take orders there.' },
+      { t: 'Report', x: 'The visit report builds from what was logged.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    addon: 'The sales app for field reps is an add-on, a flat monthly fee, not priced per rep.',
+    related: ['digital-customer-file-live-data', 'onsite-order-entry', 'offline-product-catalog-access'],
+    visual: {
+      kind: 'schedule', title: 'Thursday', rows: [['09:00', 'Hargreaves Building Supplies', 'Quote follow-up'], ['11:30', 'Northgate Plant Hire', 'Reorder'], ['14:00', 'Calder Valley Fixings', 'New range']],
+    },
+    meta: 'Visit planning and reporting for field reps: planned visits with account history, orders logged on the visit, reports for managers.',
+  },
+  {
+    slug: 'cpq-configure-price-quote',
+    name: 'Quotes',
+    group: 'field',
+    line: 'Quote at the customer\'s price, then turn it into an order.',
+    lead: 'Quotes built from your ERP prices, sent to the customer and turned into an order when accepted.',
+    problem: 'Quotes are built in spreadsheets, prices drift and the order has to be keyed again once the customer agrees.',
+    points: ['Prices from your ERP', 'Quote sent from the portal', 'Accepted quote becomes the order'],
+    steps: [
+      { t: 'Build the quote', x: 'Pick the items. The customer\'s price applies.' },
+      { t: 'Send it', x: 'The customer reviews it online.' },
+      { t: 'Accept and order', x: 'The accepted quote becomes the order in your ERP.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    addon: 'Quotes with e-signature are an add-on, a flat monthly fee.',
+    related: ['digital-signature-quote-dispatch', 'onsite-order-entry', 'tiered-pricing'],
+    visual: {
+      kind: 'quote', title: 'Quote Q-2291', sub: 'Hargreaves Building Supplies',
+      rows: [['Hex bolt M8 x 30, A2', '20 boxes', '£292.00'], ['Nyloc nut M8, A2', '10 boxes', '£98.00']], total: ['Total excl. VAT', '£390.00'], sign: 'Awaiting acceptance',
+    },
+    meta: 'Quotes at the customer\'s ERP price, sent from the portal and turned into an order when accepted. We build it, link it to your ERP and run it.',
+  },
+  {
+    slug: 'digital-signature-quote-dispatch',
+    name: 'E-signature on quotes',
+    group: 'field',
+    line: 'Customers sign on any device. No printing, no scanning.',
+    lead: 'Quotes are sent by secure link, signed on screen and stored with the order.',
+    problem: 'Quotes get printed, signed, scanned and lost in inboxes, and the sale waits on the paperwork.',
+    points: ['Signed on phone, tablet or computer', 'Signed copy stored with the order', 'Passed to your ERP'],
+    steps: [
+      { t: 'Send the quote', x: 'The customer gets a secure link.' },
+      { t: 'They sign', x: 'On any device. Time-stamped.' },
+      { t: 'It files itself', x: 'The signed copy is stored and synced to the ERP.' },
+    ],
+    segs: ['manufacturers', 'distributors'],
+    addon: 'Quotes with e-signature are an add-on, a flat monthly fee.',
+    related: ['cpq-configure-price-quote', 'onsite-order-entry', 'audit-trail-order-reporting'],
+    visual: {
+      kind: 'sign', title: 'Quote Q-2291', lines: ['Hex bolt M8 x 30, A2 x 20 boxes', 'Nyloc nut M8, A2 x 10 boxes', 'Total excl. VAT £390.00'], signer: 'J. Dale', stamp: 'Signed on tablet',
+    },
+    meta: 'E-signature on quotes: customers sign on any device and the signed copy is stored with the order and passed to your ERP.',
+  },
+];
+
+export const bySlug: Record<string, Feature> = Object.fromEntries(features.map((f) => [f.slug, f]));
+export const groupOrder: GroupKey[] = ['portal', 'emailed', 'erp', 'field'];

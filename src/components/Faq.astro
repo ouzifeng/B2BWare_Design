@@ -1,0 +1,14 @@
+---
+import Section from './ui/Section.astro';
+import FaqItem from './ui/FaqItem.astro';
+
+interface Props {
+  data: { title: string; items: { q: string; a: string }[] };
+}
+const { data } = Astro.props;
+---
+<Section id="v2-faq" tone="light" title={data.title}>
+  <div class="faq-list">
+    {data.items.map((i) => <FaqItem q={i.q} a={i.a} />)}
+  </div>
+</Section>

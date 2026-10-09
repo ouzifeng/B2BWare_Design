@@ -1,0 +1,72 @@
+---
+import SegIcon from './SegIcon.astro';
+interface Props { data: { title: string; intro: string; items: { icon: string; title: string; text: string }[]; note: string } }
+const { data } = Astro.props;
+const runs = [
+  { cust: 'Harbour Café', days: ['Tue', 'Fri'], next: 'Fri' },
+  { cust: 'Mill Lane Deli', days: ['Mon', 'Thu'], next: 'Thu' },
+  { cust: 'The Fenwick Arms', days: ['Wed'], next: 'Wed' },
+];
+const week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+---
+<section id="wh-runs" class="section is-light wh-runs">
+  <div class="container">
+    <div class="seg-split is-flip">
+      <div class="seg-split_copy">
+        <h2 class="heading-h2">{data.title}</h2>
+        <p class="text-lead seg-split_lead">{data.intro}</p>
+        <ul role="list" class="seg-list">
+          {data.items.map((i) => (
+            <li class="seg-list_item">
+              <span class="seg-list_glyph"><SegIcon name={i.icon} size={20} /></span>
+              <div>
+                <h3 class="seg-list_title">{i.title}</h3>
+                <p class="seg-list_text">{i.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p class="seg-split_note">{data.note}</p>
+      </div>
+      <div class="seg-split_visual">
+        <div class="ui-card wh-run">
+          <div class="ui-card_top">
+            <div>
+              <div class="ord-card_label">Delivery runs &middot; This week</div>
+              <div class="ord-card_meta">Cut-off <span class="seg-mono">16:00</span> the day before</div>
+            </div>
+          </div>
+          <div class="wh-run_grid" role="table" aria-label="Delivery days per customer">
+            <div class="wh-run_row is-head" role="row">
+              <span role="columnheader">Customer</span>
+              {week.map((d) => <span role="columnheader">{d}</span>)}
+            </div>
+            {runs.map((r) => (
+              <div class="wh-run_row" role="row">
+                <span class="wh-run_cust" role="cell">{r.cust}</span>
+                {week.map((d) => (
+                  <span role="cell" class:list={['wh-run_day', { 'is-on': r.days.includes(d) }]}>{r.days.includes(d) ? <span class="wh-run_pip"><span class="sr-only">{d} delivery</span></span> : ''}</span>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div class="wh-run_order">
+            <div class="wh-run_order-top">
+              <span class="wh-run_order-name">Harbour Café &middot; order at <span class="seg-mono">16:12</span> Thu</span>
+              <span class="wh-run_pill is-hold">After cut-off</span>
+            </div>
+            <p class="wh-run_order-text">Goes on Tuesday's run, not Friday's.</p>
+          </div>
+          <div class="wh-run_order">
+            <div class="wh-run_order-top">
+              <span class="wh-run_order-name">Mill Lane Deli &middot; standing order</span>
+              <span class="wh-run_pill">Today's price</span>
+            </div>
+            <p class="wh-run_order-text">Weekly, <span class="seg-mono">14</span> lines, priced from your ERP each time.</p>
+          </div>
+          <p class="ord-caption">Illustrative example.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

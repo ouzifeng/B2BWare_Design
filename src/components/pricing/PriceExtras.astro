@@ -1,0 +1,41 @@
+---
+import Section from '../ui/Section.astro';
+import { pricing } from '../../data/b2b';
+const inFee = ['Fixing the link after ERP or shop updates', 'Hosting, updates, support and daily backups', 'We watch every order and fix what breaks', 'No per-user fees'];
+---
+<Section id="pr-extras" tone="white" title="What costs extra" intro="Most things are in the price. Three things are not, and each one is priced before you commit.">
+  <div class="pr-extras">
+    <div class="pr-fee">
+      <h3 class="pr-fee_title">Already in the monthly fee</h3>
+      <ul role="list" class="seg-ticks">
+        {inFee.map((i) => <li>{i}</li>)}
+      </ul>
+      <p class="pr-fee_note">No day rates for fixes.</p>
+    </div>
+    <ul role="list" class="pr-rows">
+      <li class="pr-row">
+        <div class="pr-row_head">
+          <h3 class="pr-row_title">Add-ons</h3>
+          <span class="pr-row_price">Flat monthly fee each</span>
+        </div>
+        <ul role="list" class="pr-row_list">
+          {pricing.addons.map((a) => <li>{a}</li>)}
+        </ul>
+      </li>
+      <li class="pr-row">
+        <div class="pr-row_head">
+          <h3 class="pr-row_title">Custom work</h3>
+          <span class="pr-row_price">£500 a day</span>
+        </div>
+        <p class="pr-row_text">Anything custom gets a fixed quote before we start.</p>
+      </li>
+      <li class="pr-row">
+        <div class="pr-row_head">
+          <h3 class="pr-row_title">A consumer web shop</h3>
+          <span class="pr-row_price">Agreed in the consultation</span>
+        </div>
+        <p class="pr-row_text">No public price. Fixed price agreed in the consultation. <a class="seg-link" href="/solutions/b2c">See the consumer shop &rarr;</a></p>
+      </li>
+    </ul>
+  </div>
+</Section>

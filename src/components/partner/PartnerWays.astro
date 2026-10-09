@@ -1,0 +1,98 @@
+---
+import Section from '../ui/Section.astro';
+import SegIcon from '../segments/SegIcon.astro';
+
+const roles = [
+  { key: 'impl', icon: 'building', name: 'Implementation partner', who: 'Agencies and integrators who run client projects' },
+  { key: 'erp', icon: 'database', name: 'ERP partner', who: 'ERP resellers and VARs, on any ERP' },
+  { key: 'ref', icon: 'agent', name: 'Referral partner', who: 'Consultants who spot the need' },
+];
+type Owner = 'you' | 'us' | 'both';
+type Cell = string | { o: Owner; t: string };
+type Row = { label: string; cells?: Cell[]; shared?: string; earn?: boolean };
+const ownerLabel: Record<Owner, string> = { you: 'You', us: 'Us', both: 'Together' };
+const rows: Row[] = [
+  { label: 'You bring', cells: ['The client and the project', 'Your ERP clients', 'An introduction'] },
+  { label: 'Who sells it', cells: [{ o: 'you', t: 'With our help on calls and scoping' }, { o: 'you', t: 'With our help on calls and scoping' }, { o: 'us', t: 'After your introduction' }] },
+  { label: 'Who builds the portal and ERP link', cells: [{ o: 'both', t: 'You lead the project. Our team builds and connects it' }, { o: 'us', t: 'Our team builds and connects it' }, { o: 'us', t: 'Our team builds and connects it' }] },
+  { label: 'Who runs it after go-live', shared: 'We do, for every client: hosting, support, and fixing the ERP link when the ERP changes' },
+  { label: 'The client contracts with', cells: [{ o: 'both', t: 'You for your project work, us for the platform' }, 'As set in your partner agreement', { o: 'us', t: 'Us, directly' }] },
+  { label: 'Your brand', cells: ['Your name on the project. White label for qualified partners, agreed in your partner agreement', 'White label for qualified partners, agreed in your partner agreement', 'B2Bware brand'] },
+  { label: 'You earn', cells: ['Your own project fees, plus recurring commission', 'Recurring commission on every account', 'Recurring commission once the client pays'], earn: true },
+];
+---
+<Section id="pp-ways" title="Three ways in, one partnership" intro="Pick the role that matches how you already work. Here is who does what in each.">
+  <div class="pp-ways" data-active="impl">
+    <div class="pp-ways_switch" role="group" aria-label="Show a partner role">
+      {roles.map((r, i) => (
+        <button type="button" class="pp-ways_btn" data-role={r.key} aria-pressed={i === 0 ? 'true' : 'false'}>{r.name.replace(' partner', '')}</button>
+      ))}
+    </div>
+    <table class="pp-matrix">
+      <caption class="sr-only">Who does what in each partner role</caption>
+      <thead>
+        <tr>
+          <td class="pp-matrix_corner"></td>
+          {roles.map((r) => (
+            <th scope="col" class="pp-matrix_role" data-col={r.key}>
+              <span class="pp-matrix_icon"><SegIcon name={r.icon} size={20} /></span>
+              <span class="pp-matrix_name">{r.name}</span>
+              <span class="pp-matrix_who">{r.who}</span>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr class:list={['pp-matrix_row', { 'is-shared': row.shared, 'is-earn': row.earn }]}>
+            <th scope="row" class="pp-matrix_label">{row.label}</th>
+            {row.shared ? (
+              <td colspan="3" class="pp-matrix_shared">
+                <span class="pp-matrix_sharedtext"><SegIcon name="sync" size={18} />{row.shared}</span>
+              </td>
+            ) : (
+              row.cells!.map((c, i) => (
+                <td class="pp-matrix_cell" data-col={roles[i].key}>
+                  {typeof c === 'string' ? c : (
+                    <Fragment>
+                      <span class:list={['pp-own', `is-${c.o}`]}>{ownerLabel[c.o]}</span>
+                      <span class="pp-own_text">{c.t}</span>
+                    </Fragment>
+                  )}
+                </td>
+              ))
+            )}
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="pp-matrix_corner"></td>
+          {roles.map((r) => (
+            <td class="pp-matrix_cta" data-col={r.key}><a class="seg-link" href="#pp-apply" data-pick={r.key}>Apply for this role<span class="sr-only">: {r.name}</span> <span aria-hidden="true">&rarr;</span></a></td>
+          ))}
+        </tr>
+      </tfoot>
+    </table>
+    <p class="pp-ways_note">Commission is recurring on every account and agreed in your partner agreement. You can hold more than one role.</p>
+  </div>
+</Section>
+<script is:inline>
+  (function () {
+    var w = document.querySelector('.pp-ways');
+    if (!w) return;
+    var btns = w.querySelectorAll('.pp-ways_btn');
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        w.setAttribute('data-active', b.getAttribute('data-role'));
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      });
+    });
+    document.querySelectorAll('[data-pick]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var r = document.querySelector('#pp-form input[name="role"][value="' + a.getAttribute('data-pick') + '"]');
+        if (r) r.checked = true;
+      });
+    });
+  })();
+</script>

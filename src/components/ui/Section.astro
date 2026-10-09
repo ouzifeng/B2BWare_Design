@@ -1,0 +1,19 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  id?: string;
+  tone?: 'white' | 'light' | 'dark';
+  title?: string;
+  intro?: string;
+  class?: string;
+}
+const { id, tone = 'white', title, intro, class: extra } = Astro.props;
+const cls = ['section', extra, tone === 'light' && 'is-light', tone === 'dark' && 'is-dark'].filter(Boolean).join(' ');
+---
+<section id={id} class={cls}>
+  <div class="container">
+    {(title || intro) && <SectionHeader title={title} intro={intro} dark={tone === 'dark'} />}
+    <slot />
+  </div>
+</section>

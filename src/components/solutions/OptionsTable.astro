@@ -1,0 +1,26 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { data: { title: string; heads: string[]; rows: { option: string; fits: string; watch: string; us?: boolean }[] } }
+const { data } = Astro.props;
+---
+<Section title={data.title}>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <thead>
+        <tr>{data.heads.map((h) => <th scope="col">{h}</th>)}</tr>
+      </thead>
+      <tbody>
+        {data.rows.map((r) => (
+          <>
+            {r.us && <tr class="cmp_gap" aria-hidden="true"><td colspan="3"></td></tr>}
+            <tr class:list={{ 'is-us': r.us }}>
+              <th scope="row" class="cmp_option">{r.option}</th>
+              <td data-label={data.heads[1]}>{r.fits}</td>
+              <td data-label={data.heads[2]}>{r.watch}</td>
+            </tr>
+          </>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Section>

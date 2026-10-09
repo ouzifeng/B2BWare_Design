@@ -1,0 +1,32 @@
+---
+import Section from '../ui/Section.astro';
+import { pricing } from '../../data/b2b';
+---
+<Section id="pr-included" tone="light">
+  <div class="pr-incl">
+    <div class="pr-incl_head">
+      <h2 class="heading-h2">{pricing.includedTitle}</h2>
+      <p class="text-lead pr-incl_lead">{pricing.cards[1].text}</p>
+      <div class="pr-meter" role="img" aria-label="The 300 pound monthly fee covers the first 1,000 orders a month. Each order after that is about 15p.">
+        <p class="pr-meter_title">How the monthly fee works</p>
+        <div class="pr-meter_track" aria-hidden="true">
+          <span class="pr-meter_in">First 1,000 orders a month</span>
+          <span class="pr-meter_out">then about 15p each</span>
+        </div>
+        <div class="pr-meter_legend" aria-hidden="true">
+          <span><strong>£300 a month</strong> covers the first 1,000</span>
+          <span>After that, about 15p an order</span>
+        </div>
+      </div>
+    </div>
+    <div class="pr-incl_body">
+      <ul role="list" class="seg-ticks pr-incl_main">
+        {pricing.included.map((i) => <li>{i}</li>)}
+      </ul>
+      <p class="pr-incl_more">Also in the set-up</p>
+      <ul role="list" class="pr-chips">
+        {pricing.includedMore.map((i) => <li>{i}</li>)}
+      </ul>
+    </div>
+  </div>
+</Section>

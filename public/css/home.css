@@ -1,0 +1,31 @@
+html[data-aud=b2b] [data-aud-show]:not([data-aud-show~=b2b]),html[data-aud=b2c] [data-aud-show]:not([data-aud-show~=b2c]),html[data-aud=both] [data-aud-show]:not([data-aud-show~=both]){display:none!important}
+[data-aud-show]{animation:audFade .35s ease}
+@keyframes audFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.aud-pill[aria-pressed=true]{background:#08a270!important;color:#fff!important;border-color:#08a270!important;box-shadow:0 6px 18px rgba(8,162,112,.28)}
+.aud-pill:hover{border-color:#08a270}
+.aud-pill:focus-visible{outline:3px solid #30cf94;outline-offset:3px}
+@keyframes audPulse{0%{box-shadow:0 0 0 0 rgba(48,207,148,.6)}100%{box-shadow:0 0 0 16px rgba(48,207,148,0)}}
+.aud-switch.is-hint .aud-pill[aria-pressed=false]{animation:audPulse 1.4s ease-out 3}
+/* v1.3 layout grids on unclassed wrappers (hero, order/portal card rows, demo steps) */
+.aud-hero>.container>div{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:3.5rem;align-items:center}
+@media (max-width:991px){.aud-hero>.container>div{grid-template-columns:minmax(0,1fr);gap:2.5rem}}
+@media (max-width:479px){.aud-pill{padding:.7rem 1.1rem!important;font-size:1rem!important}.aud-ask{font-size:1.5rem!important}}
+.ord-card>div:not([class]){display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.25rem 1rem;padding:.75rem 0;border-top:1px solid #e6e6e6}
+.ord-foot{margin-top:.25rem}
+/* v1.4 B2B hero card compact on phones: smaller type, 3 rows instead of 4 */
+@media (max-width:767px){.ord-card{padding:1.1rem!important}.ord-card_top{margin-bottom:.4rem!important}.ord-card_label{font-size:.68rem!important}.ord-card_cust{font-size:1rem!important}.ord-card_meta{font-size:.75rem!important}.ord-badge{font-size:.68rem!important;padding:.25rem .55rem!important}.ord-card>div:not([class]){padding:.55rem 0;gap:.1rem .75rem}.ord-item{font-size:.82rem!important;line-height:1.35}.ord-qty,.ord-codes,.ord-ok{font-size:.72rem!important}.ord-foot{font-size:.8rem!important;padding-top:.55rem!important}.ord-caption{font-size:.7rem!important;margin-top:.5rem!important}.ord-card>div:nth-child(4){display:none!important}}
+#how-we-work .container>div:not([class]){display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem}
+@media (max-width:991px){#how-we-work .container>div:not([class]){grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:479px){#how-we-work .container>div:not([class]){grid-template-columns:minmax(0,1fr)}}
+.mp-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin-top:2.5rem}
+.mp-logo{background:#fff;border:1px solid #e6e6e6;border-radius:10px;height:88px;display:flex;align-items:center;justify-content:center;padding:1rem;transition:transform .2s,box-shadow .2s}
+.mp-logo:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(24,30,53,.08)}
+.mp-logo img{max-height:46px;max-width:100%;object-fit:contain}
+/* v1.1 Why/How/What: stack on tablet + mobile */
+@media (max-width:991px){.why-grid{grid-template-columns:minmax(0,1fr)!important;gap:1rem!important;margin-top:2rem!important}.why-card{padding:1.25rem 1.5rem!important}.why-text{font-size:1rem!important}.why-label{margin-bottom:.5rem!important}}
+@media (max-width:479px){.why-lead{font-size:1rem!important;line-height:1.55!important}.why-foot{font-size:.95rem!important}}
+/* v1.2 icon cards (Why choose + B2B platform): 2 cols tablet, 1 col mobile */
+.wc-icon .w-embed{display:flex;align-items:center;justify-content:center}
+.wc-card .route-link{margin-top:auto}
+@media (max-width:991px){.wc-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1rem!important}.wc-card{padding:1.5rem!important}}
+@media (max-width:767px){.wc-grid{grid-template-columns:minmax(0,1fr)!important}}

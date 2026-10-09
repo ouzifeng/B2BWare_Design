@@ -1,0 +1,20 @@
+---
+import Section from '../ui/Section.astro';
+import OrderMock from '../ui/OrderMock.astro';
+interface Props { data: { title: string; steps: string[]; mock: any } }
+const { data } = Astro.props;
+const last = data.steps.length - 1;
+---
+<Section title={data.title}>
+  <div class="journey">
+    <ol class="journey_list">
+      {data.steps.map((s, i) => (
+        <li class:list={['journey_item', { 'is-hold': i === 3, 'is-done': i === last }]}>
+          <span class="journey_node">{i === last ? <Fragment set:html={'<svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>'} /> : i + 1}</span>
+          <span class="journey_text">{s}</span>
+        </li>
+      ))}
+    </ol>
+    <div class="journey_mock"><OrderMock {...data.mock} /></div>
+  </div>
+</Section>

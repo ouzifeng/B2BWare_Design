@@ -1,0 +1,48 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { data: { title: string; paragraphs: string[]; link?: { text: string; href: string }; variant?: 'timeline' } }
+const { data } = Astro.props;
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const bc = [3, 9];
+const sh = [0, 3, 6, 9];
+---
+{data.variant === 'timeline' ? (
+  <Section>
+    <div class="tl-wrap">
+      <div class="tl-copy">
+        <h2 class="heading-h2">{data.title}</h2>
+        {data.paragraphs.map((p) => <p class="text-lead">{p}</p>)}
+      </div>
+      <div class="tl">
+        <div class="tl_legend" aria-hidden="true">
+          <span class="tl_key is-bc">Business Central major updates</span>
+          <span class="tl_key is-sh">Shopify API versions</span>
+        </div>
+        <ol class="tl_strip" role="list">
+          {months.map((m, i) => (
+            <li class:list={['tl_m', { 'is-deadline': i === 6, 'is-empty': !bc.includes(i) && !sh.includes(i) }]}>
+              <span class="tl_name">{m}</span>
+              <span class="tl_marks">
+                {bc.includes(i) && <span class="tl_chip is-bc"><span class="tl_chiptext">Business Central major update</span></span>}
+                {sh.includes(i) && <span class="tl_chip is-sh"><span class="tl_chiptext">Shopify API version</span></span>}
+              </span>
+            </li>
+          ))}
+        </ol>
+        <div class="tl_callout">
+          <strong>1 July 2025:</strong> Microsoft's Shopify connector deadline
+        </div>
+      </div>
+    </div>
+  </Section>
+) : (
+  <Section>
+    <div class="text-block">
+      <h2 class="heading-h2">{data.title}</h2>
+      <div class="text-block_body">
+        {data.paragraphs.map((p) => <p class="text-lead">{p}</p>)}
+        {data.link && <a href={data.link.href} class="text-block_link">{data.link.text}</a>}
+      </div>
+    </div>
+  </Section>
+)}

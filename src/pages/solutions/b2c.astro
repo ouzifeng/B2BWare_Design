@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import ShopMock from '../../components/b2c/ShopMock.astro';
+import B2cReasons from '../../components/b2c/B2cReasons.astro';
+import B2cConnected from '../../components/b2c/B2cConnected.astro';
+import B2cBuiltIn from '../../components/b2c/B2cBuiltIn.astro';
+import B2cSpeed from '../../components/b2c/B2cSpeed.astro';
+import B2cDrift from '../../components/b2c/B2cDrift.astro';
+import B2cSafe from '../../components/b2c/B2cSafe.astro';
+import B2cFaq from '../../components/b2c/B2cFaq.astro';
+import OrderCheck from '../../components/OrderCheck.astro';
+import { orderCheck } from '../../data/b2b';
+import { meta, hero, formIntro, faq } from '../../data/b2c';
+const form = { title: orderCheck.title, intro: formIntro };
+---
+<Base title={meta.title} description={meta.description}>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/b2c.css" />
+  </Fragment>
+  <section class="b2c-hero">
+    <div class="container">
+      <div class="b2c-hero_grid">
+        <div class="b2c-hero_copy">
+          <h1 class="heading-h1">{hero.headline}</h1>
+          <p class="hero_highlight">{hero.highlight}</p>
+          <p class="text-lead">{hero.lead}</p>
+          <div class="button-group">
+            <a href="#order-check" class="button is-large">Book a free consultation</a>
+            <a href="#b2c-reasons" class="button is-white is-large">See the six reasons</a>
+          </div>
+          <p class="b2c-hero_price"><strong>{hero.priceLine}</strong> {hero.priceNote}</p>
+        </div>
+        <div class="b2c-hero_visual">
+          <ShopMock />
+        </div>
+      </div>
+    </div>
+  </section>
+  <B2cReasons />
+  <B2cConnected />
+  <B2cBuiltIn />
+  <B2cSpeed />
+  <B2cDrift />
+  <B2cSafe />
+  <B2cFaq data={faq} />
+  <OrderCheck data={form} />
+</Base>

@@ -1,0 +1,32 @@
+---
+import SegHero from '../segments/SegHero.astro';
+import { pricing } from '../../data/b2b';
+const [consult, setup] = pricing.cards;
+---
+<SegHero
+  tone="light"
+  headline="The price, before you call."
+  highlight="£5,000 to set up, then £300 a month."
+  checks={['No per-user fees', 'No day rates for fixes', 'A plan and a fixed price before you pay anything']}
+  lead="One price, whichever way your orders arrive: portal, email or webshop. Whichever ERP you run."
+  primaryCta={{ text: 'Book a free consultation', href: '#order-check' }}
+  secondaryCta={{ text: 'See what is included', href: '#pr-included' }}
+  priceLine="Fixed price, agreed before we start."
+>
+  <div class="ui-card pr-quote">
+    <p class="pr-quote_title">What it costs</p>
+    <p class="pr-quote_sub">{setup.tag}.</p>
+    <dl class="seg-ledger">
+      <div class="seg-ledger_row"><dt>{consult.title}</dt><dd>£0</dd></div>
+      <div class="seg-ledger_row"><dt>Set-up, one-off</dt><dd>£5,000</dd></div>
+      <div class="seg-ledger_row"><dt>To run it, a month</dt><dd>£300</dd></div>
+      <div class="seg-ledger_row"><dt>Orders included each month</dt><dd>1,000</dd></div>
+      <div class="seg-ledger_row"><dt>Orders after that</dt><dd>about 15p</dd></div>
+    </dl>
+    <div class="seg-sent">
+      <svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>
+      <span>No per-user fees. No day rates for fixes.</span>
+    </div>
+    <a href="#" class="button is-secondary is-block pr-trial">Start 3-day free trial</a>
+  </div>
+</SegHero>

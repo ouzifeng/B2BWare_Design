@@ -1,0 +1,16 @@
+---
+import Section from './ui/Section.astro';
+import StepCard from './ui/StepCard.astro';
+import Button from './ui/Button.astro';
+
+interface Props {
+  data: { title: string; intro: string; steps: { title: string; text: string; free: boolean }[]; cta: { text: string; href: string } };
+}
+const { data } = Astro.props;
+---
+<Section id="v2-how" title={data.title} intro={data.intro}>
+  <div>
+    {data.steps.map((s, i) => <StepCard number={i + 1} title={s.title} text={s.text} free={s.free} />)}
+  </div>
+  <div class="hww-cta"><Button href={data.cta.href} size="large">{data.cta.text}</Button></div>
+</Section>

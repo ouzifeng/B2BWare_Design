@@ -1,0 +1,116 @@
+---
+import Base from '../layouts/Base.astro';
+import ProblemHero from '../components/solutions/ProblemHero.astro';
+import SymptomList from '../components/solutions/SymptomList.astro';
+import ProblemAnswer from '../components/solutions/ProblemAnswer.astro';
+import FixGrid from '../components/solutions/FixGrid.astro';
+import TextBlock from '../components/solutions/TextBlock.astro';
+import Section from '../components/ui/Section.astro';
+import OrderCheck from '../components/OrderCheck.astro';
+import { orderCheck } from '../data/b2b';
+
+const CHECK = '#order-check';
+const hero = {
+  variant: 'portal' as const,
+  headline: 'Spare parts ordering for construction equipment',
+  highlight: 'Found by machine, at the customer’s price, straight into your ERP.',
+  checks: ['Find parts by machine', 'Each customer’s own prices', 'Reorder in a few clicks', 'Emailed orders read into the ERP'],
+  lead: 'For equipment suppliers and dealers selling spare parts to construction firms. Your parts desk stops taking the same orders by phone and email.',
+  priceLine: '£5,000 to set up. £300 a month.',
+  primaryCta: { text: 'Book a free consultation', href: CHECK },
+  secondaryCta: { text: 'See how it works', href: '#uc-day' },
+};
+
+const who = {
+  title: 'Who this is for',
+  paragraphs: [
+    'Equipment suppliers and dealers who sell spare parts and wear parts to construction firms, plant hire companies and contractors. Customers buy for machines already on site, so the order starts with the machine, not the catalogue.',
+    'If your machines are configured or priced one by one, this is the wrong tool. If you sell parts on account at agreed prices, it fits.',
+  ],
+};
+
+const buyerWords = {
+  title: 'Sound familiar?',
+  variant: 'bubbles',
+  lines: [
+    '“I need the filter kit for the excavator, serial ends 4471.”',
+    'Someone looks up the machine, then the part, then the customer’s price.',
+    '“Can you resend that? The part you sent was for the older model.”',
+    'An email arrives with a PDF parts list and a purchase order number.',
+    'Then every line is typed into the ERP.',
+  ],
+};
+
+const rows = {
+  title: 'What goes wrong, and what we build',
+  problemHead: 'What goes wrong today',
+  answerHead: 'What we build',
+  rows: [
+    { problem: 'Parts are ordered by phone and email, with the machine serial in the message', answer: 'A portal where customers find parts by machine, from your own parts and machine data, and add them to an order' },
+    { problem: 'The wrong part goes out because the model or serial was misheard', answer: 'The part list is tied to the machine, so the customer picks from what fits' },
+    { problem: 'Staff check a price list before they can quote', answer: 'Each customer sees their own prices and terms, live from your ERP' },
+    { problem: 'The same parts are reordered every few weeks, one call at a time', answer: 'Order history and reorder, so a repeat order is a few clicks' },
+    { problem: 'Orders arrive as PDFs and spreadsheets and are retyped into the ERP', answer: 'Emailed orders are read, matched to your part numbers and posted to the ERP after your team approves' },
+  ],
+};
+
+const build = {
+  title: 'What we build',
+  intro: 'One portal and one ERP link, built and run by us for a fixed price.',
+  tiles: [
+    { title: 'Find by machine', text: 'Customers choose their machine and see the parts for it, using the machine and parts data you already hold. We do not sell a fitment database.' },
+    { title: 'Customer prices', text: 'Every account sees its own prices, range and terms, taken from your ERP, so the portal matches what you will invoice.' },
+    { title: 'Reorder', text: 'Past orders are one click from a new basket. Regular wear parts stop being a phone call.' },
+    { title: 'Emailed orders into the ERP', text: 'Customers who still email a PDF or spreadsheet are not left out. The order is read, matched and posted once your team approves it.' },
+  ],
+  callout: 'Orders land in your ERP as sales orders. Nobody retypes them.',
+};
+
+const day = {
+  title: 'How it works day to day',
+  intro: 'What changes for your parts desk and your customers once it is running.',
+  tiles: [
+    { title: 'The customer finds the part', text: 'They sign in, pick the machine and see the parts for it at their own price and with current stock.' },
+    { title: 'The order goes in', text: 'They add the parts, or reorder a past basket, and send it. It arrives in your ERP as a sales order.' },
+    { title: 'The email still works', text: 'A customer who emails a PDF parts list gets the same result. Your team checks the matched lines and approves them.' },
+    { title: 'Your team handles exceptions', text: 'The parts desk deals with stock queries and special requests, not retyping. If the ERP link needs fixing after an update, we do it.' },
+  ],
+};
+
+const links = [
+  { title: 'Construction industry', text: 'How contractors buy and what we fix for construction suppliers.', href: '/industries/construction' },
+  { title: 'Industrial machinery', text: 'Spare parts for dealers and agents selling machinery.', href: '/industries/industrial-machinery' },
+  { title: 'Trade portal', text: 'The customer-facing portal with each account’s own prices.', href: '/solutions/trade-portal' },
+  { title: 'Emailed orders', text: 'PDF and spreadsheet orders read into the ERP.', href: '/solutions/emailed-orders' },
+  { title: 'Search and filtering', text: 'Finding the right part by code, machine or specification.', href: '/features/advanced-search-filtering' },
+  { title: 'Order history and reorder', text: 'Repeat orders in a few clicks.', href: '/features/order-history-quick-reorder' },
+  { title: 'Contract-based catalogues', text: 'Each customer sees the range and prices agreed with them.', href: '/features/contract-based-catalogs' },
+  { title: 'Order matching', text: 'Customer part codes matched to yours, remembered for next time.', href: '/features/self-learning-order-matching' },
+];
+---
+<Base title="Spare parts ordering for construction equipment | B2Bware" description="Spare parts ordering for construction equipment dealers: parts by machine, your customer prices from the ERP, emailed orders read in.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/usecase.css" />
+  </Fragment>
+  <ProblemHero data={hero} />
+  <div class="sol-sections">
+    <TextBlock data={who} />
+    <SymptomList data={buyerWords} />
+    <ProblemAnswer data={rows} />
+    <FixGrid data={build} />
+    <div id="uc-day"><FixGrid data={day} /></div>
+    <Section id="uc-links" tone="light" title="Related pages" intro="Where to read more.">
+      <ul role="list" class="uc-links">
+        {links.map((l) => (
+          <li class="uc-link">
+            <a href={l.href} class="uc-link_a">
+              <span class="uc-link_title">{l.title} <span aria-hidden="true">→</span></span>
+              <span class="uc-link_text">{l.text}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  </div>
+  <OrderCheck data={orderCheck} />
+</Base>

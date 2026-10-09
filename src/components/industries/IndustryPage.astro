@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import IndHero from './IndHero.astro';
+import IndScenarios from './IndScenarios.astro';
+import IndPains from './IndPains.astro';
+import IndHandles from './IndHandles.astro';
+import IndProof from './IndProof.astro';
+import SegFit from '../segments/SegFit.astro';
+import Pricing from '../Pricing.astro';
+import Faq from '../Faq.astro';
+import OrderCheck from '../OrderCheck.astro';
+import { pricing, orderCheck } from '../../data/b2b';
+import { bySlug } from '../../data/industries';
+
+interface Props { slug: string }
+const ind = bySlug(Astro.props.slug);
+const faq = { title: ind.faqTitle, items: ind.faq };
+---
+<Base title={ind.metaTitle} description={ind.metaDescription}>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/industries.css" />
+  </Fragment>
+  <IndHero slug={ind.slug} />
+  <IndScenarios slug={ind.slug} />
+  <IndPains slug={ind.slug} />
+  <IndHandles slug={ind.slug} />
+  <IndProof slug={ind.slug} />
+  <SegFit
+    id="ind-fit"
+    tone="light"
+    title="Is it right for you?"
+    yesTitle="Right for you if"
+    yes={ind.fit.yes}
+    noTitle="Not the right tool if"
+    no={ind.fit.no}
+  />
+  <Pricing data={pricing} />
+  <Faq data={faq} />
+  <OrderCheck data={orderCheck} />
+</Base>

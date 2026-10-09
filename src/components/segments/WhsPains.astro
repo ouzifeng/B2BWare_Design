@@ -1,0 +1,23 @@
+---
+interface Props { data: { title: string; intro: string; items: { said: string; fix: string; href: string; linkText: string }[] } }
+const { data } = Astro.props;
+---
+<section id="wh-pains" class="section wh-pains">
+  <div class="container">
+    <div class="section_header is-tight">
+      <h2 class="heading-h2">{data.title}</h2>
+      <p class="text-lead">{data.intro}</p>
+    </div>
+    <ul role="list" class="wh-pains_list">
+      {data.items.map((p) => (
+        <li class="wh-pain">
+          <h3 class="wh-pain_said">{p.said}</h3>
+          <div class="wh-pain_fix">
+            <p>{p.fix}</p>
+            <a class="seg-link" href={p.href}>{p.linkText}<span aria-hidden="true"> &rarr;</span></a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

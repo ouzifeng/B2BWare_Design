@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import MfrHero from '../components/segments/MfrHero.astro';
+import MfrWhoOrders from '../components/segments/MfrWhoOrders.astro';
+import MfrPains from '../components/segments/MfrPains.astro';
+import MfrProof from '../components/segments/MfrProof.astro';
+import Objections from '../components/ui/Objections.astro';
+import SegFit from '../components/segments/SegFit.astro';
+import Pricing from '../components/Pricing.astro';
+import Faq from '../components/Faq.astro';
+import OrderCheck from '../components/OrderCheck.astro';
+import { pricing } from '../data/b2b';
+
+const faq = {
+  title: 'What manufacturers ask first',
+  items: [
+    { q: 'Will it work with our ERP?', a: 'Yes. We connect to any ERP, including manufacturing ERPs like Epicor, SYSPRO, Infor and IFS. B2Bware is made by SyncSpider, the integration platform we have run for 10 years. We confirm your setup in the free consultation.' },
+    { q: 'What happens when our ERP updates?', a: 'We fix the link. That is in the monthly fee, with no day rates for fixes.' },
+    { q: 'Can our sales agents use it?', a: 'Yes. Agents order for dealers with live ERP prices. A sales app for field agents is available as an add-on, for a flat monthly fee, not priced per agent.' },
+    { q: 'Can each dealer see their own prices?', a: 'Yes. Each account sees its own prices, range and terms, live from your ERP.' },
+    { q: 'Will dealers actually use it?', a: 'We set up every account and invite your dealers with you, then check who is ordering after 30 days.' },
+    { q: 'What about configured products?', a: 'This is not for them. It suits standard coded products with set prices per account, not orders that are configured or priced one by one.' },
+  ],
+};
+const form = {
+  title: 'Book a free consultation',
+  intro: "Tell us how your dealers and agents order today, and which ERP you run. We'll come back with a plan and a fixed price. You keep the plan either way.",
+};
+---
+<Base title="Ordering for manufacturers, connected to your ERP | B2Bware" description="For manufacturers: dealers order at their own prices, agents order with live ERP pricing, and nobody retypes orders. £5,000 to set up, £300 a month.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/seg-manufacturers.css" />
+    <link rel="stylesheet" href="/css/objections.css" />
+  </Fragment>
+  <MfrHero />
+  <MfrWhoOrders />
+  <MfrPains />
+  <MfrProof />
+  <SegFit
+    id="mf-fit"
+    title="Is it right for you?"
+    yesTitle="Right for you if"
+    yes={['You sell standard, coded products on account to dealers, stockists or distributors', 'Dealers have their own prices, bands or discounts', 'Orders reach you by email, phone, portal or through agents, and someone retypes them', 'You run an ERP, whichever one it is. We connect to any ERP']}
+    noTitle="Not the right tool if"
+    no={['Your products are configured, or every order is priced one by one', 'You need a quoting or configuring tool rather than ordering']}
+  />
+  <Pricing data={pricing} />
+  <Objections page="manufacturers" tone="white" />
+  <Faq data={faq} />
+  <OrderCheck data={form} />
+</Base>

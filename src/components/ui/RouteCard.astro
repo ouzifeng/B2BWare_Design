@@ -1,0 +1,19 @@
+---
+interface Props {
+  image: string;
+  alt: string;
+  title: string;
+  text: string;
+  linkText: string;
+  href: string;
+}
+const { image, alt, title, text, linkText, href } = Astro.props;
+---
+<div class="route-card">
+  <img src={image} loading="lazy" alt={alt} class="route-card_img" />
+  <div class="route-card_body">
+    <h3 class="heading-h3">{title}</h3>
+    <p class="card_text">{text}</p>
+    <a href={href} class="route-link">{linkText}</a>
+  </div>
+</div>

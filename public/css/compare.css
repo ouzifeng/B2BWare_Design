@@ -1,0 +1,62 @@
+/* /compare/<slug>. Page devices only; shared ones live in seg-common.css. Prefix: cmp- */
+
+.seg-hero .heading-h1{text-wrap:balance}
+
+/* Hero: the short answer */
+.cmp-verdict{padding:1.75rem;width:100%;max-width:30rem}
+.cmp-verdict_title{margin:0 0 1rem;font-family:var(--seg-head);font-size:1.375rem;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--seg-navy)}
+.cmp-verdict_row{padding:1rem 0;border-top:1px solid var(--seg-line)}
+.cmp-verdict_row.is-ours{margin:0 -1rem -1rem;padding:1rem;border:0;border-radius:8px;background:var(--seg-green-tint)}
+.cmp-verdict_who{margin:0 0 .3rem;font-size:.8125rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:var(--seg-slate)}
+.cmp-verdict_row.is-ours .cmp-verdict_who{color:var(--seg-green-ink)}
+.cmp-verdict_text{margin:0;font-size:1rem;line-height:1.5;color:var(--seg-navy)}
+
+/* Side-by-side table */
+.cmp-wrap{max-width:76rem;margin:0 auto;text-align:left}
+.cmp-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;background:#fff;border:1px solid var(--seg-line-soft);border-radius:10px;box-shadow:var(--seg-shadow);overflow:hidden}
+.cmp-table th,.cmp-table td{padding:1.1rem 1.5rem;vertical-align:top;text-align:left;font-size:1rem;line-height:1.5;color:var(--seg-body);border-bottom:1px solid var(--seg-line)}
+.cmp-table tbody tr:last-child>*{border-bottom:0}
+.cmp-table thead th{padding-top:1.25rem;padding-bottom:1.25rem;font-family:var(--seg-head);font-size:1.125rem;font-weight:700;color:var(--seg-navy);background:#f7f8fa;border-bottom:2px solid var(--seg-navy)}
+.cmp-table thead th.is-ours{background:var(--seg-green);color:#fff;border-bottom-color:var(--seg-green)}
+.cmp-table tbody th{width:15%;font-size:.9375rem;font-weight:700;color:var(--seg-navy)}
+.cmp-table td.is-ours{background:var(--seg-green-tint);color:var(--seg-navy);border-bottom-color:rgba(8,122,85,.18)}
+.cmp-ref{margin-left:.25rem;font-family:var(--seg-mono);font-size:.7rem;line-height:1;white-space:nowrap}
+.cmp-ref a{color:var(--seg-green-ink);text-decoration:none;font-weight:600;padding:0 .1rem}
+.cmp-ref a:hover{text-decoration:underline}
+
+.cmp-sources{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--seg-line)}
+.cmp-sources_title{margin:0 0 .75rem;font-size:.875rem;font-weight:700;color:var(--seg-slate)}
+.cmp-sources_list{margin:0;padding-left:1.5rem;display:grid;gap:.4rem}
+.cmp-sources_list li{font-size:.9375rem;line-height:1.45;color:var(--seg-slate);padding-left:.25rem;word-break:break-word}
+.cmp-sources_list li::marker{font-family:var(--seg-mono);font-size:.85em}
+.cmp-sources_list a{color:var(--seg-navy);text-underline-offset:.2em}
+.cmp-sources_list li:target{background:var(--seg-amber-tint);border-radius:4px}
+.cmp-sources_note{margin:1rem 0 0;font-size:.9rem;line-height:1.5;color:var(--seg-slate)}
+
+/* Which one fits you: two equal columns, neither is the "no" side */
+.cmp-fit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;max-width:62rem;margin:0 auto;text-align:left}
+.cmp-fit_col{padding:2rem 2.25rem 2.25rem;min-width:0;background:#fff;border:1px solid var(--seg-line-soft);border-top:3px solid var(--seg-navy);border-radius:10px;box-shadow:var(--seg-shadow)}
+.cmp-fit_col.is-ours{border-top-color:var(--seg-green)}
+.cmp-fit_col:not(.is-ours) .seg-ticks>li::before{background:none;width:.45rem;height:.45rem;top:.55em;left:.4rem;border-radius:50%;background-color:var(--seg-navy)}
+#cmp-fit .seg-fit_note{max-width:62rem}
+
+.cmp-table a:focus-visible,.cmp-sources a:focus-visible{outline:2px solid var(--seg-green);outline-offset:3px;border-radius:3px}
+
+@media (max-width:991px){
+  .cmp-table th,.cmp-table td{padding:1rem 1.1rem}
+  .cmp-fit{grid-template-columns:minmax(0,1fr)}
+}
+/* Phones: each row becomes a labelled block */
+@media (max-width:767px){
+  .cmp-table,.cmp-table tbody,.cmp-table tr,.cmp-table th,.cmp-table td{display:block;width:auto}
+  .cmp-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .cmp-table tbody tr{border-bottom:1px solid var(--seg-line)}
+  .cmp-table tbody tr:last-child{border-bottom:0}
+  .cmp-table tbody th{width:auto;padding:1.1rem 1.1rem .4rem;border:0;font-size:1.0625rem;font-family:var(--seg-head)}
+  .cmp-table td{padding:.7rem 1.1rem;border:0}
+  .cmp-table td::before{content:attr(data-label);display:block;margin-bottom:.15rem;font-size:.75rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--seg-slate)}
+  .cmp-table td.is-ours::before{color:var(--seg-green-ink)}
+  .cmp-table tbody tr:last-child td:last-child{padding-bottom:1.1rem}
+  .cmp-verdict{padding:1.25rem}
+  .cmp-fit_col{padding:1.5rem 1.25rem}
+}

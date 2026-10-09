@@ -1,0 +1,34 @@
+---
+interface Props { data: { title: string; intro: string; cards: { tag: string; title: string; text: string }[]; exTitle: string; rows: { label: string; value: string }[]; totalLabel: string; totalValue: string; exNote: string; includes: string[] } }
+const { data } = Astro.props;
+---
+<section id="wh-price" class="section is-light wh-price">
+  <div class="container">
+    <div class="section_header is-tight">
+      <h2 class="heading-h2">{data.title}</h2>
+      <p class="text-lead">{data.intro}</p>
+    </div>
+    <div class="wh-price_grid">
+      <div class="wh-price_terms">
+        {data.cards.map((c) => (
+          <div class="wh-price_term">
+            <strong class="wh-price_big">{c.title}</strong>
+            <span class="wh-price_tag">{c.tag}</span>
+            <p>{c.text}</p>
+          </div>
+        ))}
+        <ul role="list" class="seg-ticks wh-price_incl">
+          {data.includes.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
+      <div class="ui-card wh-receipt">
+        <h3 class="wh-receipt_title">{data.exTitle}</h3>
+        <dl class="seg-ledger">
+          {data.rows.map((r) => (<div class="seg-ledger_row"><dt>{r.label}</dt><dd>{r.value}</dd></div>))}
+          <div class="seg-ledger_row is-total"><dt>{data.totalLabel}</dt><dd>{data.totalValue}</dd></div>
+        </dl>
+        <p class="wh-receipt_note">{data.exNote}</p>
+      </div>
+    </div>
+  </div>
+</section>

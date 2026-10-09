@@ -1,0 +1,11 @@
+/* Use-case scenario pages (/equipment-spare-parts-ordering-construction). Page devices only. Prefix: uc- */
+.uc-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;max-width:62rem;margin:0 auto;padding:0;list-style:none;text-align:left}
+.uc-link_a{display:block;height:100%;box-sizing:border-box;padding:1.25rem 1.5rem;background:#fff;border:1px solid rgba(24,30,53,.08);border-left:3px solid #08A270;border-radius:10px;box-shadow:0 1px 2px rgba(24,30,53,.04),0 8px 24px -10px rgba(24,30,53,.12);text-decoration:none}
+.uc-link_a:hover .uc-link_title{color:#087a55}
+.uc-link_a:focus-visible{outline:2px solid #08A270;outline-offset:3px}
+.uc-link_title{display:block;margin-bottom:.2rem;font-weight:700;font-size:1.0625rem;color:#181E35}
+.uc-link_text{display:block;font-size:.9375rem;line-height:1.5;color:#535461}
+@media (max-width:767px){.uc-links{grid-template-columns:minmax(0,1fr)}.uc-link_a{padding:1rem 1.1rem}}
+/* Four text tiles sit two by two, not three and one */
+.feature-grid.is-quad:not(:has(.is-plain)){grid-template-columns:repeat(2,minmax(0,1fr));max-width:62rem;margin-left:auto;margin-right:auto}
+@media (max-width:767px){.feature-grid.is-quad:not(:has(.is-plain)){grid-template-columns:minmax(0,1fr)}}

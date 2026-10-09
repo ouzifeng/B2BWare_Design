@@ -1,0 +1,18 @@
+---
+import Section from '../ui/Section.astro';
+import { how } from '../../data/b2b';
+const tags = ['Free', 'Free', 'Set-up fee', 'Monthly fee'];
+---
+<Section id="pr-steps" tone="light" title="How buying works" intro={how.intro}>
+  <ol role="list" class="pr-steps">
+    {how.steps.map((s, i) => (
+      <li class="pr-step">
+        <span class="pr-step_node" aria-hidden="true">{i + 1}</span>
+        <span class:list={['pr-step_tag', { 'is-free': s.free }]}>{tags[i]}</span>
+        <h3 class="pr-step_title">{s.title}</h3>
+        <p class="pr-step_text">{s.text}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="pr-steps_cta"><a class="button is-large" href="#order-check">{how.cta.text}</a></p>
+</Section>

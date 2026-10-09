@@ -1,0 +1,33 @@
+---
+import type { CaseStudy } from './caseStudies';
+interface Props { data: CaseStudy }
+const { data } = Astro.props;
+---
+<section class="sol-hero is-portal cs-hero">
+  <div class="container">
+    <div class="sol-hero_grid">
+      <div class="sol-hero_copy">
+        <h1 class="heading-h1">{data.headline}</h1>
+        <p class="hero_highlight">{data.highlight}</p>
+        <p class="text-lead sol-hero_lead">{data.lead}</p>
+        <div class="button-group">
+          <a href="#order-check" class="button is-large">Book a free consultation</a>
+          <a href="#cs-results" class="button is-white is-large">Jump to the results</a>
+        </div>
+      </div>
+      <div class="sol-hero_visual">
+        <figure class="cs-glance">
+          <img src={data.image.src} alt={data.image.alt} width="572" height="404" class="cs-glance_img" />
+          <figcaption class="cs-glance_body">
+            <h2 class="cs-glance_title">{data.name} at a glance</h2>
+            <dl class="cs-facts">
+              {data.facts.map((f) => (
+                <div class="cs-facts_row"><dt>{f.label}</dt><dd>{f.value}</dd></div>
+              ))}
+            </dl>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

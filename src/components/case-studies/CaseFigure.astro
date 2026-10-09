@@ -1,0 +1,35 @@
+---
+import type { Figure } from './caseStudies';
+interface Props { figure: Figure }
+const { figure } = Astro.props;
+---
+<figure class="ui-card cs-figure">
+  <figcaption class="cs-figure_title">{figure.title}</figcaption>
+  {figure.type === 'bars' && (
+    <ul role="list" class="cs-bars">
+      {figure.rows.map((r) => (
+        <li class="cs-bars_row">
+          <div class="cs-bars_text"><span>{r.label}</span><span class={`cs-bars_val is-${r.tone}`}>{r.value}</span></div>
+          <div class="cs-bars_track"><div class={`cs-bars_fill is-${r.tone}`} style={`width:${r.share}%`}></div></div>
+        </li>
+      ))}
+    </ul>
+  )}
+  {figure.type === 'compare' && (
+    <div class="cs-compare">
+      <div class="cs-compare_head" aria-hidden="true">
+        <span></span>
+        <span class="is-before">{figure.beforeHead}</span>
+        <span class="is-after">{figure.afterHead}</span>
+      </div>
+      {figure.rows.map((r) => (
+        <dl class="cs-compare_row">
+          <dt class="cs-compare_what">{r.what}</dt>
+          <dd class="cs-compare_before"><span class="cs-compare_tag">{figure.beforeHead}</span>{r.before}</dd>
+          <dd class="cs-compare_after"><span class="cs-compare_tag">{figure.afterHead}</span>{r.after}</dd>
+        </dl>
+      ))}
+    </div>
+  )}
+  <p class="cs-figure_caption">{figure.caption}</p>
+</figure>

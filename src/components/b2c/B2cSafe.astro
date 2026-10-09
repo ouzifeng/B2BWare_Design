@@ -1,0 +1,30 @@
+---
+import Section from '../ui/Section.astro';
+import { safe } from '../../data/b2c';
+const tick = '<svg viewBox="0 0 22 22" width="22" height="22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#08A270"/><path d="M6.5 11.2 9.6 14.3 15.5 8.2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+---
+<Section id="b2c-safe" tone="white" title={safe.title} intro={safe.intro} class="b2c-safesec">
+  <ol class="b2c-steps" role="list">
+    {safe.steps.map((s) => (
+      <li><h3>{s.title}</h3><p>{s.text}</p></li>
+    ))}
+  </ol>
+  <div class="b2c-safe2">
+    <div class="b2c-moved">
+      <h3 class="b2c-sub">{safe.movedTitle}</h3>
+      <ul class="seg-ticks" role="list">
+        {safe.moved.map((m) => <li>{m}</li>)}
+      </ul>
+    </div>
+    <div class="b2c-card b2c-redirect">
+      <h3 class="b2c-sub">{safe.redirectTitle}</h3>
+      <ul role="list" class="b2c-urls">
+        <li><span class="mono">/shop/mug-blue.html</span><i aria-hidden="true">301</i><span class="mono">/mugs/stoneware-mug-blue</span></li>
+        <li><span class="mono">/shop/mug-green.html</span><i aria-hidden="true">301</i><span class="mono">/mugs/stoneware-mug-green</span></li>
+        <li><span class="mono">/category/kitchen</span><i aria-hidden="true">301</i><span class="mono">/kitchen-and-dining</span></li>
+      </ul>
+      <p class="b2c-note">{safe.redirectText}</p>
+    </div>
+  </div>
+  <p class="b2c-guarantee"><Fragment set:html={tick} /><span>{safe.guarantee}</span></p>
+</Section>

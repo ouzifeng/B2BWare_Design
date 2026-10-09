@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import PriceHero from '../components/pricing/PriceHero.astro';
+import PriceIncluded from '../components/pricing/PriceIncluded.astro';
+import PriceExtras from '../components/pricing/PriceExtras.astro';
+import PriceSteps from '../components/pricing/PriceSteps.astro';
+import Objections from '../components/ui/Objections.astro';
+import ProofStrip from '../components/ui/ProofStrip.astro';
+import Faq from '../components/Faq.astro';
+import OrderCheck from '../components/OrderCheck.astro';
+import { orderCheck } from '../data/b2b';
+
+const faq = {
+  title: 'Questions about the price',
+  items: [
+    { q: 'Is there a per-user fee?', a: 'No. There are no per-user fees. The monthly fee is £300 and includes the first 1,000 orders a month, then about 15p an order.' },
+    { q: 'What if something breaks after an ERP or shop update?', a: 'We fix the link. That is in the monthly fee, with no day rates for fixes. We watch every order and fix what breaks.' },
+    { q: 'What do add-ons cost?', a: 'Each add-on is a flat monthly fee. We put the ones you need in your plan.' },
+    { q: 'What if we need something custom?', a: 'You get a fixed quote before we start, at £500 a day.' },
+    { q: 'Do I pay anything before I see a plan?', a: 'No. The consultation is free, and you get a plan and a fixed price before you pay anything. You keep the plan either way.' },
+    { q: 'We get orders by email. How do I know it will work?', a: 'Send us 50 real orders. We test them and show you the match rate before you pay.' },
+    { q: 'Is this going to be a big IT project?', a: 'No. We do the set-up for a fixed price agreed before we start, then run it for you. Your team checks orders, not a project plan.' },
+    { q: 'What does a consumer web shop cost?', a: 'There is no public price. It is a fixed price agreed in the consultation.' },
+  ],
+};
+---
+<Base title="Pricing: £5,000 to set up, £300 a month | B2Bware" description="Trade ordering connected to your ERP: £5,000 to set up, £300 a month including your first 1,000 orders. No per-user fees, no day rates for fixes.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/pricing.css" />
+    <link rel="stylesheet" href="/css/objections.css" />
+  </Fragment>
+  <PriceHero />
+  <ProofStrip class="is-band" />
+  <PriceIncluded />
+  <PriceExtras />
+  <PriceSteps />
+  <Objections page="pricing" tone="white" />
+  <Faq data={faq} />
+  <OrderCheck data={orderCheck} />
+</Base>

@@ -1,0 +1,55 @@
+---
+import Section from '../ui/Section.astro';
+import SegIcon from '../segments/SegIcon.astro';
+
+const fixes = [
+  { icon: 'portal', title: 'An ordering portal with their customers’ own prices', text: 'Each trade customer logs in and sees their own prices, range and terms, synced live with the ERP. Their orders land in the ERP as sales orders. It is our own portal, built for trade.' },
+  { icon: 'mail', title: 'Emailed orders read into the ERP', text: 'AI reads emailed, PDF and spreadsheet orders, matches the customer’s codes to the client’s, and checks prices and stock. A person approves each order before it posts.' },
+  { icon: 'sync', title: 'Webshop to ERP links fixed and kept working', text: 'Broken or out-of-sync links between the shop and the ERP are fixed, then maintained. When the ERP updates, we fix the link.' },
+];
+const customers = [
+  { name: 'Kienesberger', line: 'Each customer’s own prices from the ERP' },
+  { name: 'Harrows Darts', line: 'Trade portal connected to the ERP' },
+  { name: 'Doppler', line: 'Sales agents order with live ERP pricing' },
+];
+---
+<Section id="pp-clients" tone="light">
+  <div class="seg-split">
+    <div class="seg-split_copy">
+      <h2 class="heading-h2">What your clients get</h2>
+      <p class="text-lead seg-split_lead">Three fixes for wholesalers, distributors and manufacturers. One ERP connection underneath, built and run by us.</p>
+      <ul role="list" class="seg-list">
+        {fixes.map((f) => (
+          <li class="seg-list_item">
+            <span class="seg-list_glyph"><SegIcon name={f.icon} size={22} /></span>
+            <div>
+              <h3 class="seg-list_title">{f.title}</h3>
+              <p class="seg-list_text">{f.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="seg-split_note">Add-ons: WhatsApp and phone orders, punchout, EDI and a sales app for field reps.</p>
+    </div>
+    <div class="seg-split_visual">
+      <div class="ui-card pp-quote">
+        <p class="pp-quote_title">What the client pays</p>
+        <p class="pp-quote_sub">A fixed price, agreed before we start.</p>
+        <dl class="seg-ledger">
+          <div class="seg-ledger_row"><dt>Set-up, one-off</dt><dd>£5,000</dd></div>
+          <div class="seg-ledger_row"><dt>To run it, a month</dt><dd>£300</dd></div>
+          <div class="seg-ledger_row"><dt>Orders included each month</dt><dd>1,000</dd></div>
+          <div class="seg-ledger_row"><dt>Day rates for fixes</dt><dd>None</dd></div>
+        </dl>
+        <div class="pp-quote_who">
+          <p class="pp-quote_whotitle">Already running it</p>
+          <ul role="list" class="pp-quote_list">
+            {customers.map((c) => (
+              <li><span class="pp-quote_name">{c.name}</span><span class="pp-quote_line">{c.line}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>

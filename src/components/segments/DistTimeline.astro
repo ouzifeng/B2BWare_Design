@@ -1,0 +1,36 @@
+---
+import Section from '../ui/Section.astro';
+const slots = [
+  { time: '8am', title: 'The inbox is full of PDFs and spreadsheets', before: "Someone opens each one and keys it line by line, using the customer's codes, not yours.", after: 'Orders are read as they arrive, overnight included. You see finished sales orders, checked against your prices, stock and credit, waiting for approval.' },
+  { time: '10am', title: 'A customer rings for "the usual", no part numbers', before: 'Your rep scrolls old orders to work out what they mean, then keys it.', after: 'They reorder from their own portal with their usual items listed. Phone and WhatsApp orders are captured into the ERP too.' },
+  { time: '1pm', title: 'Price query on one of 20,000 SKUs', before: 'Someone checks the price list, then the contract price, then rings the customer back.', after: 'Every account sees its own price, straight from your ERP. The question does not get asked.' },
+  { time: '3pm', title: 'The webshop shows stock you do not have', before: 'Prices and stock are copied over now and then, so the shop and the ERP disagree.', after: 'Prices, stock and orders sync live with your ERP, across branches and warehouses.' },
+  { time: '5pm', title: 'Still keying', before: "The desk stays late to clear the day's orders.", after: 'The queue is cleared. The team spends the day on customers, and on selling.' },
+];
+const tick = '<svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>';
+---
+<Section id="ds-day" tone="light" title="A day on your sales desk, before and after" intro="The same day, with the keying taken out.">
+  <div class="ds-day">
+    <div class="ds-day_head" aria-hidden="true"><span></span><span>Today</span><span>With B2Bware</span></div>
+    <ol role="list" class="ds-day_list">
+      {slots.map((s, i) => (
+        <li class:list={['ds-day_slot', { 'is-last': i === slots.length - 1 }]}>
+          <div class="ds-day_time"><time>{s.time}</time><span class="ds-day_dot" aria-hidden="true"></span></div>
+          <div class="ds-day_body">
+            <h3 class="ds-day_title">{s.title}</h3>
+            <div class="ds-day_pair">
+              <div class="ds-day_before">
+                <span class="ds-day_tag">Today</span>
+                <p>{s.before}</p>
+              </div>
+              <div class="ds-day_after">
+                <span class="ds-day_tag"><Fragment set:html={tick} />With B2Bware</span>
+                <p>{s.after}</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>

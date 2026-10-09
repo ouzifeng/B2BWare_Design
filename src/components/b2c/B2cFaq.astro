@@ -1,0 +1,15 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { data: { title: string; items: { q: string; a: string }[] }; }
+const { data } = Astro.props;
+---
+<Section id="v2-faq" tone="light" title={data.title}>
+  <div class="faq-list">
+    {data.items.map((i) => (
+      <details class="faq-item">
+        <summary class="faq-item_q"><h3 class="heading-h3">{i.q}</h3><span class="faq-item_icon" aria-hidden="true"></span></summary>
+        <p class="card_text faq-item_a" set:html={i.a} />
+      </details>
+    ))}
+  </div>
+</Section>

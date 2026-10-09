@@ -1,0 +1,14 @@
+---
+import Section from './ui/Section.astro';
+import CustomerCard from './ui/CustomerCard.astro';
+
+interface Props {
+  data: { title: string; intro?: string; customers: { name: string; meta: string; text: string; image?: string; stats?: { fig: string; label: string }[] }[] };
+}
+const { data } = Astro.props;
+---
+<Section id="v2-proof" title={data.title} intro={data.intro}>
+  <div class="card-grid">
+    {data.customers.map((c) => <CustomerCard {...c} />)}
+  </div>
+</Section>

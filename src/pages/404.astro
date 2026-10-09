@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/ui/Section.astro';
+import Button from '../components/ui/Button.astro';
+---
+<Base title="Page not built yet | B2Bware" description="This page has not been built on this site yet.">
+  <Section id="not-built" title="This page isn't built yet" intro="It exists on the old site but hasn't been rebuilt here.">
+    <p id="nb-path" style="font-family:monospace;opacity:.7"></p>
+    <div style="margin-top:1.5rem"><Button href="/?for=b2b">Back to the homepage</Button></div>
+  </Section>
+  <script is:inline>document.getElementById('nb-path').textContent = location.pathname;</script>
+</Base>

@@ -1,0 +1,14 @@
+---
+import Section from './ui/Section.astro';
+import RouteCard from './ui/RouteCard.astro';
+
+interface Props {
+  data: { title: string; cards: { image: string; alt: string; title: string; text: string; linkText: string; href: string }[] };
+}
+const { data } = Astro.props;
+---
+<Section id="v2-doors" title={data.title}>
+  <div>
+    {data.cards.map((c) => <RouteCard {...c} />)}
+  </div>
+</Section>

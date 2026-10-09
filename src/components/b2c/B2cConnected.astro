@@ -1,0 +1,27 @@
+---
+import Section from '../ui/Section.astro';
+import { connected } from '../../data/b2c';
+const m = connected.marketplaces;
+---
+<Section id="b2c-connected" tone="light" title={connected.title} intro={connected.intro} class="b2c-connectedsec">
+  <div class="b2c-conn">
+    {connected.groups.map((g) => (
+      <div class="b2c-conn_row">
+        <h3 class="b2c-conn_name">{g.name}</h3>
+        <ul class="b2c-wm">
+          {g.items.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+    ))}
+    <div class="b2c-conn_row is-key">
+      <h3 class="b2c-conn_name">{m.name}</h3>
+      <div>
+        <ul class="b2c-wm">
+          {m.items.map((i) => <li>{i}</li>)}
+        </ul>
+        <p class="b2c-conn_note">{m.note}</p>
+      </div>
+    </div>
+  </div>
+  <p class="b2c-conn_close">{connected.closing}</p>
+</Section>

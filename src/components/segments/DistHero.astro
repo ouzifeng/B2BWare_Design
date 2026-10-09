@@ -1,0 +1,57 @@
+---
+import SegHero from './SegHero.astro';
+const inbox = [
+  { from: 'Calder Fixings', sub: 'PO 5530.pdf', file: true, isNew: true },
+  { from: 'Marsh Engineering', sub: 'weekly order.xlsx', file: true, isNew: true },
+  { from: 'Tern Plant Hire', sub: 'same as last time pls', file: false, isNew: true },
+  { from: 'Ashby Tooling', sub: 'PO 2291.pdf', file: true, isNew: false },
+];
+const checks = [
+  { k: 'Calder Fixings, acct 3107', v: 'Their price' },
+  { k: 'Their code CF-M10 to your 933-1050', v: 'Matched' },
+  { k: 'Stock at Leeds branch', v: 'In stock' },
+  { k: 'Credit and terms', v: 'Not on stop' },
+];
+---
+<SegHero
+  tone="white"
+  headline="Your inside sales team should be selling,"
+  highlight="not keying orders."
+  checks={['Emailed, phoned and portal orders land in your ERP', 'Checked and priced for every customer', 'Built for thousands of SKUs']}
+  lead="For distributors and wholesalers with thousands of SKUs and a price for every customer. Your team gets back to the customers."
+  primaryCta={{ text: 'Book a free consultation', href: '#order-check' }}
+  secondaryCta={{ text: 'See a day on your sales desk', href: '#ds-day' }}
+  priceLine="£5,000 to set up. £300 a month."
+  priceNote="Fixed price, agreed before we start."
+>
+  <div class="ds-mock">
+    <div class="ui-card ds-inbox">
+      <div class="ds-inbox_top">
+        <span class="ord-card_label">Sales inbox</span>
+        <span class="ds-inbox_time seg-mono">8:02am</span>
+      </div>
+      <ul role="list" class="ds-inbox_list">
+        {inbox.map((m) => (
+          <li class:list={['ds-inbox_row', { 'is-new': m.isNew }]}>
+            <span class="ds-inbox_dot" aria-hidden="true"></span>
+            <span class="ds-inbox_from">{m.from}</span>
+            <span class:list={['ds-inbox_sub', { 'seg-mono': m.file }]}>{m.sub}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="ds-mock_arrow" aria-hidden="true"><svg viewBox="0 0 24 28" width="24" height="28"><path fill="none" stroke="#08A270" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M5 16l7 8 7-8"/></svg></div>
+    <div class="ui-card ds-so">
+      <div class="ui-card_top">
+        <div class="ord-card_cust">Sales order <span class="seg-mono">SO-88213</span></div>
+        <span class="ord-badge">In your ERP</span>
+      </div>
+      <ul role="list" class="ds-so_list">
+        {checks.map((c) => (
+          <li class="ds-so_row"><span>{c.k}</span><span class="ds-so_ok"><svg fill="none" viewBox="0 0 22 22" height="14" width="14" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>{c.v}</span></li>
+        ))}
+      </ul>
+      <p class="ord-caption">Illustrative example.</p>
+    </div>
+  </div>
+</SegHero>

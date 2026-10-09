@@ -1,0 +1,74 @@
+/* /pricing. Page devices only; shared ones live in seg-common.css. Prefix: pr- */
+
+.seg-hero .heading-h1{text-wrap:balance}
+
+/* Hero: what it costs */
+.pr-quote{padding:1.75rem}
+.pr-trial{margin-top:1rem;text-align:center}
+.pr-quote_title{margin:0 0 .25rem;font-family:var(--seg-head);font-size:1.375rem;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--seg-navy)}
+.pr-quote_sub{margin:0 0 1rem;font-size:.95rem;color:var(--seg-slate)}
+
+/* Included */
+.pr-incl{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:4.5rem;align-items:start;max-width:76rem;margin:0 auto;text-align:left}
+.pr-incl_head{position:sticky;top:8rem}
+.pr-incl_head .heading-h2{margin:0;text-wrap:balance}
+.pr-incl_lead{margin:1rem 0 0;max-width:30rem}
+.pr-incl_main{gap:0}
+.pr-incl_main>li{padding:.9rem 0 .9rem 1.75rem;border-bottom:1px solid #dfe4ea}
+.pr-incl_main>li::before{top:1.1rem}
+.pr-incl_main>li:first-child{border-top:1px solid #dfe4ea}
+.pr-incl_more{margin:2rem 0 .75rem;font-size:.875rem;font-weight:600;color:var(--seg-slate)}
+.pr-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.pr-chips li{padding:.3rem .75rem;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #d5dbe5;font-size:.9rem;line-height:1.4;color:var(--seg-navy)}
+
+/* Monthly fee meter */
+.pr-meter{margin-top:2.25rem;padding:1.25rem 1.25rem 1.1rem;background:#fff;border:1px solid var(--seg-line-soft);border-radius:10px;box-shadow:var(--seg-shadow)}
+.pr-meter_title{margin:0 0 .85rem;font-size:.875rem;font-weight:600;color:var(--seg-slate)}
+.pr-meter_track{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);height:2.75rem;border-radius:8px;overflow:hidden;font-size:.8125rem;font-weight:600}
+.pr-meter_in,.pr-meter_out{display:flex;align-items:center;padding:0 .75rem;line-height:1.2}
+.pr-meter_in{background:var(--seg-green);color:#fff}
+.pr-meter_out{background:var(--seg-green-tint);color:var(--seg-green-ink);background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(8,122,85,.1) 6px 7px)}
+.pr-meter_legend{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:0 .75rem;margin-top:.7rem;font-size:.84rem;line-height:1.4;color:var(--seg-body)}
+.pr-meter_legend strong{color:var(--seg-navy);font-weight:600}
+
+/* What costs extra */
+.pr-extras{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:3rem;align-items:start;max-width:76rem;margin:0 auto;text-align:left}
+.pr-fee{padding:1.75rem;background:var(--seg-green-tint);border-radius:10px}
+.pr-fee_title{margin:0 0 1.1rem;font-family:var(--seg-head);font-size:1.25rem;font-weight:700;line-height:1.3;color:var(--seg-navy)}
+.pr-fee_note{margin:1.25rem 0 0;padding-top:1rem;border-top:1px solid rgba(8,122,85,.25);font-size:.95rem;font-weight:600;color:var(--seg-green-ink)}
+.pr-rows{list-style:none;margin:0;padding:0;border-top:2px solid var(--seg-navy)}
+.pr-row{padding:1.4rem 0;border-bottom:1px solid #dfe4ea}
+.pr-row_head{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem;flex-wrap:wrap}
+.pr-row_title{margin:0;font-family:var(--seg-head);font-size:1.25rem;font-weight:700;line-height:1.3;letter-spacing:-.01em;color:var(--seg-navy)}
+.pr-row_price{font-family:var(--seg-mono);font-size:.9rem;font-weight:500;color:var(--seg-green-ink)}
+.pr-row_text{margin:.5rem 0 0;font-size:1rem;line-height:1.55;color:var(--seg-body)}
+.pr-row_list{list-style:none;margin:.9rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem 1.5rem}
+.pr-row_list li{position:relative;padding-left:1rem;font-size:.97rem;line-height:1.45;color:var(--seg-navy)}
+.pr-row_list li::before{content:"";position:absolute;left:0;top:.6em;width:.4rem;height:.4rem;border-radius:50%;background:var(--seg-green)}
+
+/* How buying works */
+.pr-steps{list-style:none;margin:0 auto;padding:0;max-width:76rem;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;text-align:left}
+.pr-step{position:relative;display:flex;flex-direction:column;align-items:flex-start}
+.pr-step:not(:last-child)::after{content:"";position:absolute;top:1.25rem;left:3.25rem;right:-1rem;height:2px;background:#d5dbe5}
+.pr-step_node{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px var(--seg-green);font-family:var(--seg-head);font-size:1rem;font-weight:700;color:var(--seg-green-ink)}
+.pr-step_tag{margin-top:1rem;padding:.1rem .6rem;border-radius:999px;font-size:.75rem;font-weight:700;line-height:1.6;background:#fff;color:var(--seg-navy);box-shadow:inset 0 0 0 1.5px var(--seg-navy)}
+.pr-step_tag.is-free{background:var(--seg-green);color:#fff;box-shadow:none}
+.pr-step_title{margin:.7rem 0 0;font-family:var(--seg-head);font-size:1.125rem;font-weight:700;line-height:1.3;color:var(--seg-navy)}
+.pr-step_text{margin:.4rem 0 0;font-size:.97rem;line-height:1.55;color:var(--seg-body)}
+.pr-steps_cta{margin:2.5rem 0 0;text-align:center}
+
+@media (max-width:991px){
+  .pr-incl,.pr-extras{grid-template-columns:minmax(0,1fr);gap:2.5rem}
+  .pr-incl_head{position:static}
+  .pr-steps{grid-template-columns:minmax(0,1fr);gap:0;max-width:36rem}
+  .pr-step{display:grid;grid-template-columns:2.5rem minmax(0,1fr);column-gap:1.1rem;padding-bottom:1.75rem}
+  .pr-step_node{grid-row:1 / span 3}
+  .pr-step_tag{margin-top:0;justify-self:start}
+  .pr-step_title{margin-top:.5rem}
+  .pr-step:not(:last-child)::after{top:2.75rem;bottom:.25rem;left:1.2rem;right:auto;width:2px;height:auto}
+}
+@media (max-width:640px){
+  .pr-row_list{grid-template-columns:minmax(0,1fr)}
+  .pr-quote{padding:1.25rem}
+  .pr-fee{padding:1.25rem}
+}

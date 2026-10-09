@@ -1,0 +1,10 @@
+---
+import type { Feature } from '../../data/features';
+interface Props { f: Feature }
+const { f } = Astro.props;
+---
+<a href={`/features/${f.slug}`} class="ft-card">
+  <span class="ft-card_name">{f.name}</span>
+  <span class="ft-card_line">{f.line}</span>
+  <span class="ft-card_more">See how it works &rarr;</span>
+</a>

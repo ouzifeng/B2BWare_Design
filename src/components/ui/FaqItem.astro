@@ -1,0 +1,12 @@
+---
+interface Props {
+  q: string;
+  a: string;
+  open?: boolean;
+}
+const { q, a, open = false } = Astro.props;
+---
+<details class="faq-item" open={open}>
+  <summary class="faq-item_q"><h3 class="heading-h3">{q}</h3><span class="faq-item_icon" aria-hidden="true"></span></summary>
+  <p class="card_text faq-item_a">{a}</p>
+</details>

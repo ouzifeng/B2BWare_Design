@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProblemHero from '../../components/solutions/ProblemHero.astro';
+import SymptomList from '../../components/solutions/SymptomList.astro';
+import ProblemAnswer from '../../components/solutions/ProblemAnswer.astro';
+import FixGrid from '../../components/solutions/FixGrid.astro';
+import TextBlock from '../../components/solutions/TextBlock.astro';
+import TwoColumn from '../../components/solutions/TwoColumn.astro';
+import OptionsTable from '../../components/solutions/OptionsTable.astro';
+import StepStrip from '../../components/solutions/StepStrip.astro';
+import Comparison from '../../components/solutions/Comparison.astro';
+import SystemsList from '../../components/solutions/SystemsList.astro';
+import PortalShowcase from '../../components/solutions/PortalShowcase.astro';
+import CtaBand from '../../components/solutions/CtaBand.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import Proof from '../../components/Proof.astro';
+import Faq from '../../components/Faq.astro';
+import Doors from '../../components/Doors.astro';
+import Pricing from '../../components/Pricing.astro';
+import OrderCheck from '../../components/OrderCheck.astro';
+import { pricing, orderCheck } from '../../data/b2b';
+import { problemPages } from '../../data/solutions';
+
+export function getStaticPaths() {
+  return Object.keys(problemPages).map((slug) => ({ params: { slug } }));
+}
+const page = problemPages[Astro.params.slug as string];
+const form = { title: orderCheck.title, intro: page.formIntro ?? orderCheck.intro };
+---
+<Base title={page.meta.title} description={page.meta.description}>
+  <ProblemHero data={page.hero} />
+  <div class:list={['sol-sections', { 'is-flip': Astro.params.slug === 'emailed-orders' }]}>
+    {page.sections.map((s) => {
+      switch (s.type) {
+        case 'symptoms': return <SymptomList data={s} />;
+        case 'problemAnswer': return <ProblemAnswer data={s} />;
+        case 'features': return <FixGrid data={s} />;
+        case 'text': return <TextBlock data={s} />;
+        case 'twoCol': return <TwoColumn data={s} />;
+        case 'options': return <OptionsTable data={s} />;
+        case 'stepStrip': return <StepStrip data={s} />;
+        case 'comparison': return <Comparison data={s} />;
+        case 'portalShowcase': return <PortalShowcase data={s} />;
+        case 'systems': return <SystemsList data={s} />;
+        case 'proof': return <Proof data={s} />;
+        case 'pricing': return <Pricing data={pricing} />;
+        case 'how': return <HowItWorks data={s} />;
+        case 'faq': return <Faq data={s} />;
+        case 'cta': return <CtaBand data={s} />;
+        case 'doors': return <Doors data={s} />;
+      }
+    })}
+  </div>
+  <OrderCheck data={form} />
+</Base>

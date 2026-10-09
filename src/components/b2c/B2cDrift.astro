@@ -1,0 +1,27 @@
+---
+import Section from '../ui/Section.astro';
+import { drift } from '../../data/b2c';
+---
+<Section id="b2c-drift" tone="light" title={drift.title} intro={drift.intro} class="b2c-driftsec">
+  <div class="b2c-drift">
+    <div class="b2c-dcol is-patch">
+      <h3 class="b2c-dcol_h">{drift.patchedTitle}</h3>
+      <div class="b2c-flow" role="img" aria-label="The ERP and the shop each hold a price and a stock figure, joined by a link. The figures have drifted apart.">
+        <div class="b2c-node"><b>ERP</b><span>£22.00</span><span>Stock 12</span></div>
+        <div class="b2c-wire"><em>Link</em></div>
+        <div class="b2c-node is-copy"><b>Shop copy</b><span class="is-bad">£24.00</span><span class="is-bad">Stock 14</span></div>
+      </div>
+      <p>{drift.patchedText}</p>
+    </div>
+    <div class="b2c-dcol is-built">
+      <h3 class="b2c-dcol_h">{drift.builtTitle}</h3>
+      <div class="b2c-flow" role="img" aria-label="The shop reads its price and stock directly from the ERP, so there is only one set of figures.">
+        <div class="b2c-node"><b>ERP</b><span>£22.00</span><span>Stock 12</span></div>
+        <div class="b2c-wire is-solid"><em>Reads</em></div>
+        <div class="b2c-node is-live"><b>Shop</b><span>£22.00</span><span>Stock 12</span></div>
+      </div>
+      <p>{drift.builtText}</p>
+    </div>
+  </div>
+  <p class="ord-caption b2c-caption is-center">Illustrative example.</p>
+</Section>

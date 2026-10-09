@@ -1,0 +1,37 @@
+---
+import SegIcon from './SegIcon.astro';
+interface Props { data: { title: string; intro: string; channels: { icon: string; name: string; line: string }[]; erpTitle: string; erpChecks: string[]; erpLine: string } }
+const { data } = Astro.props;
+---
+<section id="wh-channels" class="section is-dark wh-ch">
+  <div class="container">
+    <div class="section_header is-tight">
+      <h2 class="heading-h2 is-white">{data.title}</h2>
+      <p class="text-lead is-white">{data.intro}</p>
+    </div>
+    <div class="wh-flow">
+      <ul role="list" class="wh-flow_in">
+        {data.channels.map((c, i) => (
+          <li class="wh-chan" style={`--i:${i}`}>
+            <span class="wh-chan_icon"><SegIcon name={c.icon} size={20} /></span>
+            <span class="wh-chan_text">
+              <span class="wh-chan_name">{c.name}</span>
+              <span class="wh-chan_line">{c.line}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div class="wh-flow_bus" aria-hidden="true"><span class="wh-flow_arrow"></span></div>
+      <div class="ui-card wh-erp">
+        <span class="wh-erp_icon"><SegIcon name="database" size={22} /></span>
+        <h3 class="wh-erp_title">{data.erpTitle}</h3>
+        <ul role="list" class="wh-erp_checks">
+          {data.erpChecks.map((t) => (
+            <li><svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>{t}</li>
+          ))}
+        </ul>
+        <div class="ui-card_foot">{data.erpLine}</div>
+      </div>
+    </div>
+  </div>
+</section>

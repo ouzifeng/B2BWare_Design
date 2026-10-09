@@ -1,0 +1,30 @@
+---
+// Compact proof next to a primary call to action. Real named customers only.
+interface Props { class?: string }
+const { class: extra } = Astro.props;
+const items = [
+  { name: 'Doppler', text: 'Sales agents order with live ERP prices, 70% faster order entry.', href: '/case-studies/doppler' },
+  { name: 'Kienesberger', text: "Each customer's own prices from the ERP, across about 70,000 price entries.", href: '/case-studies/kienesberger' },
+  { name: 'Harrows Darts', text: 'UK trade portal connected to the ERP.' },
+];
+---
+<ul role="list" class:list={['proofstrip', extra]} aria-label="Customers running B2Bware">
+  {items.map((i) => (
+    <li class="proofstrip_item">
+      <span class="proofstrip_name">{i.name}</span>
+      <span class="proofstrip_text">{i.text}{i.href && <> <a class="proofstrip_link" href={i.href}>Case study<span aria-hidden="true"> &rarr;</span></a></>}</span>
+    </li>
+  ))}
+</ul>
+<style is:global>
+  .proofstrip{list-style:none;margin:2rem 0 0;padding:1.1rem 0 0;border-top:1px solid rgba(24,30,53,.12);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem 1.75rem;text-align:left}
+  .proofstrip_item{display:flex;flex-direction:column;gap:.2rem;min-width:0}
+  .proofstrip_name{font-family:var(--_typography---font--heading);font-size:.9375rem;font-weight:700;color:#181E35}
+  .proofstrip_text{font-size:.8125rem;line-height:1.45;color:#596780}
+  .proofstrip_link{font-weight:600;color:#087a55;text-decoration:none;white-space:nowrap;text-underline-offset:.2em}
+  .proofstrip_link:hover{text-decoration:underline}
+  .proofstrip_link:focus-visible{outline:2px solid #08A270;outline-offset:3px;border-radius:3px}
+  .proofstrip.is-band{max-width:76rem;margin:0 auto;padding:1.5rem 0;border-top:0}
+  .proofstrip.is-band .proofstrip_text{font-size:.9375rem}
+  @media (max-width:991px){.proofstrip{grid-template-columns:minmax(0,1fr);gap:.85rem}}
+</style>

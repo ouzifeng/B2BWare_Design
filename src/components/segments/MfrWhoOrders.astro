@@ -1,0 +1,31 @@
+---
+import Section from '../ui/Section.astro';
+import SegIcon from './SegIcon.astro';
+const routes = [
+  { icon: 'store', tag: 'Dealers', title: 'Reorder at their own prices', points: ['Their own price list or discount band, from your ERP', 'Live stock before they order', 'Order history and one-click reorder', 'Orders land in your ERP as finished sales orders'] },
+  { icon: 'agent', tag: 'Sales agents', title: 'Order on the visit', points: ['Live ERP prices, not a price list from last month', 'Order for a dealer in the same system the dealer uses', 'Sales app for field agents, available as an add-on', 'A flat fee, not priced per agent'] },
+  { icon: 'building', tag: 'Direct trade customers', title: 'Same ERP, their own terms', points: ['Trade customers order through a portal connected to your ERP', 'Orders by email, PDF or WhatsApp are read into the ERP too', 'Big customers can order from inside their own buying system (punchout)', 'We set up the accounts and invite them with you'] },
+];
+---
+<Section id="mf-who" title="Who orders from you" intro="One system for every route into your ERP. Each one gets what it needs.">
+  <div class="mf-net">
+    <div class="mf-net_hub">
+      <span class="mf-net_hub-icon"><SegIcon name="database" size={20} /></span>
+      <span class="mf-net_hub-text"><strong>Your ERP</strong><span>Prices, stock and orders, live</span></span>
+    </div>
+    <ol role="list" class="mf-net_routes">
+      {routes.map((r) => (
+        <li class="mf-net_route">
+          <div class="mf-net_node">
+            <span class="mf-net_icon"><SegIcon name={r.icon} size={22} /></span>
+            <span class="mf-net_tag">{r.tag}</span>
+          </div>
+          <h3 class="mf-net_title">{r.title}</h3>
+          <ul role="list" class="seg-ticks">
+            {r.points.map((p) => <li>{p}</li>)}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>

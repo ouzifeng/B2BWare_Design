@@ -1,0 +1,19 @@
+---
+import Section from '../ui/Section.astro';
+import type { ComparePageData } from '../../data/compare';
+interface Props { data: ComparePageData }
+const { fit } = Astro.props.data;
+---
+<Section id="cmp-fit" tone="light" title={fit.title}>
+  <div class="cmp-fit">
+    <div class="cmp-fit_col">
+      <h3 class="seg-fit_title">{fit.theirsTitle}</h3>
+      <ul role="list" class="seg-ticks">{fit.theirs.map((i) => <li>{i}</li>)}</ul>
+    </div>
+    <div class="cmp-fit_col is-ours">
+      <h3 class="seg-fit_title">{fit.oursTitle}</h3>
+      <ul role="list" class="seg-ticks">{fit.ours.map((i) => <li>{i}</li>)}</ul>
+    </div>
+  </div>
+  <p class="seg-fit_note">{fit.note}</p>
+</Section>

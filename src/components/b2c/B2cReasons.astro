@@ -1,0 +1,19 @@
+---
+import Section from '../ui/Section.astro';
+import B2cMock from './B2cMock.astro';
+import { reasons, reasonsIntro } from '../../data/b2c';
+---
+<Section id="b2c-reasons" tone="white" title={reasonsIntro.title} intro={reasonsIntro.intro} class="b2c-reasons">
+  <div class="b2c-rows">
+    {reasons.map((r) => (
+      <article class="b2c-row">
+        <div class="b2c-row_copy">
+          <h3 class="b2c-row_title">{r.title}</h3>
+          <p class="b2c-row_today"><strong>Today</strong>{r.today}</p>
+          <p class="b2c-row_fix"><strong>With B2Bware</strong>{r.fix}</p>
+        </div>
+        <B2cMock kind={r.kind} />
+      </article>
+    ))}
+  </div>
+</Section>

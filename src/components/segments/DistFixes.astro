@@ -1,0 +1,25 @@
+---
+import Section from '../ui/Section.astro';
+import SegIcon from './SegIcon.astro';
+const fixes = [
+  { icon: 'mail', title: 'Read the emailed orders', text: 'PDFs, spreadsheets and "same as last time" emails become finished sales orders in your ERP. Their codes are mapped to yours, and every correction is kept so the same mistake does not come back.', href: '/solutions/emailed-orders', link: 'Emailed orders' },
+  { icon: 'portal', title: 'Give accounts an online ordering portal', text: 'Customers reorder their usual items at their own prices, live stock showing. We set up the accounts and invite your customers with you, so people use it.', href: '/solutions/trade-portal', link: 'Online ordering portal' },
+  { icon: 'sync', title: 'Link the shop to your ERP', text: 'Prices, stock and orders sync live, for any ERP. When the ERP updates, we fix the link, and that is in the monthly fee.', href: '/solutions/erp-integration', link: 'ERP integration' },
+];
+---
+<Section id="ds-fixes" tone="light" title="Three fixes, one team" intro="One team owns all three, so nobody points at another supplier. Live in weeks, not months.">
+  <ul role="list" class="ds-fixes">
+    {fixes.map((f) => (
+      <li class="ds-fix">
+        <div class="ds-fix_head">
+          <span class="ds-fix_icon"><SegIcon name={f.icon} size={22} /></span>
+          <h3 class="ds-fix_title">{f.title}</h3>
+        </div>
+        <div class="ds-fix_body">
+          <p class="ds-fix_text">{f.text}</p>
+          <a class="seg-link" href={f.href}>{f.link}<span aria-hidden="true"> &rarr;</span></a>
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>

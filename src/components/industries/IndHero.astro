@@ -1,0 +1,52 @@
+---
+import SegHero from '../segments/SegHero.astro';
+import { bySlug } from '../../data/industries';
+interface Props { slug: string }
+const ind = bySlug(Astro.props.slug);
+const { hero, card } = ind;
+---
+<SegHero
+  tone="light"
+  headline={hero.headline}
+  highlight={hero.highlight}
+  checks={hero.checks}
+  lead={hero.lead}
+  primaryCta={{ text: 'Book a free consultation', href: '#order-check' }}
+  secondaryCta={{ text: 'See what we fix', href: '#ind-pains' }}
+  priceLine="£5,000 to set up. £300 a month."
+  priceNote="Live in weeks, not months."
+>
+  <div class={`ui-card ind-card is-${card.kind}`} data-industry={ind.slug}>
+    <div class="ord-card_label">{card.label}</div>
+    <div class="ord-card_cust ind-card_title">{card.title}</div>
+    <div class="ord-card_meta">{card.meta}</div>
+    {card.chips && (
+      <ul role="list" class="ind-chips">
+        {card.chips.map((c) => <li class="ind-chip">{c}</li>)}
+      </ul>
+    )}
+    {card.steps && (
+      <ol role="list" class="ind-steps">
+        {card.steps.map((s, i) => <li class="ind-step"><span class="ind-step_n">{i + 1}</span>{s}</li>)}
+      </ol>
+    )}
+    <div class="ind-head" aria-hidden="true"><span>{card.cols[0]}</span><span>{card.cols[1]}</span><span>{card.cols[2]}</span></div>
+    <ul role="list" class="ind-rows">
+      {card.rows.map((r) => (
+        <li class="ind-row">
+          <div class="ind-row_who">
+            <span class="ind-row_name">{r.a}</span>
+            {r.sub && <span class="ind-row_sub seg-mono">{r.sub}</span>}
+          </div>
+          <span class:list={['seg-stock', `is-${r.tone ?? 'ok'}`]}><span class="seg-stock_dot" aria-hidden="true"></span>{r.b}</span>
+          <span class="ind-row_now">{r.c}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="seg-sent">
+      <svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>
+      <span>{card.sent}</span>
+    </div>
+    <p class="ord-caption">Illustrative example.</p>
+  </div>
+</SegHero>

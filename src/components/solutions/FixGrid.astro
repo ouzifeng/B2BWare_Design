@@ -1,0 +1,27 @@
+---
+import Section from '../ui/Section.astro';
+interface Props {
+  data: { title: string; intro?: string; tiles: { title: string; text?: string }[]; callout?: string; limits?: string };
+}
+const { data } = Astro.props;
+const n = data.tiles.length;
+---
+<Section title={data.title} intro={data.intro}>
+  <div class:list={['feature-grid', { 'is-quad': n === 4 }]}>
+    {data.tiles.map((t) => t.text ? (
+      <div class="feature-tile">
+        <h3 class="heading-h3">{t.title}</h3>
+        <p class="card_text">{t.text}</p>
+      </div>
+    ) : (
+      <div class="feature-tile is-plain">
+        <svg fill="none" viewBox="0 0 22 22" height="22" width="22" class="feature-tile_icon" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>
+        <h3 class="feature-tile_title">{t.title}</h3>
+      </div>
+    ))}
+  </div>
+  {data.callout && (
+    <div class="callout sol-callout"><svg fill="none" viewBox="0 0 22 22" height="22" width="22" class="callout_icon" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linecap="round" stroke-width="2" stroke="#fff" d="M11 6.5v6M11 15.5h.01"></path></svg><span>{data.callout}</span></div>
+  )}
+  {data.limits && <p class="sol-limits">{data.limits}</p>}
+</Section>

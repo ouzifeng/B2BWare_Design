@@ -1,0 +1,28 @@
+---
+const rows = [
+  { item: 'Hex bolt M8 × 30, A2', price: '£14.60 per box of 100' },
+  { item: 'Nyloc nut M8, A2', price: '£9.20 per box of 200' },
+  { item: 'Anchor resin 380ml', price: '£3.85 each at 10+' },
+];
+---
+<div class="ui-card pm">
+  <div class="ui-card_top">
+    <div>
+      <div class="ord-card_label">Trade portal &middot; Hargreaves Building Supplies</div>
+      <div class="ord-card_meta pm_acct">Acct 10442 &middot; Terms 30 days &middot; Credit OK</div>
+    </div>
+  </div>
+  <div class="pm_head">Your usual items</div>
+  {rows.map((r) => (
+    <div class="pm_row">
+      <div class="pm_main">
+        <div class="ord-item">{r.item}</div>
+        <div class="ord-codes">{r.price}</div>
+      </div>
+      <span class="pm_re">Reorder</span>
+    </div>
+  ))}
+  <div class="pm_btn">Reorder last order (14 lines)</div>
+  <div class="ui-card_foot">Order goes to your ERP as a sales order</div>
+  <p class="ord-caption">Illustrative example.</p>
+</div>

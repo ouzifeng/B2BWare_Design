@@ -1,0 +1,52 @@
+---
+import Section from '../ui/Section.astro';
+import { builtIn } from '../../data/b2c';
+---
+<Section id="b2c-builtin" tone="white" title={builtIn.title} intro={builtIn.intro} class="b2c-builtsec">
+  <ol class="b2c-built">
+    {builtIn.items.map((it) => (
+      <li class="b2c-built_row">
+        <div class="b2c-built_copy">
+          <h3 class="b2c-built_title">{it.title}</h3>
+          <p>{it.text}</p>
+        </div>
+        <div class="b2c-frag" aria-hidden="true">
+          {it.kind === 'search' && (
+            <>
+              <div class="b2c-frag_field"><span class="mono">sheos</span></div>
+              <p class="b2c-frag_line">Showing results for <strong>shoes</strong></p>
+              <p class="b2c-frag_meta mono">24 products</p>
+            </>
+          )}
+          {it.kind === 'promo' && (
+            <>
+              <div class="b2c-frag_field"><span class="mono">SPRING10</span><i>Applied</i></div>
+              <ul class="b2c-lines">
+                <li class="is-promo"><span>Spring voucher</span><span>-10%</span></li>
+              </ul>
+            </>
+          )}
+          {it.kind === 'variants' && (
+            <>
+              <p class="b2c-frag_meta">Canvas jacket</p>
+              <div class="b2c-chips"><span>S</span><span class="is-on">M</span><span>L</span><em></em><span class="is-on">Navy</span><span>Sand</span></div>
+            </>
+          )}
+          {it.kind === 'multi' && (
+            <>
+              <div class="b2c-frag_shops"><span>Shop A</span><span>Shop B</span><span>Shop C</span></div>
+              <div class="b2c-frag_base mono"><span>One catalogue</span><span>Stock 12</span></div>
+            </>
+          )}
+          {it.kind === 'trade' && (
+            <div class="b2c-frag_prices">
+              <div><small>Public</small><span class="mono">£24.00</span></div>
+              <div class="is-trade"><small>Trade account</small><span class="mono">£18.00</span></div>
+            </div>
+          )}
+        </div>
+      </li>
+    ))}
+  </ol>
+  <p class="ord-caption b2c-caption is-center">{builtIn.caption}</p>
+</Section>

@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import OrderCheck from '../components/OrderCheck.astro';
+import { orderCheck } from '../data/b2b';
+
+const steps = [
+  { title: 'You tell us what is not working', text: 'Orders retyped, reorders by phone, a shop that does not match your ERP.' },
+  { title: 'We come back with a plan and a fixed price', text: 'Based on your own setup, before you pay anything.' },
+  { title: 'You decide', text: 'You keep the plan either way.' },
+];
+---
+<Base title="Contact B2Bware | Talk to us" description="Tell us what is not working. We come back with a plan and a fixed price, and you keep the plan either way.">
+  <section class="section is-light ct-hero">
+    <div class="container">
+      <h1 class="heading-h1">Talk to us</h1>
+      <p class="text-lead">Tell us what is not working. We come back with a plan and a fixed price.</p>
+    </div>
+  </section>
+  <section class="section ct-next">
+    <div class="container">
+      <h2 class="heading-h3">What happens next</h2>
+      <ol role="list" class="ct-steps">
+        {steps.map((s, i) => (
+          <li class="ct-step">
+            <span class="ct-step_num" aria-hidden="true">{i + 1}</span>
+            <h3 class="ct-step_title">{s.title}</h3>
+            <p class="ct-step_text">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <OrderCheck data={orderCheck} />
+  <section class="section is-light ct-company">
+    <div class="container">
+      <p class="ct-company_text">B2Bware is made by SyncSpider GmbH, Molkereistraße 4, 4910 Ried im Innkreis, Austria</p>
+    </div>
+  </section>
+</Base>
+<style>
+  .ct-hero{padding-top:4rem;padding-bottom:3rem}
+  .ct-hero .text-lead{max-width:40rem;margin:1rem 0 0}
+  .ct-next{padding-top:3rem;padding-bottom:3rem}
+  .ct-steps{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+  .ct-step{border-top:2px solid #eceef1;padding-top:1rem}
+  .ct-step_num{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:50%;background:#181e35;color:#fff;font-family:"Red Hat Mono",monospace;font-size:.875rem}
+  .ct-step_title{margin:.75rem 0 .25rem;font-size:1.0625rem;line-height:1.35;color:#181e35}
+  .ct-step_text{margin:0;font-size:.9375rem;line-height:1.5;color:#5b6272}
+  .ct-company{padding-top:2rem;padding-bottom:2rem}
+  .ct-company_text{margin:0;font-size:.9375rem;color:#5b6272}
+  @media(max-width:767px){.ct-hero{padding-top:2.5rem;padding-bottom:2rem}.ct-steps{grid-template-columns:minmax(0,1fr);gap:1rem}}
+</style>

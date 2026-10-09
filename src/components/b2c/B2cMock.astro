@@ -1,0 +1,134 @@
+---
+// One consumer moment per reason. All illustrative HTML/CSS mocks.
+interface Props { kind: 'order' | 'price' | 'stock' | 'variants' | 'updates' | 'month'; }
+const { kind } = Astro.props;
+const tick = '<svg viewBox="0 0 22 22" width="18" height="18" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#08A270"/><path d="M6.5 11.2 9.6 14.3 15.5 8.2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const month = [
+  { o: 'SO-20431', how: 'Card', paid: '£43.20', ref: '' },
+  { o: 'SO-20432', how: 'Card', paid: '£18.00', ref: '' },
+  { o: 'SO-20433', how: 'Card', paid: '£60.00', ref: 'Refunded £60.00' },
+  { o: 'SO-20434', how: 'Prepayment', paid: '£125.00', ref: '' },
+  { o: 'SO-20435', how: 'Cash on delivery', paid: '£32.00', ref: '' },
+];
+---
+<div class={`b2c-stage is-${kind}`}>
+{kind === 'order' && (
+  <div class="b2c-pair">
+    <div class="b2c-card b2c-confirm">
+      <p class="b2c-confirm_h"><Fragment set:html={tick} />Thank you, your order is placed</p>
+      <p class="b2c-confirm_t">We have sent a confirmation to your email.</p>
+      <ul class="b2c-lines" role="list">
+        <li><span>Stoneware mug, blue x 2</span><span>£48.00</span></li>
+        <li><span>Promotion</span><span>-£4.80</span></li>
+        <li class="is-total"><span>Total paid, incl. VAT</span><span>£43.20</span></li>
+      </ul>
+    </div>
+    <div class="b2c-card b2c-erp">
+      <p class="b2c-erp_h">Your ERP</p>
+      <p class="b2c-erp_id">Order SO-20431 in your ERP</p>
+      <dl class="b2c-erp_dl">
+        <div><dt>Source</dt><dd>Web shop</dd></div>
+        <div><dt>Status</dt><dd>Posted, watched</dd></div>
+        <div><dt>Retyped by</dt><dd>Nobody</dd></div>
+      </dl>
+    </div>
+  </div>
+)}
+{kind === 'price' && (
+  <div class="b2c-pair">
+    <div class="b2c-card b2c-basket">
+      <p class="b2c-card_h">Your basket</p>
+      <ul class="b2c-lines" role="list">
+        <li><span>Stoneware mug, blue<small>£24.00 incl. VAT x 2</small></span><span>£48.00</span></li>
+        <li class="is-promo"><span>Promotion applied<small>10% off</small></span><span>-£4.80</span></li>
+        <li class="is-total"><span>Total<small>includes £7.20 VAT</small></span><span>£43.20</span></li>
+      </ul>
+      <span class="b2c-btn is-block">Pay securely</span>
+    </div>
+    <div class="b2c-card b2c-erp">
+      <p class="b2c-erp_h">Your ERP</p>
+      <dl class="b2c-erp_dl">
+        <div><dt>Price</dt><dd>£24.00 incl. VAT</dd></div>
+        <div><dt>Promotion</dt><dd>10% off</dd></div>
+        <div><dt>Order total</dt><dd>£43.20</dd></div>
+      </dl>
+      <p class="b2c-same"><Fragment set:html={tick} />Same price. Set up once.</p>
+    </div>
+  </div>
+)}
+{kind === 'stock' && (
+  <div class="b2c-card b2c-wide">
+    <p class="b2c-card_h">What the shop shows</p>
+    <ul class="b2c-stocklist" role="list">
+      <li>
+        <span class="b2c-sl_name">Stoneware mug, blue</span>
+        <span class="b2c-stock"><i aria-hidden="true"></i>In stock: 12</span>
+        <span class="b2c-sl_erp">ERP 12</span>
+      </li>
+      <li>
+        <span class="b2c-sl_name">Stoneware mug, green</span>
+        <span class="b2c-stock is-low"><i aria-hidden="true"></i>Last 2 in stock</span>
+        <span class="b2c-sl_erp">ERP 2</span>
+      </li>
+      <li>
+        <span class="b2c-sl_name">Stoneware mug, red</span>
+        <span class="b2c-stock is-out"><i aria-hidden="true"></i>Out of stock</span>
+        <span class="b2c-sl_erp">ERP 0</span>
+      </li>
+    </ul>
+    <p class="b2c-note">Read live from the ERP. Not a copy made on a timer.</p>
+  </div>
+)}
+{kind === 'variants' && (
+  <div class="b2c-pair is-vert">
+    <div class="b2c-card b2c-erp is-item">
+      <p class="b2c-erp_h">Item master in your ERP</p>
+      <dl class="b2c-erp_dl">
+        <div><dt>Item</dt><dd>Stoneware mug</dd></div>
+        <div><dt>Colours</dt><dd>Blue, green, red</dd></div>
+        <div><dt>Sizes</dt><dd>Small, large</dd></div>
+      </dl>
+    </div>
+    <div class="b2c-card b2c-var">
+      <p class="b2c-card_h">On the shop, with no retyping</p>
+      <div class="b2c-chips" aria-hidden="true"><span class="is-on">Blue</span><span>Green</span><span>Red</span><em></em><span>Small</span><span class="is-on">Large</span></div>
+      <dl class="b2c-var_dl">
+        <div><dt>Item no.</dt><dd>Its own, per variant</dd></div>
+        <div><dt>Barcode</dt><dd>From the ERP</dd></div>
+        <div><dt>Weight</dt><dd>From the ERP</dd></div>
+        <div><dt>Stock</dt><dd>Its own, live</dd></div>
+      </dl>
+    </div>
+  </div>
+)}
+{kind === 'updates' && (
+  <div class="b2c-card b2c-wide">
+    <p class="b2c-card_h">After a shop or plugin update</p>
+    <ol class="b2c-log" role="list">
+      <li><i class="is-ok"></i><span>Shop software updated</span></li>
+      <li><i class="is-warn"></i><span>Link check: product feed changed<small>Caught by us, not by a customer</small></span></li>
+      <li><i class="is-ok"></i><span>Link fixed<small>In the monthly fee</small></span></li>
+      <li><i class="is-ok"></i><span>Test order posted to the ERP</span></li>
+    </ol>
+  </div>
+)}
+{kind === 'month' && (
+  <div class="b2c-card b2c-wide">
+    <p class="b2c-card_h">Month end: payments matched to ERP orders</p>
+    <table class="b2c-tbl">
+      <thead><tr><th>ERP order</th><th>Paid by</th><th class="r">Amount</th><th>Matched</th></tr></thead>
+      <tbody>
+        {month.map((m) => (
+          <tr>
+            <td class="mono">{m.o}</td>
+            <td>{m.how}</td>
+            <td class="r mono">{m.paid}{m.ref && <small>{m.ref}</small>}</td>
+            <td><Fragment set:html={tick} /></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+  <p class="ord-caption b2c-caption">Illustrative example.</p>
+</div>

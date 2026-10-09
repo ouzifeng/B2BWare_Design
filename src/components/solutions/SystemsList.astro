@@ -1,0 +1,13 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { data: { title: string; text: string } }
+const { data } = Astro.props;
+---
+<Section>
+  <div class="text-block">
+    <h2 class="heading-h2">{data.title}</h2>
+    <div class="text-block_body">
+      <p class="text-lead">{data.text}</p>
+    </div>
+  </div>
+</Section>

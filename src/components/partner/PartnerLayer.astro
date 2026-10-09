@@ -1,0 +1,68 @@
+---
+import Section from '../ui/Section.astro';
+
+const lines = [
+  { theirs: 'HB-M8-30', ours: 'BLT-0830-A2', item: 'Hex bolt M8 x 30, A2', qty: '300', pack: '3 packs of 100', price: '£14.60', fix: 'Code matched' },
+  { theirs: 'NYL-M8', ours: 'NUT-08-NY', item: 'Nyloc nut M8, A2', qty: '400', pack: '2 packs of 200', price: '£9.20', fix: 'Pack converted' },
+  { theirs: 'RES-380', ours: 'ANC-R380', item: 'Anchor resin 380ml', qty: '12', pack: '12 each', price: '£3.85', fix: 'Contract price' },
+];
+const layer = [
+  { title: 'Each customer’s own prices', text: 'Price lists, contract bands and quantity breaks, live from the ERP for every account.' },
+  { title: 'Customers’ own part codes', text: 'Orders use the customer’s codes. We match them to the client’s, and the matches are learned.' },
+  { title: 'Packs and units', text: 'Boxes of 100, drums and pallets converted to the units the ERP expects.' },
+  { title: 'Emailed and PDF orders', text: 'Read, checked against prices, stock and credit, then approved by a person before posting.' },
+];
+---
+<Section id="pp-layer" class="pp-layer">
+  <div class="seg-split is-flip">
+    <div class="seg-split_copy">
+      <h2 class="heading-h2">You know the ERP. We handle the commerce layer.</h2>
+      <p class="text-lead seg-split_lead">A standard connector moves a product, a price and a stock number. Trade orders need more, and that is where these projects go wrong.</p>
+      <ul role="list" class="seg-list">
+        {layer.map((l) => (
+          <li class="seg-list_item">
+            <span class="seg-list_glyph"><svg fill="none" viewBox="0 0 22 22" height="20" width="20" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg></span>
+            <div>
+              <h3 class="seg-list_title">{l.title}</h3>
+              <p class="seg-list_text">{l.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="seg-split_visual">
+      <div class="ui-card pp-map">
+        <div class="ui-card_top">
+          <div>
+            <div class="ord-card_cust">Hargreaves Building Supplies</div>
+            <div class="ord-card_meta">Emailed PDF order &middot; Account <span class="seg-mono">HBS-10442</span> &middot; Contract prices</div>
+          </div>
+        </div>
+        <ul role="list" class="pp-map_rows">
+          {lines.map((l) => (
+            <li class="pp-map_row">
+              <div class="pp-map_codes">
+                <span class="pp-map_theirs seg-mono">{l.theirs}</span>
+                <svg class="pp-map_arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14 M13 6l6 6-6 6" /></svg>
+                <span class="pp-map_ours seg-mono">{l.ours}</span>
+              </div>
+              <div class="pp-map_item">
+                <span class="pp-map_name">{l.item}</span>
+                <span class="pp-map_pack"><span class="seg-mono">{l.qty}</span> &middot; {l.pack}</span>
+              </div>
+              <div class="pp-map_right">
+                <span class="pp-map_price seg-mono">{l.price}</span>
+                <span class="pp-fix">{l.fix}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div class="seg-sent">
+          <svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>
+          <span>Approved and sent to the ERP as sales order <span class="seg-mono">SO-41207</span></span>
+        </div>
+        <p class="ord-caption">Illustrative example.</p>
+      </div>
+    </div>
+  </div>
+</Section>

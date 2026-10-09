@@ -1,0 +1,156 @@
+/* /partner-program. Page devices only; shared ones live in seg-common.css. Prefix: pp- */
+
+/* Hero */
+.seg-hero .heading-h1{text-wrap:balance}
+
+/* Hero mock: the partner's client list */
+.pp-book .ui-card_top{margin-bottom:.9rem}
+.pp-book_head{display:flex;justify-content:space-between;padding:0 0 .5rem;font-size:.75rem;font-weight:600;color:var(--seg-slate)}
+.pp-book_rows{list-style:none;margin:0;padding:0}
+.pp-book_row{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0;border-top:1px solid var(--seg-line)}
+.pp-book_who{display:flex;flex-direction:column;min-width:0}
+.pp-book_name{font-size:.95rem;font-weight:600;line-height:1.3;color:var(--seg-navy)}
+.pp-book_what{font-size:.8rem;line-height:1.4;color:var(--seg-slate)}
+.pp-stage{flex:none;display:inline-flex;align-items:center;gap:.4rem;padding:.2rem .6rem;border-radius:999px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.pp-stage_dot{width:.45rem;height:.45rem;border-radius:50%;background:currentColor}
+.pp-stage.is-live{background:var(--seg-green-tint);color:var(--seg-green-ink)}
+.pp-stage.is-build{background:#eef1f7;color:#3d4a66}
+.pp-stage.is-early{background:#fff;color:var(--seg-slate);box-shadow:inset 0 0 0 1px #d5dbe5}
+
+/* Three ways in: the role matrix */
+.pp-ways{max-width:72rem;margin:0 auto;text-align:left}
+.pp-ways_switch{display:none}
+.pp-matrix{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;background:#fff;border:1px solid var(--seg-line-soft);border-radius:12px;box-shadow:var(--seg-shadow);overflow:hidden}
+.pp-matrix th,.pp-matrix td{padding:1rem 1.25rem;vertical-align:top;text-align:left;font-weight:400;transition:background-color .25s var(--seg-ease)}
+.pp-matrix_corner{width:14rem}
+.pp-matrix thead th,.pp-matrix thead td{padding-top:1.75rem;padding-bottom:1.25rem;background:#fbfcfd}
+.pp-matrix_role{border-left:1px solid var(--seg-line)}
+.pp-matrix_icon{display:flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;margin-bottom:.85rem;border-radius:50%;background:var(--seg-green-tint);color:var(--seg-green-ink)}
+.pp-matrix_name{display:block;font-family:var(--seg-head);font-size:1.25rem;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--seg-navy)}
+.pp-matrix_who{display:block;margin-top:.3rem;font-size:.9rem;line-height:1.45;color:var(--seg-slate)}
+.pp-matrix_label{font-size:.875rem;font-weight:600!important;line-height:1.45;color:var(--seg-slate);border-top:1px solid var(--seg-line)}
+.pp-matrix_cell{font-size:.97rem;line-height:1.5;color:var(--seg-navy);border-top:1px solid var(--seg-line);border-left:1px solid var(--seg-line)}
+.pp-matrix_shared{border-top:1px solid var(--seg-line);border-left:1px solid var(--seg-line);padding:.75rem 1rem!important}
+.pp-matrix_sharedtext{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.7rem 1rem;border-radius:8px;background:var(--seg-green-tint);font-size:.95rem;font-weight:600;line-height:1.4;color:var(--seg-navy);text-align:center}
+.pp-matrix_sharedtext svg{flex:none;color:var(--seg-green-ink)}
+.pp-own{display:inline-flex;align-items:center;margin:0 0 .4rem;padding:.1rem .55rem;border-radius:999px;font-size:.75rem;font-weight:700;line-height:1.5;white-space:nowrap}
+.pp-own.is-you{background:#fff;color:var(--seg-navy);box-shadow:inset 0 0 0 1.5px var(--seg-navy)}
+.pp-own.is-us{background:var(--seg-green);color:#fff}
+.pp-own.is-both{background:var(--seg-green-tint);color:var(--seg-green-ink);box-shadow:inset 0 0 0 1px rgba(8,162,112,.35)}
+.pp-own_text{display:block}
+.pp-matrix_cell:has(.pp-own.is-us){background:#f6fcf9}
+.pp-matrix_row.is-earn .pp-matrix_label{color:var(--seg-navy)}
+.pp-matrix_row.is-earn .pp-matrix_cell{font-weight:600;color:var(--seg-green-ink)}
+.pp-matrix_row.is-earn th,.pp-matrix_row.is-earn td{border-top:2px solid var(--seg-navy)}
+.pp-matrix tfoot td{padding-top:.5rem;padding-bottom:1.5rem}
+.pp-matrix_cta{border-left:1px solid var(--seg-line)}
+.pp-matrix_cta .seg-link{font-size:.95rem}
+/* Column focus: hovering any part of a role column lights the whole column */
+@media (hover:hover) and (min-width:768px){
+  .pp-matrix:has([data-col="impl"]:hover) [data-col="impl"],
+  .pp-matrix:has([data-col="erp"]:hover) [data-col="erp"],
+  .pp-matrix:has([data-col="ref"]:hover) [data-col="ref"]{background-color:#f3fbf7}
+}
+.pp-layer .seg-split{align-items:center}
+.pp-ways_note{max-width:72rem;margin:1.25rem auto 0;font-size:.9375rem;line-height:1.55;color:var(--seg-slate)}
+
+/* What the client pays */
+.pp-quote{padding:1.75rem}
+.pp-quote_sub{margin:0 0 1rem;font-size:.95rem;color:var(--seg-slate)}
+.pp-quote_title{margin:0 0 .25rem;font-family:var(--seg-head);font-size:1.375rem;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--seg-navy)}
+.pp-quote_who{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--seg-line)}
+.pp-quote_whotitle{margin:0 0 .75rem;font-size:.875rem;font-weight:600;color:var(--seg-slate)}
+.pp-quote_list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.pp-quote_list li{display:flex;flex-direction:column;gap:.05rem}
+.pp-quote_name{font-family:var(--seg-head);font-size:1rem;font-weight:700;color:var(--seg-navy)}
+.pp-quote_line{font-size:.875rem;line-height:1.45;color:var(--seg-body)}
+
+/* Commerce layer mock: their codes to the client's codes */
+.pp-map .ui-card_top{margin-bottom:.9rem}
+.pp-map_rows{list-style:none;margin:0;padding:0}
+.pp-map_row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"codes right" "item right";gap:.35rem 1rem;padding:.85rem 0;border-top:1px solid var(--seg-line)}
+.pp-map_codes{grid-area:codes;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.pp-map_theirs{font-size:.78rem;color:#5f6b80;text-decoration:line-through;text-decoration-color:rgba(95,107,128,.55)}
+.pp-map_arrow{flex:none;color:var(--seg-green)}
+.pp-map_ours{font-size:.8rem;font-weight:600;color:var(--seg-navy)}
+.pp-map_item{grid-area:item;display:flex;flex-direction:column;min-width:0}
+.pp-map_name{font-size:.92rem;font-weight:600;line-height:1.3;color:var(--seg-navy)}
+.pp-map_pack{font-size:.8rem;color:var(--seg-slate)}
+.pp-map_pack .seg-mono{font-weight:500;color:var(--seg-navy)}
+.pp-map_right{grid-area:right;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:.4rem}
+.pp-map_price{font-size:.95rem;color:var(--seg-navy)}
+.pp-fix{display:inline-flex;align-items:center;padding:.15rem .55rem;border-radius:999px;background:var(--seg-green-tint);color:var(--seg-green-ink);font-size:.72rem;font-weight:600;white-space:nowrap}
+
+/* Why partners work with us: navy band, heading left, list right */
+.pp-why_grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:4.5rem;align-items:start;max-width:76rem;margin:0 auto;text-align:left}
+.pp-why_head .heading-h2{margin:0;text-wrap:balance}
+.pp-why_lead{margin:1rem 0 0;max-width:30rem;color:#c9d0e3}
+.pp-why_list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,.12)}
+.pp-why_item{display:grid;grid-template-columns:2.5rem minmax(0,1fr);gap:1.1rem;padding:1.4rem 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.pp-why_icon{display:flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(48,207,148,.12);color:#30cf94}
+.pp-why_name{margin:0;font-family:var(--seg-head);font-size:1.25rem;font-weight:700;line-height:1.3;letter-spacing:-.01em;color:#fff}
+.pp-why_text{margin:.35rem 0 0;font-size:1rem;line-height:1.55;color:#c9d0e3}
+
+/* How it works: numbered track */
+.pp-steps{list-style:none;margin:0 auto;padding:0;max-width:76rem;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1.5rem;text-align:left;counter-reset:none}
+.pp-step{position:relative}
+.pp-step:not(:last-child)::after{content:"";position:absolute;top:1.25rem;left:3.25rem;right:-1rem;height:2px;background:#d5dbe5}
+.pp-step_node{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px var(--seg-green);font-family:var(--seg-head);font-size:1rem;font-weight:700;color:var(--seg-green-ink)}
+.pp-step.is-done .pp-step_node{background:var(--seg-green-tint);box-shadow:none}
+.pp-step_title{margin:1.1rem 0 0;font-family:var(--seg-head);font-size:1.125rem;font-weight:700;line-height:1.3;color:var(--seg-navy)}
+.pp-step_text{margin:.4rem 0 0;font-size:.97rem;line-height:1.55;color:var(--seg-body)}
+
+/* Apply */
+.pp-form_pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 1rem}
+.pp-apply .oc-input:focus-visible{outline:2px solid var(--seg-green);outline-offset:1px;border-color:var(--seg-green)}
+.pp-apply .oc-input::placeholder{color:#667085}
+.pp-apply .oc-field label.oc-radio{align-items:flex-start}
+.pp-apply .oc-radio input{flex:none;margin-top:.2em;accent-color:var(--seg-green)}
+.pp-apply .button{margin-top:.5rem}
+.pp-apply_promise{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:.75rem 2rem;max-width:44rem;margin:1.5rem auto 0;padding:0}
+.pp-apply_promise li{display:flex;align-items:center;gap:.5rem;font-size:.9375rem;color:#c9d0e3}
+.pp-apply_promise li::before{content:"";width:16px;height:16px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Ccircle fill='%2308A270' r='11' cx='11' cy='11'/%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M6.5 11.2 9.6 14.3 15.5 8.2'/%3E%3C/svg%3E") no-repeat center/contain}
+
+@media (max-width:991px){
+  .pp-matrix_corner{width:10rem}
+  .pp-matrix th,.pp-matrix td{padding:.9rem 1rem}
+  .pp-why_grid{grid-template-columns:minmax(0,1fr);gap:2.5rem}
+  .pp-steps{grid-template-columns:minmax(0,1fr);gap:0;max-width:36rem}
+  .pp-step{display:grid;grid-template-columns:2.5rem minmax(0,1fr);column-gap:1.1rem;padding-bottom:1.75rem}
+  .pp-step_node{grid-row:1 / span 2}
+  .pp-step_title{margin-top:.45rem}
+  .pp-step:not(:last-child)::after{top:2.75rem;bottom:.25rem;left:calc(1.25rem - 1px);right:auto;width:2px;height:auto}
+}
+
+/* Phones: the matrix becomes one role at a time, picked with the switcher */
+@media (max-width:767px){
+  .pp-ways_switch{display:flex;gap:.25rem;margin:0 0 1rem;padding:.25rem;border-radius:10px;background:#e9edf3}
+  .pp-ways_btn{flex:1 1 0;min-width:0;padding:.65rem .4rem;border:0;border-radius:8px;background:transparent;font:inherit;font-size:.875rem;font-weight:600;line-height:1.2;color:var(--seg-slate);cursor:pointer;transition:background-color .2s var(--seg-ease),color .2s var(--seg-ease),box-shadow .2s var(--seg-ease)}
+  .pp-ways_btn[aria-pressed="true"]{background:#fff;color:var(--seg-navy);box-shadow:0 1px 3px rgba(24,30,53,.14)}
+  .pp-ways_btn:focus-visible{outline:2px solid var(--seg-green);outline-offset:2px}
+  .pp-matrix,.pp-matrix thead,.pp-matrix tbody,.pp-matrix tfoot,.pp-matrix tr,.pp-matrix th,.pp-matrix td{display:block;width:auto}
+  .pp-matrix_corner{display:none!important}
+  .pp-matrix th,.pp-matrix td{border-left:0!important;padding:0 1.25rem}
+  .pp-matrix thead th{padding:1.4rem 1.25rem 1.1rem}
+  .pp-matrix_row{padding:.85rem 0;border-top:1px solid var(--seg-line)}
+  .pp-matrix_row th,.pp-matrix_row td{border-top:0!important}
+  .pp-matrix_row.is-earn{border-top:2px solid var(--seg-navy)}
+  .pp-matrix_label{padding-bottom:.25rem!important;font-size:.8125rem}
+  .pp-matrix_shared{padding:.25rem 1.25rem 0!important}
+  .pp-matrix_sharedtext{justify-content:flex-start;text-align:left;font-size:.9rem}
+  .pp-matrix tfoot td{padding:.5rem 1.25rem 1.25rem}
+  .pp-ways[data-active="impl"] [data-col]:not([data-col="impl"]),
+  .pp-ways[data-active="erp"] [data-col]:not([data-col="erp"]),
+  .pp-ways[data-active="ref"] [data-col]:not([data-col="ref"]){display:none}
+  html:not(.w-mod-js) .pp-ways_switch{display:none}
+  html:not(.w-mod-js) .pp-ways [data-col]{display:block}
+  .pp-why_item{padding:1.1rem 0}
+  .pp-why_name{font-size:1.125rem}
+  .pp-form_pair{grid-template-columns:minmax(0,1fr)}
+  .pp-book_row{gap:.75rem}
+  .pp-book_what{font-size:.75rem}
+  .pp-apply_promise{flex-direction:column;align-items:flex-start;max-width:none;gap:.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .pp-matrix th,.pp-matrix td,.pp-ways_btn{transition:none}
+}

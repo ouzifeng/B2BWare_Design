@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import PartnerHero from '../components/partner/PartnerHero.astro';
+import PartnerWays from '../components/partner/PartnerWays.astro';
+import PartnerOffer from '../components/partner/PartnerOffer.astro';
+import PartnerLayer from '../components/partner/PartnerLayer.astro';
+import PartnerWhy from '../components/partner/PartnerWhy.astro';
+import PartnerSteps from '../components/partner/PartnerSteps.astro';
+import PartnerApply from '../components/partner/PartnerApply.astro';
+import SegFit from '../components/segments/SegFit.astro';
+import Faq from '../components/Faq.astro';
+
+const faq = {
+  title: 'What partners ask us',
+  items: [
+    { q: 'Is there a cost to join?', a: 'No. Apply, agree your partner agreement, and start bringing us clients.' },
+    { q: 'How does commission work?', a: 'You earn recurring commission on every account you bring. The rate and terms are set in your partner agreement. Commission is paid once the client has paid us.' },
+    { q: 'Which ERPs do you work with?', a: 'Any ERP. B2Bware is made by SyncSpider, the integration platform we have run for 10 years, with 400+ integrations. If there is no connector yet, we build the link as part of set-up. We check the client’s setup in the free consultation before we quote.' },
+    { q: 'What if the client’s ERP changes?', a: 'We fix the link. That is in the client’s monthly fee, with no day rates for fixes.' },
+    { q: 'Does my team need developers?', a: 'No. Our team connects the ERP, builds the portal and runs it after go-live. Implementation partners lead the project with us.' },
+    { q: 'Can I sell it under my own brand?', a: 'Yes. White label is available for qualified partners and is agreed in your partner agreement.' },
+    { q: 'Do I have to hit a quota or sign exclusivity?', a: 'No. There is no quota and no exclusivity. You can hold more than one role.' },
+    { q: 'What support do partners get?', a: 'A named partner manager, demo access, product information and sales material. We join discovery calls and help scope and price each client.' },
+  ],
+};
+---
+<Base title="Partner program for ERP partners and agencies | B2Bware" description="For ERP resellers, agencies and consultants: we build and run the portal and ERP link, you keep the client and earn recurring commission.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/partner.css" />
+  </Fragment>
+  <PartnerHero />
+  <PartnerWays />
+  <PartnerOffer />
+  <PartnerLayer />
+  <PartnerWhy />
+  <PartnerSteps />
+  <SegFit
+    id="pp-fit"
+    title="Is this for you?"
+    yesTitle="A good fit if"
+    yes={['Your clients are wholesalers, distributors or manufacturers on an ERP, whichever one', 'Their orders still arrive by email, PDF, spreadsheet or phone', 'They sell to trade customers on their own prices', 'A client runs an old portal that one developer keeps alive', 'You want a margin line to add to your scope, not a product to build']}
+    noTitle="Not a fit for clients who"
+    no={['Sell configured products, or price every order one by one', 'Run a bespoke ERP with no way to connect to it', 'Are in the middle of an ERP migration. We pick them up after']}
+  />
+  <Faq data={faq} />
+  <PartnerApply />
+</Base>

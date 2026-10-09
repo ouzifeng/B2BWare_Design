@@ -1,0 +1,19 @@
+---
+import Section from '../ui/Section.astro';
+import { speed } from '../../data/b2c';
+---
+<Section id="b2c-speed" tone="light" class="b2c-speedsec">
+  <div class="b2c-speed">
+    <div class="b2c-speed_copy">
+      <h2 class="heading-h2">{speed.title}</h2>
+      <p class="text-lead">{speed.text}</p>
+    </div>
+    <figure class="b2c-score">
+      <div class="b2c-score_num"><strong class="mono">{speed.score}</strong><span class="mono">{speed.outOf}</span></div>
+      <figcaption>
+        <b>{speed.label}</b>
+        <span>{speed.note}</span>
+      </figcaption>
+    </figure>
+  </div>
+</Section>

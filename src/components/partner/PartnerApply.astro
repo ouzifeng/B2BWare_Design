@@ -1,0 +1,18 @@
+---
+import Section from '../ui/Section.astro';
+import PartnerForm from './PartnerForm.astro';
+interface Props {
+  endpoint?: string;
+}
+const { endpoint } = Astro.props;
+---
+<Section id="pp-apply" tone="dark" title="Apply to the partner program" intro="Tell us how you work and who your clients are. Our partner team replies within two business days.">
+  <div class="oc-wrap pp-apply">
+    <PartnerForm endpoint={endpoint} />
+  </div>
+  <ul role="list" class="pp-apply_promise">
+    <li>Free to join</li>
+    <li>No quota or exclusivity</li>
+    <li>Recurring commission on every account</li>
+  </ul>
+</Section>

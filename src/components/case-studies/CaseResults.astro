@@ -1,0 +1,20 @@
+---
+import type { CaseStudy } from './caseStudies';
+interface Props { data: CaseStudy }
+const { data } = Astro.props;
+---
+<section id="cs-results" class="section is-dark cs-results">
+  <div class="container">
+    <h2 class="heading-h2 is-white cs-results_title">{data.results.title}</h2>
+    <dl class="cs-results_grid">
+      {data.results.items.map((r) => (
+        <div class="cs-results_item">
+          <dt class="cs-results_fig">{r.fig}</dt>
+          <dd class="cs-results_label">{r.label}</dd>
+          {r.note && <dd class="cs-results_note">{r.note}</dd>}
+        </div>
+      ))}
+    </dl>
+    <p class="cs-results_source">{data.results.source}</p>
+  </div>
+</section>

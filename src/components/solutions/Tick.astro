@@ -1,0 +1,9 @@
+---
+interface Props { items: string[]; onDark?: boolean; }
+const { items, onDark = false } = Astro.props;
+---
+<ul role="list" class="check-list">
+  {items.map((t) => (
+    <li class:list={['check-list_item', { 'is-dark': !onDark }]}><svg fill="none" viewBox="0 0 22 22" height="22" width="22" class="check-list_icon" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg><span>{t}</span></li>
+  ))}
+</ul>

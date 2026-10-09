@@ -1,0 +1,23 @@
+---
+import Section from '../ui/Section.astro';
+const steps = [
+  { title: 'Apply', text: 'Tell us how you work and who your clients are. We reply within two business days.' },
+  { title: 'Agree the fit', text: 'A call with our partner team to pick your role and agree your partner agreement.' },
+  { title: 'Get set up', text: 'Demo access, product information and sales material, plus a named contact.' },
+  { title: 'Bring a client', text: 'Introduce them. We run a free consultation on their own data and give a fixed price.' },
+  { title: 'They go live, you earn', text: 'We build, test on real orders and run it. Your commission starts once the client pays.' },
+];
+const tick = '<svg fill="none" viewBox="0 0 22 22" height="20" width="20" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>';
+const last = steps.length - 1;
+---
+<Section id="pp-steps" tone="light" title="How it works" intro="From application to your first live client.">
+  <ol role="list" class="pp-steps">
+    {steps.map((s, i) => (
+      <li class:list={['pp-step', { 'is-done': i === last }]}>
+        <span class="pp-step_node" aria-hidden="true">{i === last ? <Fragment set:html={tick} /> : i + 1}</span>
+        <h3 class="pp-step_title">{s.title}</h3>
+        <p class="pp-step_text">{s.text}</p>
+      </li>
+    ))}
+  </ol>
+</Section>

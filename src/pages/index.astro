@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import HomeB2bLimits from '../components/home/HomeB2bLimits.astro';
+import Doors from '../components/Doors.astro';
+import WhatWeFix from '../components/WhatWeFix.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Faq from '../components/Faq.astro';
+import Proof from '../components/Proof.astro';
+import Pricing from '../components/Pricing.astro';
+import OrderCheck from '../components/OrderCheck.astro';
+import B2cReasonsBrief from '../components/b2c/B2cReasonsBrief.astro';
+import { doors, whatWeFix, how, faq, proof, pricing, orderCheck } from '../data/b2b';
+import { formIntro as b2cFormIntro } from '../data/b2c';
+---
+<Base title="Trade ordering connected to your ERP | B2Bware" description="Trade portals, emailed orders and webshop to ERP integration for manufacturers, distributors and wholesalers. £5,000 to set up, £300 a month.">
+  <Fragment slot="head">
+    <link rel="canonical" href="https://b2bware.com/" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/b2c.css" />
+    <script is:inline>
+/* B2Bware audience switch v1.0 (home3): sets html[data-aud] before paint: ?for=b2b|b2c|both, else last choice, else both. */
+(function(){var m={b2b:'b2b',business:'b2b',businesses:'b2b',b2c:'b2c',consumer:'b2c',consumers:'b2c',retail:'b2c',both:'b2b',all:'b2b'};var q=(new URLSearchParams(location.search).get('for')||'').toLowerCase();var a=m[q];if(!a){try{a=m[localStorage.getItem('b2bw_aud')||'']}catch(e){}}document.documentElement.setAttribute('data-aud',a||'b2b');})();
+    </script>
+  </Fragment>
+  <HomeHero />
+  <div data-aud-show="b2b">
+    <Doors data={doors} />
+    <HomeB2bLimits />
+    <WhatWeFix data={whatWeFix} />
+    <HowItWorks data={how} />
+    <Proof data={proof} />
+    <Pricing data={pricing} />
+    <Faq data={faq} />
+  </div>
+  <div data-aud-show="b2c">
+    <B2cReasonsBrief />
+  </div>
+  <OrderCheck data={orderCheck} />
+  <Fragment slot="foot">
+    <script is:inline define:vars={{ b2bIntro: orderCheck.intro, b2cIntro: b2cFormIntro }}>
+/* Consultation form intro follows the audience switch */
+(function(){var h=document.documentElement;var p=document.querySelector('#order-check .section_header p, #order-check p');if(!p)return;
+function sync(){p.textContent=h.getAttribute('data-aud')==='b2c'?b2cIntro:b2bIntro;}
+sync();new MutationObserver(sync).observe(h,{attributes:true,attributeFilter:['data-aud']});})();
+    </script>
+    <script is:inline>
+/* B2Bware audience switch v1.0 (home3): pills, URL sync, remember choice, analytics event */
+(function(){var h=document.documentElement,K='b2bw_aud';
+function set(a,user){h.setAttribute('data-aud',a);
+document.querySelectorAll('.aud-pill').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-aud-set')===a?'true':'false')});
+document.querySelectorAll('[data-aud-pass]').forEach(function(l){try{var u=new URL(l.getAttribute('href'),location.href);u.searchParams.set('for',a);l.setAttribute('href',u.origin===location.origin?u.pathname+u.search+u.hash:u.href)}catch(e){}});
+if(user){try{localStorage.setItem(K,a)}catch(e){}var u=new URL(location.href);u.searchParams.set('for',a);history.replaceState(null,'',u);(window.dataLayer=window.dataLayer||[]).push({event:'audience_select',audience:a});}}
+set(h.getAttribute('data-aud')||'b2b',false);
+document.addEventListener('click',function(e){var b=e.target.closest('.aud-pill');if(!b)return;e.preventDefault();var sw=b.closest('.aud-switch');if(sw)sw.classList.remove('is-hint');set(b.getAttribute('data-aud-set'),true);});
+var sw=document.querySelector('.aud-switch');if(sw&&!/[?&]for=/.test(location.search)){setTimeout(function(){sw.classList.add('is-hint')},1500);}
+})();
+    </script>
+  </Fragment>
+</Base>

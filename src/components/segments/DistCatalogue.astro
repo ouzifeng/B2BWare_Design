@@ -1,0 +1,66 @@
+---
+const tiles = [
+  { title: 'Per-customer prices across thousands of SKUs', text: 'Each account sees its own prices, range and terms, live from your ERP. No price lists copied into a shop.' },
+  { title: 'Live stock across branches and warehouses', text: 'Stock follows the ERP, so customers and your team see the same number.' },
+  { title: 'Supplier product data loaded for you', text: 'We load product data from your suppliers, so you are not chasing datasheets or filling gaps by hand.' },
+  { title: 'Big customers order from their own buying system', text: 'Punchout lets a large account order from inside its own procurement system, at its own prices, into your ERP.' },
+  { title: 'EDI as an add-on', text: 'For customers that need an EDI link. A flat monthly fee, agreed up front.' },
+];
+const lines = [
+  { name: 'Hex bolt M10 x 50, A2', brand: 'Fastline', code: '933-1050', leeds: '1,240', bristol: '386', price: '£16.80', list: '£22.10' },
+  { name: 'Hex bolt M10 x 60, A2', brand: 'Fastline', code: '933-1060', leeds: '412', bristol: '0', price: '£18.35', list: '£24.40' },
+  { name: 'Nyloc nut M10, A2', brand: 'Kerb', code: '985-0010', leeds: '2,150', bristol: '960', price: '£9.60', list: '£12.90' },
+  { name: 'Washer M10, form A, A2', brand: 'Kerb', code: '125-0010', leeds: '3,800', bristol: '1,120', price: '£4.15', list: '£5.70' },
+];
+---
+<section id="ds-catalogue" class="section ds-cat">
+  <div class="container">
+    <div class="seg-split">
+      <div class="seg-split_copy">
+        <h2 class="heading-h2">Built for big catalogues</h2>
+        <p class="text-lead seg-split_lead">The things an off-the-shelf shop cannot carry once you have thousands of products and a price for every customer.</p>
+        <ul role="list" class="seg-list">
+          {tiles.map((t) => (
+            <li class="seg-list_item">
+              <svg fill="none" viewBox="0 0 22 22" height="20" width="20" class="seg-list_icon" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>
+              <div>
+                <h3 class="seg-list_title">{t.title}</h3>
+                <p class="seg-list_text">{t.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="seg-split_visual">
+        <div class="ui-card ds-cat_card">
+          <div class="ui-card_top">
+            <div>
+              <div class="ord-card_label">Trade portal &middot; Calder Fixings</div>
+              <div class="ord-card_meta">Acct <span class="seg-mono">3107</span> &middot; Your prices apply</div>
+            </div>
+          </div>
+          <div class="ds-cat_search" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+            <span class="seg-mono">M10 A2</span>
+          </div>
+          <div class="ds-cat_head" aria-hidden="true"><span>Product</span><span>Leeds</span><span>Bristol</span><span>Your price</span></div>
+          <ul role="list" class="ds-cat_rows">
+            {lines.map((l) => (
+              <li class="ds-cat_row">
+                <div class="ds-cat_prod">
+                  <span class="ds-cat_name">{l.name}</span>
+                  <span class="ds-cat_meta">{l.brand} &middot; <span class="seg-mono">{l.code}</span> &middot; <span class="ds-cat_sheet">Datasheet</span></span>
+                </div>
+                <span class:list={['ds-cat_stock seg-mono', { 'is-zero': l.leeds === '0' }]}><span class="ds-cat_lbl">Leeds </span>{l.leeds}</span>
+                <span class:list={['ds-cat_stock seg-mono', { 'is-zero': l.bristol === '0' }]}><span class="ds-cat_lbl">Bristol </span>{l.bristol}</span>
+                <span class="ds-cat_price"><span class="seg-mono">{l.price}</span><span class="seg-mono seg-was">{l.list}</span></span>
+              </li>
+            ))}
+          </ul>
+          <div class="ui-card_foot ds-cat_foot"><span>Prices and stock live from your ERP</span></div>
+          <p class="ord-caption">Illustrative example.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

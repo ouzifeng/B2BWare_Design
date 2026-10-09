@@ -1,0 +1,13 @@
+---
+import type { CaseStudy } from './caseStudies';
+interface Props { data: CaseStudy }
+const { data } = Astro.props;
+---
+<section class="section is-light cs-next">
+  <div class="container">
+    <div class="cs-next_row">
+      <p class="cs-next_text">{data.next.text}</p>
+      <a href={data.next.href} class="seg-link cs-next_link">{data.next.linkText}<span aria-hidden="true"> &rarr;</span></a>
+    </div>
+  </div>
+</section>

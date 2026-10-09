@@ -1,0 +1,95 @@
+---
+import Section from '../ui/Section.astro';
+interface Props { data: { title: string; intro?: string } }
+const { data } = Astro.props;
+const lines = [
+  { name: 'Countersunk wood screw 5 x 80mm', pack: 'Box of 100', list: '£18.40', price: '£13.95', stock: 'In stock', units: '1,240 boxes', tone: 'ok', qty: 4 },
+  { name: 'Hex bolt M10 x 60mm, galvanised', pack: 'Box of 50', list: '£22.10', price: '£16.80', stock: 'In stock', units: '386 boxes', tone: 'ok', qty: 2 },
+  { name: 'Frame fixing 10 x 100mm', pack: 'Box of 100', list: '£31.50', price: '£24.20', stock: 'Low stock', units: '14 boxes', tone: 'low', qty: 3 },
+  { name: 'Construction adhesive 380ml', pack: 'Tube', list: '£4.95', price: '£3.60', stock: 'In stock', units: '2,150 tubes', tone: 'ok', qty: 24 },
+  { name: 'Roofing screw 6.3 x 38mm', pack: 'Box of 200', list: '£27.00', price: '£20.40', stock: 'In stock', units: '512 boxes', tone: 'ok', qty: 5 },
+];
+const orders = [
+  { no: 'SO-48213', date: '3 Oct 2026', lines: '14 lines', total: '£486.20' },
+  { no: 'SO-48107', date: '26 Sep 2026', lines: '9 lines', total: '£312.75' },
+  { no: 'SO-47952', date: '19 Sep 2026', lines: '16 lines', total: '£540.10' },
+  { no: 'SO-47810', date: '12 Sep 2026', lines: '7 lines', total: '£198.40' },
+];
+---
+<Section title={data.title} intro={data.intro}>
+  <div class="ps">
+    <div class="ps_app">
+      <aside class="ps_side">
+        <div class="ps_brand">
+          <span class="ps_logo" aria-hidden="true">H</span>
+          <div>
+            <div class="ps_brand-name">Hargreaves Supplies</div>
+            <div class="ps_brand-sub">Trade portal</div>
+          </div>
+        </div>
+        <nav class="ps_nav" aria-label="Portal">
+          <span class="ps_nav-item is-on">Order</span>
+          <span class="ps_nav-item">Order history</span>
+          <span class="ps_nav-item">Reorder</span>
+        </nav>
+        <div class="ps_acct">
+          <div class="ps_acct-name">Calder Roofing Ltd</div>
+          <div class="ps_acct-sub">Your trade prices apply</div>
+        </div>
+      </aside>
+
+      <div class="ps_main">
+        <div class="ps_bar">
+          <div>
+            <div class="ps_title">New order</div>
+            <div class="ps_sub">Prices shown are your account prices</div>
+          </div>
+          <span class="ps_btn">Reorder last order (14 lines)</span>
+        </div>
+
+        <div class="ps_list">
+          {lines.map((l) => (
+            <div class="ps_line">
+              <div class="ps_info">
+                <div class="ps_name">{l.name}</div>
+                <div class="ps_pack">{l.pack}</div>
+                <div class:list={['ps_stock', `is-${l.tone}`]}><span class="ps_dot" aria-hidden="true"></span>{l.stock} <span class="ps_units">{l.units}</span></div>
+              </div>
+              <div class="ps_prices">
+                <div class="ps_label">Your price</div>
+                <div class="ps_price">{l.price}</div>
+                <div class="ps_was">{l.list}</div>
+              </div>
+              <div class="ps_act">
+                <span class="ps_qty">{l.qty}</span>
+                <span class="ps_re">Reorder</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="ps_sent">
+          <span class="ps_tick" aria-hidden="true">&#10003;</span>
+          <span>Sent to your ERP as sales order <span class="ps_mono">SO-48291</span></span>
+        </div>
+      </div>
+
+      <aside class="ps_hist">
+        <div class="ps_hist-title">Recent orders</div>
+        {orders.map((o) => (
+          <div class="ps_ord">
+            <div>
+              <div class="ps_ord-no">{o.no}</div>
+              <div class="ps_ord-date">{o.date} &middot; {o.lines}</div>
+            </div>
+            <div class="ps_ord-r">
+              <div class="ps_ord-total">{o.total}</div>
+              <span class="ps_re">Reorder</span>
+            </div>
+          </div>
+        ))}
+      </aside>
+    </div>
+    <p class="ord-caption">Illustrative example.</p>
+  </div>
+</Section>

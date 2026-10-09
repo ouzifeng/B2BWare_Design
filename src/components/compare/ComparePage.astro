@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import SegHero from '../segments/SegHero.astro';
+import CompareTable from './CompareTable.astro';
+import CompareFit from './CompareFit.astro';
+import Doors from '../Doors.astro';
+import Faq from '../Faq.astro';
+import OrderCheck from '../OrderCheck.astro';
+import { orderCheck } from '../../data/b2b';
+import { problemCards } from '../../data/solutions';
+import { comparePages, compareHero } from '../../data/compare';
+
+interface Props { slug: string }
+const data = comparePages[Astro.props.slug];
+const { hero, verdict } = data;
+const doors = { title: 'The problems behind the comparison', cards: data.problems.map((k) => problemCards[k]) };
+const faq = { title: `Questions about ${data.name} and B2Bware`, items: data.faq };
+---
+<Base title={data.meta.title} description={data.meta.description}>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/compare.css" />
+  </Fragment>
+  <SegHero
+    tone="light"
+    headline={hero.headline}
+    highlight={hero.highlight}
+    checks={hero.checks}
+    lead={hero.lead}
+    primaryCta={compareHero.primaryCta}
+    secondaryCta={compareHero.secondaryCta}
+    priceLine={compareHero.priceLine}
+    priceNote={compareHero.priceNote}
+  >
+    <div class="ui-card cmp-verdict">
+      <p class="cmp-verdict_title">{verdict.title}</p>
+      <div class="cmp-verdict_row">
+        <p class="cmp-verdict_who">Choose {data.name} if</p>
+        <p class="cmp-verdict_text">{verdict.theirs}</p>
+      </div>
+      <div class="cmp-verdict_row is-ours">
+        <p class="cmp-verdict_who">Choose B2Bware if</p>
+        <p class="cmp-verdict_text">{verdict.ours}</p>
+      </div>
+    </div>
+  </SegHero>
+  <CompareTable data={data} />
+  <CompareFit data={data} />
+  <Doors data={doors} />
+  <Faq data={faq} />
+  <OrderCheck data={orderCheck} />
+</Base>

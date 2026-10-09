@@ -1,0 +1,46 @@
+---
+import SegHero from './SegHero.astro';
+import SegIcon from './SegIcon.astro';
+interface Props { data: { headline: string; highlight: string; checks: string[]; lead: string; priceLine: string; note: string; primaryCta: { text: string; href: string }; secondaryCta: { text: string; href: string } } }
+const { data } = Astro.props;
+const orders = [
+  { icon: 'phone', via: 'Phone', cust: 'Harbour Café', so: 'SO-20418', total: '£186.40' },
+  { icon: 'mail', via: 'Email PDF', cust: 'Mill Lane Deli', so: 'SO-20419', total: '£412.75' },
+  { icon: 'chat', via: 'WhatsApp', cust: 'The Fenwick Arms', so: 'SO-20420', total: '£298.10' },
+  { icon: 'portal', via: 'Portal', cust: 'Corner Stores Ltd', so: 'SO-20421', total: '£1,046.30' },
+  { icon: 'agent', via: 'Rep', cust: 'Westgate Bakery', so: 'SO-20422', total: '£154.60' },
+];
+---
+<SegHero
+  tone="light"
+  headline={data.headline}
+  highlight={data.highlight}
+  checks={data.checks}
+  lead={data.lead}
+  primaryCta={data.primaryCta}
+  secondaryCta={data.secondaryCta}
+  priceLine={data.priceLine}
+  priceNote={data.note}
+>
+  <div class="ui-card wh-queue">
+    <div class="ui-card_top">
+      <div>
+        <div class="ord-card_label">Orders into your ERP &middot; Tuesday</div>
+        <div class="ord-card_meta">Each at the customer's own price</div>
+      </div>
+      <span class="ord-badge">Live</span>
+    </div>
+    <ul role="list" class="wh-queue_rows">
+      {orders.map((o) => (
+        <li class="wh-queue_row">
+          <span class="wh-queue_icon"><SegIcon name={o.icon} size={18} /></span>
+          <span class="wh-queue_who"><span class="wh-queue_cust">{o.cust}</span><span class="wh-queue_via">{o.via}</span></span>
+          <span class="wh-queue_so seg-mono">{o.so}</span>
+          <span class="wh-queue_total seg-mono">{o.total}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="ui-card_foot">Sales orders posted, ready to pick</div>
+    <p class="ord-caption">Illustrative example.</p>
+  </div>
+</SegHero>

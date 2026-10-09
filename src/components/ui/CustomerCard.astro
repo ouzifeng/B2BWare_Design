@@ -1,0 +1,31 @@
+---
+interface Props {
+  name: string;
+  meta: string;
+  text: string;
+  image?: string;
+  stats?: { fig: string; label: string }[];
+}
+const { name, meta, text, image, stats } = Astro.props;
+---
+<div class="testimonial-card">
+  {image
+    ? <img src={image} alt="" loading="lazy" class="testimonial-card_img" />
+    : <div class="testimonial-card_img testimonial-card_panel">{name}</div>}
+  <div class="testimonial-card_body">
+    <div class="testimonial-card_head">
+      <div class="testimonial-card_person">
+        <div class="testimonial-card_name">{name}</div>
+        <div class="testimonial-card_company">{meta}</div>
+      </div>
+    </div>
+    <p class="testimonial-card_quote">{text}</p>
+    {stats && stats.length > 0 && (
+      <div class="proof-stats">
+        {stats.map((s) => (
+          <div class="proof-stat"><span class="proof-fig">{s.fig}</span><span class="proof-label">{s.label}</span></div>
+        ))}
+      </div>
+    )}
+  </div>
+</div>

@@ -1,0 +1,16 @@
+/* Objection block (src/components/ui/Objections.astro). Prefix: obj-
+   Hairline rows: the buyer's words on the left, our answer on the right. */
+.obj{margin:0 auto;max-width:62rem;border-top:1px solid #dfe4ea;text-align:left}
+.obj_row{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.5fr);gap:1rem 3rem;padding:1.75rem 0;border-bottom:1px solid #dfe4ea}
+.obj_q{margin:0;font-family:var(--_typography---font--heading);font-size:1.25rem;font-weight:700;line-height:1.35;letter-spacing:-.01em;color:#181E35;text-wrap:balance}
+.obj_a{margin:0;max-width:40rem;font-size:1.0625rem;line-height:1.6;color:#535461}
+.obj_a strong{color:#181E35;font-weight:600}
+.obj_foot{max-width:62rem;margin:1.75rem auto 0;font-size:1rem;color:#596780;text-align:left}
+.obj_link{font-weight:600;color:#087a55;text-decoration:none;text-underline-offset:.2em}
+.obj_link:hover{text-decoration:underline}
+.obj_link:focus-visible{outline:2px solid #08A270;outline-offset:3px;border-radius:3px}
+@media (max-width:767px){
+  .obj_row{grid-template-columns:minmax(0,1fr);gap:.6rem;padding:1.35rem 0}
+  .obj_q{font-size:1.125rem}
+  .obj_a{font-size:1rem}
+}

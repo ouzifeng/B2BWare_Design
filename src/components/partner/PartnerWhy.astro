@@ -1,0 +1,30 @@
+---
+import SegIcon from '../segments/SegIcon.astro';
+const reasons = [
+  { icon: 'agent', title: 'You keep the client', text: 'You stay their adviser. We work alongside you, and the relationship stays yours.' },
+  { icon: 'repeat', title: 'Recurring revenue', text: 'Commission on every account you bring, agreed in your partner agreement. Not a one-off fee.' },
+  { icon: 'sync', title: 'One team runs it', text: 'The portal and the ERP link come from one supplier, so nobody points the finger when something breaks.' },
+  { icon: 'portal', title: 'Nothing to build', text: 'No portal product for your team to write or maintain. You add it to your scope.' },
+];
+---
+<section id="pp-why" class="section is-dark pp-why">
+  <div class="container">
+    <div class="pp-why_grid">
+      <div class="pp-why_head">
+        <h2 class="heading-h2 is-white">Why partners work with us</h2>
+        <p class="text-lead is-white pp-why_lead">You bring the client and the ERP know-how. We bring the portal, the order capture and the team that runs it. B2Bware is made by SyncSpider, the integration platform we have run for 10 years, with 400+ integrations.</p>
+      </div>
+      <ul role="list" class="pp-why_list">
+        {reasons.map((r) => (
+          <li class="pp-why_item">
+            <span class="pp-why_icon"><SegIcon name={r.icon} size={20} /></span>
+            <div>
+              <h3 class="pp-why_name">{r.title}</h3>
+              <p class="pp-why_text">{r.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

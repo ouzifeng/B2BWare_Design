@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/ui/Section.astro';
+import IndIcon from '../../components/industries/IndIcon.astro';
+import OrderCheck from '../../components/OrderCheck.astro';
+import { industries } from '../../data/industries';
+import { orderCheck } from '../../data/b2b';
+---
+<Base title="Trade ordering by industry, connected to your ERP | B2Bware" description="Trade ordering for logistics, construction, electronics, auto parts, machinery, food packaging, beauty and medical technology, straight into your ERP.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/industries.css" />
+  </Fragment>
+  <section class="sol-hero seg-hero is-portal ind-index-hero">
+    <div class="container">
+      <div class="ind-index-hero_copy">
+        <h1 class="heading-h1">Trade ordering, built around how your industry buys.</h1>
+        <p class="hero_highlight">The same fix, in your own terms.</p>
+        <p class="text-lead sol-hero_lead">Orders retyped from emails. The same reorders by phone. Customer prices the shop cannot show. Pick your industry to see how it looks in yours.</p>
+        <div class="button-group">
+          <a href="#ind-list" class="button is-large">Choose your industry</a>
+          <a href="#order-check" class="button is-white is-large">Book a free consultation</a>
+        </div>
+        <p class="seg-hero_price"><strong>£5,000 to set up. £300 a month.</strong> <span>Whichever ERP you run.</span></p>
+      </div>
+    </div>
+  </section>
+  <Section id="ind-list" tone="white" title="Eight industries we work with" intro="Each page shows the orders, prices and problems we see in that trade.">
+    <ul role="list" class="ind-grid">
+      {industries.map((i) => (
+        <li class="ind-grid_item">
+          <a href={`/industries/${i.slug}`} class="ind-grid_link">
+            <span class="ind-grid_icon"><IndIcon slug={i.slug} /></span>
+            <span class="ind-grid_name">{i.name}</span>
+            <span class="ind-grid_blurb">{i.blurb}</span>
+            <span class="ind-grid_go">See how it works<span aria-hidden="true"> &rarr;</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="ind-grid_note">Your industry not listed? The fix is the same if you sell standard coded products on account. <a class="seg-link" href="#order-check">Tell us how you sell<span aria-hidden="true"> &rarr;</span></a></p>
+  </Section>
+  <Section id="ind-problems" tone="light" title="Start from the problem instead" intro="Every industry page ends up at one of these three.">
+    <ul role="list" class="ind-probs">
+      <li><a class="ind-probs_card" href="/solutions/trade-portal"><strong>Same reorders by phone</strong><span>Customers order at their own prices in a portal.</span><span class="seg-link">Trade portal<span aria-hidden="true"> &rarr;</span></span></a></li>
+      <li><a class="ind-probs_card" href="/solutions/erp-integration"><strong>Shop and ERP out of sync</strong><span>Prices, stock and orders agree with your ERP.</span><span class="seg-link">ERP integration<span aria-hidden="true"> &rarr;</span></span></a></li>
+      <li><a class="ind-probs_card" href="/solutions/emailed-orders"><strong>Emailed orders retyped</strong><span>PDF and spreadsheet orders read into your ERP.</span><span class="seg-link">Emailed orders<span aria-hidden="true"> &rarr;</span></span></a></li>
+    </ul>
+  </Section>
+  <OrderCheck data={orderCheck} />
+</Base>

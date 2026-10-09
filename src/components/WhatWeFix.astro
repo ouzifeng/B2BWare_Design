@@ -1,0 +1,21 @@
+---
+import Section from './ui/Section.astro';
+
+interface Props {
+  data: { title: string; intro: string; items: { problem: string; fix: string }[]; limits: string };
+}
+const { data } = Astro.props;
+---
+<Section id="v2-fix" tone="light" title={data.title} intro={data.intro}>
+  <div class="fix-panel">
+    <ul class="fix-list">
+      {data.items.map((i) => (
+        <li class="fix-row">
+          <p class="fix-row_problem">{i.problem}</p>
+          <p class="fix-row_fix">{i.fix}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="fix-limits">{data.limits}</p>
+  </div>
+</Section>

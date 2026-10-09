@@ -1,0 +1,34 @@
+---
+import Section from './ui/Section.astro';
+import Button from './ui/Button.astro';
+import OrderMock from './ui/OrderMock.astro';
+
+interface Props {
+  data: {
+    headline: string;
+    highlight: string;
+    sub: string;
+    primaryCta: { text: string; href: string };
+    secondaryCta: { text: string; href: string };
+    note: string;
+    mock: any;
+  };
+}
+const { data } = Astro.props;
+---
+<Section id="v2-hero" class="aud-hero">
+  <div>
+    <div>
+      <h1 class="heading-h1">{data.headline} <span class="hero_highlight">{data.highlight}</span></h1>
+      <p class="text-lead">{data.sub}</p>
+      <div class="aud-ctas">
+        <Button href={data.primaryCta.href} size="large">{data.primaryCta.text}</Button>
+        <Button href={data.secondaryCta.href} variant="secondary" size="large">{data.secondaryCta.text}</Button>
+      </div>
+      <p class="aud-note">{data.note}</p>
+    </div>
+    <div>
+      <OrderMock {...data.mock} />
+    </div>
+  </div>
+</Section>

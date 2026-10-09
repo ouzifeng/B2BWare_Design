@@ -1,0 +1,15 @@
+---
+import Section from './ui/Section.astro';
+import OrderCheckForm from './forms/OrderCheckForm.astro';
+
+interface Props {
+  data: { title: string; intro: string };
+  endpoint?: string;
+}
+const { data, endpoint } = Astro.props;
+---
+<Section id="order-check" tone="dark" title={data.title} intro={data.intro}>
+  <div class="oc-wrap">
+    <OrderCheckForm endpoint={endpoint} />
+  </div>
+</Section>

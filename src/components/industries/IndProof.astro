@@ -1,0 +1,26 @@
+---
+import { bySlug } from '../../data/industries';
+interface Props { slug: string }
+const ind = bySlug(Astro.props.slug);
+const items = ind.proof ?? [];
+---
+{items.length > 0 && (
+  <section id="ind-proof" class="section is-dark seg-proof">
+    <div class="container">
+      <div class="seg-proof_top">
+        <h2 class="heading-h2 is-white">Already running with sellers like you</h2>
+        <p class="seg-proof_ask">Ask us to put you in touch. <a href="#order-check">Book a free consultation<span aria-hidden="true"> &rarr;</span></a></p>
+      </div>
+      <div class="ind-proof">
+        {items.map((c) => (
+          <article class="ind-proof_item">
+            <h3 class="seg-proof_name is-small">{c.name}</h3>
+            <p class="seg-proof_meta">{c.meta}</p>
+            <p class="seg-proof_claim">{c.text}</p>
+            <a class="ind-proof_link" href={c.href}>Read the {c.name} story<span aria-hidden="true"> &rarr;</span></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

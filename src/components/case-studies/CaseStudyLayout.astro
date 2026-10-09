@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import OrderCheck from '../OrderCheck.astro';
+import { orderCheck } from '../../data/b2b';
+import CaseHero from './CaseHero.astro';
+import CaseStory from './CaseStory.astro';
+import CaseResults from './CaseResults.astro';
+import CaseNext from './CaseNext.astro';
+import type { CaseStudy } from './caseStudies';
+interface Props { data: CaseStudy }
+const { data } = Astro.props;
+---
+<Base title={data.title} description={data.description}>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/case-studies.css" />
+  </Fragment>
+  <CaseHero data={data} />
+  <CaseStory data={data} />
+  <CaseResults data={data} />
+  <CaseNext data={data} />
+  <OrderCheck data={orderCheck} />
+</Base>

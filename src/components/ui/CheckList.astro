@@ -1,0 +1,9 @@
+---
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+---
+<ul role="list" class="check-list">
+  {items.map((item) => <li class="check-list_item is-dark">{item}</li>)}
+</ul>

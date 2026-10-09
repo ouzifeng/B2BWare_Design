@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import SegHero from '../../components/segments/SegHero.astro';
+import Section from '../../components/ui/Section.astro';
+import Visual from '../../components/features/Visual.astro';
+import FeatureCard from '../../components/features/FeatureCard.astro';
+import OrderCheck from '../../components/OrderCheck.astro';
+import { orderCheck } from '../../data/b2b';
+import { features, bySlug, groups, segments } from '../../data/features';
+
+export function getStaticPaths() {
+  return features.map((f) => ({ params: { slug: f.slug } }));
+}
+const f = bySlug[Astro.params.slug as string];
+const g = groups[f.group];
+const related = f.related.map((s) => bySlug[s]);
+---
+<Base title={`${f.name} for trade ordering | B2Bware`} description={f.meta}>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/features.css" />
+  </Fragment>
+
+  <SegHero
+    tone="light"
+    headline={f.name}
+    highlight={f.line}
+    checks={f.points}
+    lead={f.lead}
+    primaryCta={{ text: 'Book a free consultation', href: '#order-check' }}
+    secondaryCta={{ text: 'See how it works', href: '#ft-how' }}
+    priceLine="£5,000 to set up. £300 a month."
+    priceNote={f.addon ?? 'Part of the one price.'}
+  >
+    <Visual v={f.visual} />
+  </SegHero>
+
+  <Section id="ft-fix" tone="light">
+    <div class="ft-fix">
+      <div>
+        <p class="ft-eyebrow">{g.title}</p>
+        <h2 class="heading-h2 ft-fix_h">What it fixes</h2>
+      </div>
+      <p class="text-lead ft-fix_p">{f.problem}</p>
+    </div>
+  </Section>
+
+  <Section id="ft-how" tone="white" title="How it works">
+    <ol role="list" class="ft-steps">
+      {f.steps.map((s, i) => (
+        <li class="ft-step">
+          <span class="ft-step_n" aria-hidden="true">{i + 1}</span>
+          <h3 class="ft-step_t">{s.t}</h3>
+          <p class="ft-step_x">{s.x}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section id="ft-fit" tone="light" title="Where it fits">
+    <div class="ft-fit">
+      <a class="ft-fit_main" href={g.href}>
+        <span class="ft-eyebrow">Part of the job</span>
+        <strong>{g.problemLabel}</strong>
+        <span>{g.problem} See the whole fix.</span>
+        <span class="seg-link">{g.problemLabel} &rarr;</span>
+      </a>
+      <ul role="list" class="ft-fit_segs">
+        {f.segs.map((k) => (
+          <li><a href={segments[k].href}><strong>{segments[k].name}</strong><span>{segments[k].text}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="ft-related" tone="white" title="Related features">
+    <div class="ft-grid is-three">
+      {related.map((r) => <FeatureCard f={r} />)}
+    </div>
+    <p class="ft-all"><a class="seg-link" href="/features">All features &rarr;</a></p>
+  </Section>
+
+  <OrderCheck data={orderCheck} />
+</Base>

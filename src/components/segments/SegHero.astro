@@ -1,0 +1,35 @@
+---
+import Tick from '../solutions/Tick.astro';
+interface Props {
+  tone?: 'light' | 'white';
+  headline: string;
+  highlight: string;
+  checks: string[];
+  lead: string;
+  primaryCta: { text: string; href: string };
+  secondaryCta: { text: string; href: string };
+  priceLine: string;
+  priceNote?: string;
+}
+const { tone = 'light', headline, highlight, checks, lead, primaryCta, secondaryCta, priceLine, priceNote } = Astro.props;
+---
+<section class:list={['sol-hero', 'seg-hero', tone === 'light' ? 'is-portal' : 'is-email']}>
+  <div class="container">
+    <div class="sol-hero_grid">
+      <div class="sol-hero_copy">
+        <h1 class="heading-h1">{headline}</h1>
+        <p class="hero_highlight">{highlight}</p>
+        <Tick items={checks} />
+        <p class="text-lead sol-hero_lead">{lead}</p>
+        <div class="button-group">
+          <a href={primaryCta.href} class="button is-large">{primaryCta.text}</a>
+          <a href={secondaryCta.href} class="button is-white is-large">{secondaryCta.text}</a>
+        </div>
+        <p class="seg-hero_price"><strong>{priceLine}</strong>{priceNote && <span> {priceNote}</span>}</p>
+      </div>
+      <div class="sol-hero_visual">
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>

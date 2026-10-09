@@ -1,0 +1,45 @@
+---
+import SegHero from '../segments/SegHero.astro';
+const clients = [
+  { name: 'Hargreaves Building Supplies', bought: 'Trade portal and emailed orders', stage: 'Live', tone: 'live' },
+  { name: 'Northgate Cycles', bought: 'Dealer portal', stage: 'Building', tone: 'build' },
+  { name: 'Tamar Sports', bought: 'Webshop to ERP link', stage: 'Consultation', tone: 'early' },
+];
+---
+<SegHero
+  tone="light"
+  headline="Bring B2B ordering to your clients."
+  highlight="We build it, run it, and pay you on every account."
+  checks={['Recurring commission on every account you bring', 'We handle customer prices, part codes and emailed orders', 'Any ERP. No quota, no exclusivity']}
+  lead="For ERP partners, agencies and consultants. You keep the client. One team runs the portal and the ERP link."
+  primaryCta={{ text: 'Apply to join', href: '#pp-apply' }}
+  secondaryCta={{ text: 'See the three ways in', href: '#pp-ways' }}
+  priceLine="Free to join."
+  priceNote="Your clients pay a fixed price: £5,000 to set up, £300 a month."
+>
+  <div class="ui-card pp-book">
+    <div class="ui-card_top">
+      <div>
+        <div class="ord-card_cust">Accounts you brought in</div>
+        <div class="ord-card_meta">Partner view &middot; 3 clients</div>
+      </div>
+    </div>
+    <div class="pp-book_head" aria-hidden="true"><span>Client</span><span>Stage</span></div>
+    <ul role="list" class="pp-book_rows">
+      {clients.map((c) => (
+        <li class="pp-book_row">
+          <div class="pp-book_who">
+            <span class="pp-book_name">{c.name}</span>
+            <span class="pp-book_what">{c.bought}</span>
+          </div>
+          <span class:list={['pp-stage', `is-${c.tone}`]}><span class="pp-stage_dot" aria-hidden="true"></span>{c.stage}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="seg-sent">
+      <svg fill="none" viewBox="0 0 22 22" height="18" width="18" aria-hidden="true"><circle fill="#08A270" r="11" cy="11" cx="11"></circle><path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fff" d="M6.5 11.2 9.6 14.3 15.5 8.2"></path></svg>
+      <span>Recurring commission on every live account</span>
+    </div>
+    <p class="ord-caption">Illustrative example.</p>
+  </div>
+</SegHero>

@@ -1,0 +1,14 @@
+---
+interface Props { data: { title: string; subtitle: string; text: string; cta: { text: string; href: string } }; }
+const { data } = Astro.props;
+---
+<section class="section is-dark">
+  <div class="container">
+    <div class="cta-band">
+      <h2 class="heading-h2 is-white">{data.title}</h2>
+      <p class="cta-band_subtitle">{data.subtitle}</p>
+      <p class="text-lead is-white">{data.text}</p>
+      <a href={data.cta.href} class="button is-large">{data.cta.text}</a>
+    </div>
+  </div>
+</section>

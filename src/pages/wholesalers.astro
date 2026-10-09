@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import OrderCheck from '../components/OrderCheck.astro';
+import WhsHero from '../components/segments/WhsHero.astro';
+import WhsChannels from '../components/segments/WhsChannels.astro';
+import WhsPains from '../components/segments/WhsPains.astro';
+import WhsRuns from '../components/segments/WhsRuns.astro';
+import Objections from '../components/ui/Objections.astro';
+import SegFit from '../components/segments/SegFit.astro';
+import WhsPrice from '../components/segments/WhsPrice.astro';
+
+const CHECK = '#order-check';
+
+const hero = {
+  headline: 'Let customers order however they like.',
+  highlight: 'Every order lands in your ERP at their price.',
+  checks: ['Phone, email and WhatsApp orders captured', 'A portal with their own prices', 'Reps order with live prices'],
+  lead: 'Your office stops keying orders, and your customers keep ordering the way they already do.',
+  priceLine: '£5,000 to set up. £300 a month.',
+  note: 'For UK delivered wholesalers, whichever ERP you run.',
+  primaryCta: { text: 'Book a free consultation', href: CHECK },
+  secondaryCta: { text: 'See how orders flow in', href: '#wh-channels' },
+};
+
+const channels = {
+  title: 'Every channel into one ERP',
+  intro: 'You do not have to move your customers. We take each way they order and post a finished sales order.',
+  channels: [
+    { icon: 'phone', name: 'Phone', line: 'Phone orders captured and put into the ERP.' },
+    { icon: 'mail', name: 'Email and PDF', line: 'Emails, PDFs and spreadsheets read. Their codes matched to yours.' },
+    { icon: 'chat', name: 'WhatsApp', line: 'WhatsApp orders read and put into the ERP.' },
+    { icon: 'portal', name: 'Online portal', line: 'Their own prices and one-click reorder.' },
+    { icon: 'agent', name: 'Your reps', line: 'Reps order with live prices.' },
+  ],
+  erpTitle: 'Right customer, right price, ready to pick',
+  erpChecks: ['Prices checked', 'Stock checked', 'Account checked'],
+  erpLine: 'Checked before the order posts.',
+};
+
+const pains = {
+  title: 'What wholesalers tell us',
+  intro: 'Four problems we hear most, and what we do about each.',
+  items: [
+    {
+      said: 'Orders come in every way and someone keys them all by hand.',
+      fix: 'Every channel ends in the same place: a finished sales order in your ERP. Your team checks exceptions, not every line.',
+      href: '/solutions/emailed-orders',
+      linkText: 'How emailed orders are read',
+    },
+    {
+      said: 'We cannot make our customers change how they order.',
+      fix: 'You do not have to. The café keeps phoning, the shop keeps emailing. Customers who want a portal get one, with their own prices and one-click reorder. We set up the accounts, invite them with you, and check who is ordering after 30 days.',
+      href: '/solutions/trade-portal',
+      linkText: 'See the online ordering portal',
+    },
+    {
+      said: 'Price lists per customer group, special prices, and the tools cannot cope.',
+      fix: 'Each customer sees and is charged their own price, live from your ERP. Promotions and time-limited prices come from the ERP too, so there is no second price list to keep in step.',
+      href: '/solutions/erp-integration',
+      linkText: 'How the ERP link works',
+    },
+    {
+      said: 'The trade shop is not properly linked to your ERP, or it only syncs overnight.',
+      fix: 'Live sync of prices, stock and orders, on any ERP. We take over the link and fix it, or build it new. Fixing it after ERP updates is in the monthly fee.',
+      href: '/solutions/erp-integration',
+      linkText: 'Fix the shop and ERP link',
+    },
+  ],
+};
+
+const runs = {
+  title: 'Built around your delivery runs',
+  intro: 'A delivered wholesaler is not a normal webshop. These are handled, not worked around.',
+  items: [
+    { icon: 'clock', title: 'Cut-off times', text: 'Orders after the cut-off go on the next run, not the one that has already been picked.' },
+    { icon: 'truck', title: 'Delivery days', text: 'Each customer is on their own delivery days and the order lands on the right one.' },
+    { icon: 'repeat', title: 'Standing and repeat orders', text: "The weekly order goes in at today's price, not last month's." },
+    { icon: 'tag', title: 'Promotions and time-limited prices', text: 'Start and end dates come from your ERP and switch off when they should.' },
+  ],
+  note: 'We confirm how your own rules work in the free consultation, before you pay anything.',
+};
+
+const fit = {
+  title: 'Is this for a business like yours?',
+  yesTitle: 'Right for you if',
+  yes: [
+    'You deliver to shops, cafés, restaurants and trade accounts',
+    'You carry a stocked, coded range',
+    'Customers place many small repeat orders',
+    'You have price lists per customer group',
+    'You run an ERP, whichever one it is',
+    'You have roughly 10 to 249 staff',
+  ],
+  noTitle: 'Not right for you if',
+  no: [
+    'Most sales are cash and carry or collected from the depot',
+    'Prices change daily with the market',
+    'Every order is configured or priced one by one',
+  ],
+  proof: { text: 'Already running for manufacturers and distributors in the UK and Austria.', linkText: 'See who', href: '/?for=b2b' },
+};
+
+const price = {
+  title: 'The price, before you call',
+  intro: 'One price, whichever way your orders arrive. No per-user fees.',
+  cards: [
+    { tag: 'One-off, agreed before we start', title: '£5,000 to set up', text: 'Set up and tested on your real orders before anything goes live.' },
+    { tag: 'To run it', title: '£300 a month', text: 'First 1,000 orders a month included, then about 15p an order.' },
+  ],
+  exTitle: 'Worked example: 1,300 orders a month',
+  rows: [
+    { label: 'Monthly fee, first 1,000 orders', value: '£300' },
+    { label: '300 extra orders at about 15p', value: 'about £45' },
+  ],
+  totalLabel: 'About a month',
+  totalValue: '£345',
+  exNote: 'Roughly 60 orders a working day. WhatsApp ordering is an add-on at a flat monthly fee. Anything custom gets a fixed quote first.',
+  includes: [
+    'ERP updates fixed in the monthly fee',
+    'Every correction kept, so it gets sharper',
+    'Live in weeks, not months',
+    'One team owns it all',
+  ],
+};
+
+const faq = {
+  title: 'What wholesalers ask first',
+  items: [
+    { q: 'Our customers will not use a portal.', a: 'Then they do not have to. They can keep phoning, emailing or messaging, and the order still lands in your ERP. The portal is for the customers who want it, and we check who is ordering after 30 days.' },
+    { q: 'Will it work with our ERP?', a: 'Yes, your ERP and your setup, not just the brand. If your version is not already covered, we build the link as part of set-up. We confirm it in the free consultation.' },
+    { q: 'Can you take WhatsApp orders?', a: 'Yes. WhatsApp and phone orders are captured into the ERP. WhatsApp ordering is an add-on at a flat monthly fee, and we confirm the set-up for your customers in the consultation.' },
+    { q: 'What if our ERP updates?', a: 'We fix the link. Fixing it after ERP updates is in the monthly fee, with no day rates.' },
+    { q: 'Do you handle cut-offs, delivery days and standing orders?', a: 'Yes. Cut-offs, delivery days, standing orders and promotions are handled. We check your own rules in the free consultation.' },
+  ],
+};
+
+const form = {
+  title: 'Book a free consultation',
+  intro: 'Tell us how your customers order today: phone, email, WhatsApp or a shop. We will come back with a plan and a fixed price. You keep the plan either way.',
+};
+---
+<Base title="Order management for wholesalers | B2Bware" description="Customers order by phone, email, WhatsApp or portal. Every order lands in your ERP at their price. For UK delivered wholesalers. £5,000 to set up, £300 a month.">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/css/seg-common.css" />
+    <link rel="stylesheet" href="/css/seg-wholesalers.css" />
+    <link rel="stylesheet" href="/css/objections.css" />
+  </Fragment>
+  <WhsHero data={hero} />
+  <WhsChannels data={channels} />
+  <WhsPains data={pains} />
+  <WhsRuns data={runs} />
+  <SegFit id="wh-fit" title={fit.title} yesTitle={fit.yesTitle} yes={fit.yes} noTitle={fit.noTitle} no={fit.no}>
+    <p class="seg-fit_note">{fit.proof.text} <a class="seg-link" href={fit.proof.href}>{fit.proof.linkText}<span aria-hidden="true"> &rarr;</span></a></p>
+  </SegFit>
+  <WhsPrice data={price} />
+  <Objections page="wholesalers" tone="white" />
+  <Faq data={faq} />
+  <OrderCheck data={form} />
+</Base>

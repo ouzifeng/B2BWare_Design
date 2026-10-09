@@ -1,0 +1,33 @@
+---
+import Tick from './Tick.astro';
+import PortalMock from './PortalMock.astro';
+import SyncMock from './SyncMock.astro';
+import EmailMock from './EmailMock.astro';
+interface Props {
+  data: { variant: 'portal' | 'erp' | 'email'; headline: string; highlight: string; checks: string[]; lead: string; priceLine?: string; primaryCta: { text: string; href: string }; secondaryCta: { text: string; href: string } };
+}
+const { data } = Astro.props;
+const v = data.variant;
+---
+<section class:list={['sol-hero', `is-${v}`]}>
+  <div class="container">
+    <div class="sol-hero_grid">
+      <div class="sol-hero_copy">
+        <h1 class="heading-h1">{data.headline}</h1>
+        <p class="hero_highlight">{data.highlight}</p>
+        <Tick items={data.checks} onDark={v === 'erp'} />
+        <p class="text-lead sol-hero_lead">{data.lead}</p>
+        <div class="button-group">
+          <a href={data.primaryCta.href} class="button is-large">{data.primaryCta.text}</a>
+          <a href={data.secondaryCta.href} class="button is-white is-large">{data.secondaryCta.text}</a>
+        </div>
+        {data.priceLine && <p class="sol-hero_price">{data.priceLine}</p>}
+      </div>
+      <div class="sol-hero_visual">
+        {v === 'portal' && <PortalMock />}
+        {v === 'erp' && <SyncMock />}
+        {v === 'email' && <EmailMock />}
+      </div>
+    </div>
+  </div>
+</section>

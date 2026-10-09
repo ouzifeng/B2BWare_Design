@@ -1,0 +1,42 @@
+---
+import Section from '../ui/Section.astro';
+import { CHECKED, type ComparePageData } from '../../data/compare';
+interface Props { data: ComparePageData }
+const { data } = Astro.props;
+const { table, sources, name } = data;
+---
+<Section id="cmp-table" title={table.title} intro={table.intro}>
+  <div class="cmp-wrap">
+    <table class="cmp-table">
+      <caption class="sr-only">{name} compared with B2Bware</caption>
+      <thead>
+        <tr>
+          <th scope="col"><span class="sr-only">Question</span></th>
+          <th scope="col" class="is-ours">B2Bware</th>
+          <th scope="col">{table.theirsHead}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {table.rows.map((r) => (
+          <tr>
+            <th scope="row">{r.label}</th>
+            <td class="is-ours" data-label="B2Bware">{r.ours}</td>
+            <td data-label={table.theirsHead}>
+              {r.theirs}
+              {r.src && <sup class="cmp-ref">{r.src.map((n, i) => <>{i > 0 && ', '}<a href={`#cmp-src-${n}`} aria-label={`Source ${n}`}>{n}</a></>)}</sup>}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <div class="cmp-sources">
+      <h3 class="cmp-sources_title">Sources, checked {CHECKED}</h3>
+      <ol class="cmp-sources_list">
+        {sources.map((s, i) => (
+          <li id={`cmp-src-${i + 1}`}><a href={s.url} rel="noopener" target="_blank">{s.label}</a></li>
+        ))}
+      </ol>
+      <p class="cmp-sources_note">Vendor sites change. If something here is out of date, tell us and we will fix it. B2Bware figures come from our <a href="/pricing" class="seg-link">pricing page</a>.</p>
+    </div>
+  </div>
+</Section>
